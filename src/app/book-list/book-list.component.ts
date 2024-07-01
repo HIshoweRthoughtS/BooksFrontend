@@ -24,5 +24,7 @@ export class BookListComponent implements OnInit {
   }
 
   //todo: new book form in popout
+  //https://jasonwatmore.com/post/2023/01/03/angular-14-modal-popup-dialog-tutorial-with-example
+  //https://stackoverflow.com/questions/76621643/angular-open-component-in-new-browser-window
 
 }
