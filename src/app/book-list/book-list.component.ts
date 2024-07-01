@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-book-list',
@@ -7,6 +7,22 @@ import { Component } from '@angular/core';
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
-export class BookListComponent {
+export class BookListComponent implements OnInit {
+
+  //I need a booklist service or ngrx/store
+  //Links to Short Essay, maybe with a comment section
+  //links to authors, dates, and other extra info
+  //possibility to add books to the list with all the
+  //neccessary info filled out. a first created date is
+  //created and fieds for future date updates will be summoned
+  
+  //later a backend with the needed info
+  constructor() {}
+
+  ngOnInit(): void {
+
+  }
+
+  //todo: new book form in popout
 
 }
