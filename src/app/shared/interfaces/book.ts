@@ -5,4 +5,6 @@ export interface Book {
     publisher:string,
     pages:number,
     extra_info:string,
+
+    
 }
