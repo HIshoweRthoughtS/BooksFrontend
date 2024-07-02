@@ -22,6 +22,11 @@ export class BookListComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  //i will work in reads. that means, everytime i read a book i can start a new read
+  //-> the book will be marked as in progress (currently reading)
+  //later i can press a button: finfished
+  //then i will be redirected to fill out a review form with the known properties
+  //so a review has to be connected to a "read". the read properties can of course be faked.
 
   //todo: new book form in popout
   //https://jasonwatmore.com/post/2023/01/03/angular-14-modal-popup-dialog-tutorial-with-example
