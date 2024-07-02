@@ -22,7 +22,10 @@ export class BookListComponent implements OnInit {
   //neccessary info filled out. a first created date is
   //created and fieds for future date updates will be summoned
   
-  //later a backend with the needed info
+  //todo: later a backend with the needed info
+  //todo: backend has endpoints for every read and the SmallBook info list.
+  //frontend pieces together all info. loading every review/read when needed.
+  //e.g. select a read from booklist -> show this read and review
   constructor(private dbService:MemoryDbService) {
     this.books$ = dbService.Books;
   }
