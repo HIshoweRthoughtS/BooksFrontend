@@ -9,21 +9,19 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class MemoryDbService {
   private inMemDb:DbStruct;
   private DbBooksSubject:BehaviorSubject<Book[]>;
-  public Books$:Observable<Book[]>;
 
   constructor() {
     this.inMemDb = db;
     this.DbBooksSubject = new BehaviorSubject<Book[]>(this.inMemDb.books);
-    this.Books$ = this.DbBooksSubject.asObservable();
   }
 
-  get Books(): Book[] {
-    return this.inMemDb.books;
+  get Books(): Observable<Book[]> {
+    return this.DbBooksSubject.asObservable();
   }
 
   addBook(book:Book) {
     this.inMemDb.books.push(book);
-    this.DbBooksSubject.next(this.Books);
+    this.DbBooksSubject.next(this.inMemDb.books);
   }
 
   set Books(newBooks:DbStruct) {
