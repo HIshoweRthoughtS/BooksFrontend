@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Book } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,5 +10,11 @@ export class JsonDbServiceService {
 
   constructor() { }
 
-  get Books(): 
+  get Books()/*: Book*/ {
+    return 
+  }
+
+  private get DbFullContent() {
+    return 
+  }
 }
