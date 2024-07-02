@@ -3,11 +3,12 @@ import { MemoryDbService } from '../shared/services/memory-db.service';
 import { Observable } from 'rxjs';
 import { Book } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './review-table.component.html',
   styleUrl: './review-table.component.scss'
 })
