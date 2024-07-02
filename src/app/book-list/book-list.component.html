@@ -1,0 +1,20 @@
+<table>
+    <thead>
+        <tr>
+            <th>Autor</th>
+            <th>Titel</th>
+            <th>Verlag</th>
+            <th>Gelesen</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (b of books$ | async; track b.isbn) {
+            <tr>
+                <td>{{b.author}}</td>
+                <td>{{b.title}}</td>
+                <td>{{b.publisher}}</td>
+                <td>{{b.reads?.length | bool:true}}</td>
+            </tr>
+        }
+    </tbody>
+</table>
