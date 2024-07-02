@@ -10,6 +10,7 @@ export interface Book {
     more_pages:number | null,
     reads: Read[] | null,
     
+    rank:number,
     extra_info:string | null,
     thoughts:string | null,
 }

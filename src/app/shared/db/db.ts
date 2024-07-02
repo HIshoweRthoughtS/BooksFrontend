@@ -27,6 +27,7 @@ let db:DbStruct = {
                     "short_essay":""
                 }     
             ],
+            "rank":1,
             "extra_info":"",
             "thoughts":""
         }
