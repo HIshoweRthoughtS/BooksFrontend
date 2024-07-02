@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { MemoryDbService } from '../shared/services/memory-db.service';
+import { Observable } from 'rxjs';
+import { Book } from '../shared/interfaces';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-book-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
 export class BookListComponent implements OnInit {
+
+  books$:Observable<Book[]>;
 
   //I need a booklist service or ngrx/store
   //Links to Short Essay, maybe with a comment section
@@ -17,7 +23,9 @@ export class BookListComponent implements OnInit {
   //created and fieds for future date updates will be summoned
   
   //later a backend with the needed info
-  constructor() {}
+  constructor(private dbService:MemoryDbService) {
+    this.books$ = dbService.Books;
+  }
 
   ngOnInit(): void {
 
@@ -34,5 +42,6 @@ export class BookListComponent implements OnInit {
 
 
   //todo: i want 'versino control' form my thoughts/essays on the books
+  //ranking after reads should be unneccessary with versino control
 
 }

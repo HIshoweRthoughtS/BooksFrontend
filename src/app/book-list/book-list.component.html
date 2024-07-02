@@ -9,51 +9,38 @@
                 Titel
             </th>
             <th>
-                Author
+                Autor
             </th>
             <th>
-                started
+                Zeitraum
             </th>
             <th>
-                finished
-            </th>
-            <th>
-                notes
-            </th>
-            <th>
-                extra info
-            </th>
-            <th>
-                short essay
+                Notizen
             </th>
         </tr>
     </thead>
     <tbody>
-        @for (p of [1,9]; track $index) {
+        @for (b of books$ | async; track b.isbn) {
             <tr>
-                
+                <td>
+                    {{b.rank}}
+                </td>
+                <td>
+                    {{b.title}}
+                </td>
+                <td>
+                    {{b.author}}
+                </td>
+                <td>
+                    tba
+                </td>
+                <td>
+                    {{b.thoughts}}
+                </td>
             </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
-            <tr>
-                
-            </tr>
+        }
+        @empty {
+            bibi
         }
     </tbody>
 </table>
