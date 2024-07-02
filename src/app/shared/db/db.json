@@ -1,0 +1,25 @@
+{
+    "books":[
+        {
+            "title":"Frankenstein",
+            "extended title":"Frankenstein or THE MODERN PROMETHEUS//Edited with an Introduction and Notes by MAURICE HINDLE//REVISED EDITION",
+            "author":"Marry Shelly",
+            "publisher":"PENGUIN CLASSICS",
+            "ISBN":"978-0-141-43947-1",
+            "first release":"",
+            "reviews":[
+                {
+                    "reads":{
+                        "1":{
+                            "started":"12/2023",
+                            "finished":"03/2024",
+                            "quicknote":"readagain",
+                            "thoughts":"already a favourite",
+                            "short essay":""
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
