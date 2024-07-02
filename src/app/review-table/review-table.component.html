@@ -1,1 +1,55 @@
-<p>review-table works!</p>
+<h2>Eine Liste von Buechern, die ich gelesen habe, und meine Gedanken zu diesen</h2>
+<hr />
+<table>
+    <thead>
+        <tr>
+            <th>
+                Rang
+                <small>nach meiner persoenlichen Einschaetzung</small>
+            </th>
+            <th>
+                Titel
+            </th>
+            <th>
+                Autor
+            </th>
+            <th>
+                Gelesen
+            </th>
+            <th>
+                Notizen
+            </th>
+            <th>
+                ISBN
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (b of books$ | async; track b.isbn) {
+            <tr>
+                <td>
+                    {{b.rank}}
+                </td>
+                <td>
+                    {{b.title}}
+                </td>
+                <td>
+                    {{b.author}}
+                </td>
+                <td><!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
+                    {{b.reads?.length}} mal
+                    
+                </td>
+                <td>
+                    {{b.thoughts}}
+                </td>
+                <td>
+                    {{b.isbn}}
+                </td>
+            </tr>
+        }
+        @empty {
+            bibi
+        }
+    </tbody>
+</table>
