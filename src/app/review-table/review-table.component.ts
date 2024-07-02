@@ -48,4 +48,6 @@ export class ReviewTableComponent implements OnInit {
   //todo: i want 'versino control' form my thoughts/essays on the books
   //ranking after reads should be unneccessary with versino control
 
+  //date range of first read will always stay in todo list.
+  //review will contain all read date ranges, including todo range as first entry
 }
