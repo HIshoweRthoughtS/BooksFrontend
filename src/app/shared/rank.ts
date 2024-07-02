@@ -12,6 +12,9 @@
 
 //todo: a toString() method will show the rank in an easy to understand rep.
 
+//todo: maybe ranking via drag and drop
+//there should, however, be a soloution for when I cant decide
+
 enum isType {
     number = 'number',
     string = 'string',

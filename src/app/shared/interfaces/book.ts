@@ -14,3 +14,7 @@ export interface Book {
     extra_info:string | null,
     thoughts:string | null,
 }
+
+
+//todo: es soll zwei interfaces geben. eins mit allen infos fuer die 'gelesen' Liste
+//und eins mit nur buch infos, fuer eine 'alle buecher'- bzw. 'todo' liste
