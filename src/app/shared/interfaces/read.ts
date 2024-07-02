@@ -2,18 +2,19 @@ import { Review } from './review'
 
 enum Grades {
     vb = "Very Best",
-    ra = "readagain",
-    gr = "goodread",
-    nm = "nicemessage",
-    e = "enjoyed",
-    pg = "partially good",
-    nr = "not recommended",
-    dnf = "did not finish",
+    ra = "Read Again",
+    gr = "Good Read",
+    nm = "Nice Message",
+    e = "Enjoyed",
+    pg = "Partially Good",
+    nr = "Not Recommended",
+    dnf = "Did Not Finish",
 }
 
 export interface Read {
-    startDate:Date,
-    finishDate:Date,
-    review:Review,
-    quicknote:Grades, //aka grade
+    startDate:string, //is Date asap
+    finishDate:string | null, //is Date asap
+    quicknote:string, //is Grades | null asap //aka grade
+    review:Review | null,
+    short_essay:string | null,
 }

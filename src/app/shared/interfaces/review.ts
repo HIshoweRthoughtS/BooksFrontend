@@ -1,5 +1,5 @@
 export interface Review {
     content:string,
-    createdAt:Date,
-    updatedAt:Date,
+    createdAt:string, //is Date asap
+    updatedAt:string, //is Date asap
 }
