@@ -1,6 +1,6 @@
 import { Review } from './review'
 
-enum Grades {
+export enum Grades {
     vb = "Very Best",
     ra = "Read Again",
     gr = "Good Read",

@@ -1,1 +1,16 @@
-<p>new-read-form works!</p>
+<div>
+    <form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
+        <select>
+            @for (b of books$ | async; track b.isbn) {
+                <option>
+                    {{b.title}}
+                </option>
+            }
+        </select>
+        <input type="date" formControlName="startDate"  class="mandatory"   placeholder="Startdate" />
+        <input type="date" formControlName="finishDate" class="mandatory"   placeholder="Finishdate" />
+        <input type="text" formControlName="quicknote"  class="optional"     placeholder="quicknote" />
+        <input type="text" formControlName="review"     class="optional"    placeholder="review" />
+        <input type="text" formControlName="essay"      class="optional"    placeholder="short essay" />
+    </form>
+</div>
