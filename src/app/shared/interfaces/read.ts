@@ -13,8 +13,8 @@ enum Grades {
 
 export interface Read {
     startDate:string, //is Date asap
-    finishDate:string | null, //is Date asap
-    quicknote:string, //is Grades | null asap //aka grade
+    finishDate:string, //is Date asap
+    quicknote:string, //todo: is Grades | null asap //aka grade
     review:Review | null,
     short_essay:string | null,
 }

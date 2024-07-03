@@ -56,8 +56,6 @@ export class NewBookFormComponent implements OnInit {
       thoughts: tmpForm.thoughts,
 
       more_pages: null,
-      reads: null,
-      rank: null,
       extra_info: null,
     };
     this.dbService.addBook(tmpBook);

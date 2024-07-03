@@ -2,6 +2,7 @@ import { Read } from "./read";
 import { Author } from "./author";
 
 
+
 //todo: remove double fields. leaving for now, so nothing breaks.
 //when changed, change appropriate places in other components
 export interface Book {
@@ -11,14 +12,11 @@ export interface Book {
     publisher:string,
     pages:number,
 
-    //extra_authors:Author
+    //extra_authors:Author[]
     extended_title:string | null,
     more_pages:number | null,
     
-    rank:number | null,
-    reads: Read[] | null,
-    
-    extra_info:string | null,
+    extra_info:string | null, //such as, where to buy, awards, etc
     thoughts:string | null,
 }
 
@@ -33,8 +31,7 @@ export interface ReviewedBook {
     book:Book,
     readCoutn:number,
     reads: Read[],
-    rank:number | null,
-    thoughts:string | null,
+    rank:number | null //rank is not per read, cause that would be too much. With version control becomes uneccessary
 }
 
 //todo: es soll zwei interfaces geben. eins mit allen infos fuer die 'gelesen' Liste
