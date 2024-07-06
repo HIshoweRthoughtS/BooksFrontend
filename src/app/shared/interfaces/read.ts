@@ -12,6 +12,7 @@ export enum Grades {
 }
 
 export interface Read {
+    id:string, //isbn + start/finish-date/count
     startDate:string, //is Date asap
     finishDate:string, //is Date asap
     quicknote:string, //todo: is Grades | null asap //aka grade

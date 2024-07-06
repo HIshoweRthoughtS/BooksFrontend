@@ -67,6 +67,7 @@ let db:DbStruct = {
             readCoutn:1,
             reads:[
                     {
+                        "id":"978-0-141-43947-1--1",
                         "startDate":"12/2023",
                         "finishDate":"03/2024",
                         "quicknote":"Read Again",
