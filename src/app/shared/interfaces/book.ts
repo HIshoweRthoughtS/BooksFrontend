@@ -20,14 +20,14 @@ export interface Book {
     thoughts:string | null,
 }
 
-export interface TodoBook {
+export interface TodoBook extends Book {
     book:Book,
     read:boolean,
     started:Date | null,
     finished:Date | null,
 }
 
-export interface ReviewedBook {
+export interface ReviewedBook extends Book {
     book:Book,
     readCoutn:number,
     reads: Read[],
