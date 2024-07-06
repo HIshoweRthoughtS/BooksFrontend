@@ -1,9 +1,8 @@
 <hr />
 <footer>
-    first created: 01.07.2024
-    last updated: 03.07.2024
-    <a [routerLink]="['/about']">Ueber mich</a>
+    first created: 01.07.2024<br>last updated: 03.07.2024<br>
+    <a [routerLink]="['/about']">Ueber mich</a><br>
     <a [routerLink]="['/legalnotice']">Impressum</a>
-
+    <br>
     {{db$ | async | json}}
 </footer>
