@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { db, DbStruct } from '../db/db'
 import { Book, Review, ReviewedBook, TodoBook } from '../interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { DbManager } from '../abstracts/db-manager';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MemoryDbService {
+//why impliment and not extend abstract DbManager? A.: https://stackoverflow.com/questions/35990538/extending-vs-implementing-a-pure-abstract-class-in-typescript
+export class MemoryDbService implements DbManager {
   private inMemDb:DbStruct;
   private DbSubject:BehaviorSubject<DbStruct>;
   private DbBooksSubject:BehaviorSubject<Book[]>;
@@ -35,6 +37,11 @@ export class MemoryDbService {
 
   get Reviews(): Observable<ReviewedBook[]> {
     return this.DbReadsSubject.asObservable();
+  }
+
+  findBook(isbn: string): Book | undefined {
+    const retBook:Book | undefined = this.inMemDb.books.find((b:Book) => b.isbn === isbn);
+    return retBook;
   }
 
   addBook(book:Book) {
