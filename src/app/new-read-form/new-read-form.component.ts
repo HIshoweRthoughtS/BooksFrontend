@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 import { Book } from '../shared/interfaces';
 import { Grades } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-read-form',
@@ -14,25 +15,40 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './new-read-form.component.scss'
 })
 export class NewReadFormComponent implements OnInit {
-  newReadForm:any;
+  newReadForm!:FormGroup<any>;
 
   books$:Observable<Book[]>;
+  selectedBook?:Book;
 
-  constructor(private formBuilder:FormBuilder,private dbService:MemoryDbService) {
+  constructor(private aRoute:ActivatedRoute,private formBuilder:FormBuilder,private dbService:MemoryDbService) {
     this.books$ = dbService.Books;
+    this.selectedBook = undefined; //handle url params to change this
+
   }
 
   ngOnInit(): void {
     this.newReadForm = this.formBuilder.group({
+      isbn: [null, Validators.required],
       startDate: [null, Validators.required],
       finishDate: [null, Validators.required],
       quicknote: ['', ],
       review: ['', ],
       essay: ['', ],
-    })
+    });
+    this.handleUrlParams();
+  }
+
+  private handleUrlParams(): void {
+    const urlIsbn = this.aRoute.snapshot.queryParamMap.get('isbn');
+    //todo[later,good enough for now]: books.find isbn
+    //if found -> display in dropdown
+    //if not found -> redirect to new book form with redirect back on succes if popout not working yet or on phone
+    this.newReadForm.patchValue({book:urlIsbn});
   }
 
   createNewRead() {
 
+
+    //if a new read(a new reviewdBook) is created from a todo, this todo must be deleted(replaced by the new reviewedbook)
   }
 }

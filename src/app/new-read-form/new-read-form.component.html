@@ -1,16 +1,20 @@
 <div>
     <form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
-        <select>
+        <select formControlName="isbn">
             @for (b of books$ | async; track b.isbn) {
-                <option>
+                <option value="{{b.isbn}}">
                     {{b.title}}
                 </option>
             }
         </select>
         <input type="date" formControlName="startDate"  class="mandatory"   placeholder="Startdate" />
         <input type="date" formControlName="finishDate" class="mandatory"   placeholder="Finishdate" />
-        <input type="text" formControlName="quicknote"  class="optional"     placeholder="quicknote" />
+        <input type="text" formControlName="quicknote"  class="optional"    placeholder="quicknote" />
         <input type="text" formControlName="review"     class="optional"    placeholder="review" />
         <input type="text" formControlName="essay"      class="optional"    placeholder="short essay" />
+
+        <button type="submit" [disabled]="!newReadForm.valid">Create Me</button>
     </form>
+
+    {{newReadForm.value | json}}
 </div>
