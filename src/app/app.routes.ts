@@ -7,14 +7,7 @@ import { AboutMeComponent } from './about-me/about-me.component';
 import { NewReadFormComponent } from './new-read-form/new-read-form.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/readlist', pathMatch: 'full' }
-    ,{
-        path: 'readlist',
-        component: ReviewTableComponent,
-        title: 'Bewertung'
-    }
-    ,{ path: 'bewertung', redirectTo: '/readlist', pathMatch: 'full' }
-    ,{ path: 'bewertungen', redirectTo: '/readlist', pathMatch: 'full' }
+    { path: '', redirectTo: '/booklist', pathMatch: 'full' }
     ,{
         path: 'booklist',
         component: BookListComponent,
@@ -24,6 +17,13 @@ export const routes: Routes = [
     ,{ path: 'todos', redirectTo: '/booklist', pathMatch: 'full' }
     ,{ path: 'buchliste', redirectTo: '/booklist', pathMatch: 'full' }
     ,{ path: 'buecherliste', redirectTo: '/booklist', pathMatch: 'full' }
+    ,{
+        path: 'readlist',
+        component: ReviewTableComponent,
+        title: 'Bewertung'
+    }
+    ,{ path: 'bewertung', redirectTo: '/readlist', pathMatch: 'full' }
+    ,{ path: 'bewertungen', redirectTo: '/readlist', pathMatch: 'full' }
     ,{
         path: 'newbook',
         component: NewBookFormComponent,
