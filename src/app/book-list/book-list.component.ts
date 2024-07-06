@@ -4,11 +4,12 @@ import { Book, ReviewedBook, TodoBook } from '../shared/interfaces';
 import { MemoryDbService } from '../shared/services/memory-db.service';
 import { CommonModule } from '@angular/common';
 import { BoolPipe } from '../shared/bool.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-review-table',
   standalone: true,
-  imports: [CommonModule,BoolPipe],
+  imports: [CommonModule,BoolPipe,RouterLink],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })

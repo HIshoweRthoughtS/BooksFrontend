@@ -4,6 +4,7 @@ import { NewBookFormComponent } from './new-book-form/new-book-form.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ReviewTableComponent } from './review-table/review-table.component';
 import { AboutMeComponent } from './about-me/about-me.component';
+import { NewReadFormComponent } from './new-read-form/new-read-form.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/readlist', pathMatch: 'full' }
@@ -31,6 +32,13 @@ export const routes: Routes = [
     ,{ path: 'new', redirectTo: '/newbook', pathMatch: 'full' }
     ,{ path: 'neu', redirectTo: '/newbook', pathMatch: 'full' }
     ,{ path: 'neuesbuch', redirectTo: '/newbook', pathMatch: 'full' }
+    ,{
+        path: 'newreview',
+        component: NewReadFormComponent,
+        title: 'New Review'
+    }
+    ,{ path: 'newread', redirectTo: '/newreview', pathMatch: 'full' }
+    ,{ path: 'neuebewertung', redirectTo: '/newreview', pathMatch: 'full' }
     ,{
         path: 'about',
         component: AboutMeComponent,
