@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MemoryDbService } from '../shared/services/memory-db.service';
 import { Observable } from 'rxjs';
-import { Book } from '../shared/interfaces';
+import { ReviewedBook } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
 })
 export class ReviewTableComponent implements OnInit {
 
-  books$:Observable<Book[]>;
+  reads$:Observable<ReviewedBook[]>;
 
   //I need a booklist service or ngrx/store
   //Links to Short Essay, maybe with a comment section
@@ -28,7 +28,7 @@ export class ReviewTableComponent implements OnInit {
   //frontend pieces together all info. loading every review/read when needed.
   //e.g. select a read from booklist -> show this read and review
   constructor(private dbService:MemoryDbService) {
-    this.books$ = dbService.Books;
+    this.reads$ = dbService.Reviews;
   }
 
   ngOnInit(): void {
