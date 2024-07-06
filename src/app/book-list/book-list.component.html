@@ -1,3 +1,11 @@
+
+<h2>Eine Liste von Buechern, die ich gelesen habe, oder noch lesen werde</h2>
+<!-- Buecher sortiert in folgender form
+ 1. gelesene Buecher
+    sortiert nach datum des ersten Mal lesens 
+ 2. noch nicht gelesene Buecher
+    sortiert nach tbd-->
+<hr />
 <table>
     <thead>
         <tr>
@@ -7,13 +15,27 @@
             <th>Gelesen</th>
         </tr>
     </thead>
+    <!--implement drag and drop for each loob-->
     <tbody>
-        @for (b of books$ | async; track b.isbn) {
+        @for (r of reads$ | async; track r.book.isbn) {
             <tr>
-                <td>{{b.author}}</td>
-                <td>{{b.title}}</td>
-                <td>{{b.publisher}}</td>
-                <td>{{b.reads?.length | bool:true}}</td>
+                <td>{{r.book.author}}</td>
+                <td>{{r.book.title}}</td>
+                <td>{{r.book.publisher}}</td>
+                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
+                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
+                <td>{{r.reads.length | bool:true}}</td>
+            </tr>
+        }
+        <hr />
+        @for (t of todos$ | async; track t.book.isbn) {
+            <tr>
+                <td>{{t.book.author}}</td>
+                <td>{{t.book.title}}</td>
+                <td>{{t.book.publisher}}</td>
+                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
+                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
+                <td>nein</td>
             </tr>
         }
     </tbody>
