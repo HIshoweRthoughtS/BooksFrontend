@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MemoryDbService } from '../shared/services/memory-db.service';
 import { Observable } from 'rxjs';
 import { ReviewedBook } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Book, ReviewedBook, TodoBook } from '../shared/interfaces';
-import { MemoryDbService } from '../shared/services/memory-db.service';
 import { CommonModule } from '@angular/common';
 import { BoolPipe } from '../shared/bool.pipe';
 import { RouterLink } from '@angular/router';

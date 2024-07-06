@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
 import { Book } from '../shared/interfaces';
-import { MemoryDbService } from '../shared/services/memory-db.service';
 import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
