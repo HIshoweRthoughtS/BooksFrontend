@@ -5,6 +5,7 @@ import { MemoryDbService } from '../shared/services/memory-db.service';
 import { CommonModule } from '@angular/common';
 import { BoolPipe } from '../shared/bool.pipe';
 import { RouterLink } from '@angular/router';
+import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
   selector: 'app-review-table',
@@ -18,8 +19,8 @@ export class BookListComponent {
   todos$:Observable<TodoBook[]>;
   //creating new books should be possible at least here, maybe reviews as well
   //<a [routerLink]="['/newbook']"> || [queryParams]="{para: value}"
-  constructor(private dbService:MemoryDbService) {
-    this.reads$ = dbService.Reviews;
-    this.todos$ = dbService.Todos;
+  constructor(private bookService:BookManagementService) {
+    this.reads$ = bookService.Reviews;
+    this.todos$ = bookService.Todos;
   }
 }

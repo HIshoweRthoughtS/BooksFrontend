@@ -4,6 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
 import { Book } from '../shared/interfaces';
 import { MemoryDbService } from '../shared/services/memory-db.service';
+import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
   selector: 'app-new-book-form',
@@ -24,7 +25,7 @@ export class NewBookFormComponent implements OnInit {
 
   newBookForm:any;
 
-  constructor(private formBuilder:FormBuilder, private dbService:MemoryDbService) {
+  constructor(private bookService:BookManagementService,private formBuilder:FormBuilder) {
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
     this.newBookForm = this.formBuilder.group({
       isbn : ['', Validators.required],
@@ -58,7 +59,7 @@ export class NewBookFormComponent implements OnInit {
       more_pages: null,
       extra_info: null,
     };
-    this.dbService.addBook(tmpBook);
+    this.bookService.addBook(tmpBook);
     console.log('test', this.newBookForm.value);
   }
 }

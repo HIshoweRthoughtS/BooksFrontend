@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { ReviewedBook } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
   selector: 'app-book-list',
@@ -27,8 +28,8 @@ export class ReviewTableComponent implements OnInit {
   //todo: backend has endpoints for every read and the SmallBook info list.
   //frontend pieces together all info. loading every review/read when needed.
   //e.g. select a read from booklist -> show this read and review
-  constructor(private dbService:MemoryDbService) {
-    this.reads$ = dbService.Reviews;
+  constructor(private bookService:BookManagementService) {
+    this.reads$ = bookService.Reviews;
   }
 
   ngOnInit(): void {

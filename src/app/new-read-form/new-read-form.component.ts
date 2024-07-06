@@ -6,6 +6,7 @@ import { Grades } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
   selector: 'app-new-read-form',
@@ -20,8 +21,8 @@ export class NewReadFormComponent implements OnInit {
   books$:Observable<Book[]>;
   selectedBook?:Book;
 
-  constructor(private aRoute:ActivatedRoute,private formBuilder:FormBuilder,private dbService:MemoryDbService) {
-    this.books$ = dbService.Books;
+  constructor(private aRoute:ActivatedRoute,private bookService:BookManagementService,private formBuilder:FormBuilder) {
+    this.books$ = bookService.Books;
     this.selectedBook = undefined; //handle url params to change this
 
   }
@@ -43,7 +44,7 @@ export class NewReadFormComponent implements OnInit {
     //todo[later,good enough for now]: books.find isbn
     //if found -> display in dropdown
     //if not found -> redirect to new book form with redirect back on succes if popout not working yet or on phone
-    this.newReadForm.patchValue({book:urlIsbn});
+    this.newReadForm.patchValue({isbn:urlIsbn});
   }
 
   createNewRead() {
