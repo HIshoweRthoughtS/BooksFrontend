@@ -15,4 +15,7 @@ export abstract class DbManager {
     abstract findBook(isbn:string): Book | undefined
     // abstract findRead(readId:string): Read | undefined
     // abstract findReviewedBook(readId:string): ReviewedBook | undefined
+
+    abstract reviewContainsAnyBook(book:Book): boolean
+    abstract todoContainsAnyBook(book:Book): boolean
 }

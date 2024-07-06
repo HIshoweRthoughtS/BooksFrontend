@@ -37,4 +37,12 @@ export class BookManagementService {
     //if book has member in todos -> create new reviewedbook, delete todo
     //if book has member in reads -> add review to read.reviews
   }//same as above
+
+  //finder
+  reviewsContain(book:Book): boolean {
+    return this.dbHandler.reviewContainsAnyBook(book);
+  }
+  todoContain(book:Book): boolean {
+    return this.dbHandler.todoContainsAnyBook(book);
+  }
 }

@@ -59,6 +59,49 @@ export class MemoryDbService implements DbManager {
     const retBook:Book | undefined = this.inMemDb.books.find((b:Book) => b.isbn === isbn);
     return retBook;
   }
+  containsBook(book:Book): boolean {
+    let ret: boolean = false;
+    if (!this.findBook(book.isbn)) {
+      ret = true;
+    }
+    return ret;
+  }
+
+  findReviewedBook(isbn:string): ReviewedBook | undefined {
+    return this.inMemDb.read.find((b:ReviewedBook) => b.book.isbn === isbn);
+  }
+  containsReviewedBook(book:ReviewedBook): boolean {
+    let ret: boolean = false;
+    if (!this.findReviewedBook(book.book.isbn)) {
+      ret = true;
+    }
+    return ret;
+  }
+  reviewContainsAnyBook(book:Book): boolean {
+    let ret: boolean = false;
+    if (!this.findReviewedBook(book.isbn)) {
+      ret = true;
+    }
+    return ret;
+  }
+
+  findTodoBook(isbn:string): TodoBook | undefined {
+    return this.inMemDb.todos.find((b:TodoBook) => b.book.isbn === isbn);
+  }
+  containsTodoBook(book:TodoBook): boolean {
+    let ret: boolean = false;
+    if (!this.findTodoBook(book.book.isbn)) {
+      ret = true;
+    }
+    return ret;
+  }
+  todoContainsAnyBook(book:Book): boolean {
+    let ret: boolean = false;
+    if (!this.findTodoBook(book.isbn)) {
+      ret = true;
+    }
+    return ret;
+  }
   // findRead(readId: string): Read | undefined {
   //   let retRead:  Read | undefined = undefined;
   //   const tmpBook = this.findReviewedBook(readId);
