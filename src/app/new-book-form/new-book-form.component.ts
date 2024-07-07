@@ -29,13 +29,13 @@ export class NewBookFormComponent implements OnInit {
     this.newBookForm = this.formBuilder.group({
       isbn : ['', Validators.required],
       title : ['', Validators.required],
-      extendedTitle : ['', Validators.required],
+      extendedTitle : [''],
       author : ['', Validators.required],
       publisher : ['', Validators.required],
-      started : ['', Validators.required],
-      finished : ['', Validators.required],
-      quicknote : ['', Validators.required],
-      thoughts : ['', Validators.required],
+      started : ['' ],
+      finished : [''],
+      quicknote : [''],
+      thoughts : [''],
       
     });
   }

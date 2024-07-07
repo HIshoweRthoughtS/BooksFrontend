@@ -9,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class PageNotFoundComponent {
 
+  //todo[later,luxus] show games maybe or at least be a bit interesting
 }
