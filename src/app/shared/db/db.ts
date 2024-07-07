@@ -17,6 +17,7 @@ let db:DbStruct = {
             "pages":-1,
             "extended_title":"",
             "more_pages":-1,
+            "first_read": null,
             "extra_info":"Formelsammlung",
             "thoughts":""
         }
@@ -31,7 +32,24 @@ let db:DbStruct = {
 
             "extended_title":"Sherlock Holmes The Complete Novels and Stories Volume 1",
             "more_pages":1059,
+            "first_read":null,
             "extra_info":"classic",
+            "thoughts":"",
+            read:false,
+            started:null,
+            finished:null
+        },
+        {
+            "isbn":"978-3-423-28984-9",
+            "author":"John Strelecky",
+            "title":"Das Café am Rande der Welt",
+            "publisher":"dtv",
+            "pages":143,
+
+            "extended_title":"Das Café am Rande der Welt - Eine Erzaehlung ueber den Sinn des Lebens",
+            "more_pages":143,
+            "first_read":"02.07.2024 -",
+            "extra_info":"deutsch - aus dem englischen von Bettina Lemke",
             "thoughts":"",
             read:false,
             started:null,
@@ -48,6 +66,7 @@ let db:DbStruct = {
 
             "extended_title":"Frankenstein or THE MODERN PROMETHEUS//Edited with an Introduction and Notes by MAURICE HINDLE//REVISED EDITION",
             "more_pages":273,
+            "first_read":"12/2023 - 03/2024",
             "extra_info":"classic",
             "thoughts":"*in Borat voice* very nice",
             readCoutn:1,
