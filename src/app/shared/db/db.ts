@@ -6,6 +6,7 @@ interface DbStruct {
     read:ReviewedBook[]
 }
 
+//in Books will only be books not already present in todo or review, that means no duplicates
 let db:DbStruct = {
     books:[
         {
