@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
-import { Book, BookReadStates } from '../shared/interfaces';
+import { Book, BookReadStates, Grades, TodoBook } from '../shared/interfaces';
 import { BookManagementService } from '../shared/services/book-management.service';
+import { CastingCouchService } from '../shared/services/casting-couch.service';
 
 @Component({
   selector: 'app-new-book-form',
@@ -24,19 +25,22 @@ export class NewBookFormComponent implements OnInit {
 
   newBookForm:any;
 
-  constructor(private bookService:BookManagementService,private formBuilder:FormBuilder) {
+  grades:{[key:number]:{short:string, long:string}};
+
+  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private formBuilder:FormBuilder) {
+    this.grades = Grades;
+
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
     this.newBookForm = this.formBuilder.group({
-      isbn : ['', Validators.required],
+      isbn : ['', Validators.required], //only new isbn. check db
       title : ['', Validators.required],
       extendedTitle : [''],
       author : ['', Validators.required],
       publisher : ['', Validators.required],
-      started : ['' ],
-      finished : [''],
+      started : [null],
+      finished : [null],
       quicknote : [''],
       thoughts : [''],
-      
     });
   }
 
@@ -52,6 +56,7 @@ export class NewBookFormComponent implements OnInit {
       author: tmpForm.author,
       title: tmpForm.title,
       publisher: tmpForm.publisher,
+      //todo[important] get pages with api or form field
       pages: 404,
 
       extended_title: tmpForm.extended_title,
@@ -61,7 +66,29 @@ export class NewBookFormComponent implements OnInit {
       extra_info: undefined,
       read_state: BookReadStates.exists
     };
-    this.bookService.addOther(tmpBook);
-    console.log('test', this.newBookForm.value);
+    //todo: check if following flow better
+    //create a book and add to db
+    //check if todo or review criteria is met
+    //transform book to todo or review if neccessary
+    if (tmpForm.started !== null) {
+      //reviewed book
+      if (tmpForm.finished !== null && tmpForm.quicknote !== '') {
+        const newRevBook = this.caster.getNewReviewedBook(tmpBook, {id:'tbd', startDate:tmpForm.started, finishDate:tmpForm.finished,quicknote:tmpForm.quicknote});
+        this.bookService.addReviewed(newRevBook);
+      }
+      //todo book
+      else {
+        const newToBook:TodoBook = {
+          ...tmpBook,
+          read_state: BookReadStates.todo,
+          started: tmpForm.started
+        }
+        this.bookService.addTodo(newToBook);
+      }
+    }
+    //other book
+    else {
+      this.bookService.addOther(tmpBook);
+    }
   }
 }

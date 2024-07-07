@@ -13,6 +13,8 @@ export abstract class DbManager {
 
     //setters/adders
     abstract addOther(book:Book): void;
+    abstract addTodo(book:TodoBook): void;
+    abstract addReviewed(book:ReviewedBook): void;
     abstract addReadToBook(read:Read, book:ReviewedBook): void;
 
     //finders

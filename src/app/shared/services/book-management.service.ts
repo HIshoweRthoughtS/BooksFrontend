@@ -45,6 +45,8 @@ export class BookManagementService {
 
   //adder (setter)
   public addOther(book:Book): void { this.dbHandler.addOther(book) }
+  public addTodo(book:TodoBook): void { this.dbHandler.addTodo(book) }
+  public addReviewed(book:ReviewedBook): void { this.dbHandler.addReviewed(book) }
 
   addReadFindBook(read:Read, isbn:string): void {
     const tmpBook:Book | undefined = this.dbHandler.findBook(isbn);

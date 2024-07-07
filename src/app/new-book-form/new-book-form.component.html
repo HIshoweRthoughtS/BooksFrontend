@@ -8,9 +8,15 @@
         <input type="text" formControlName="extendedTitle"  class="optional"     placeholder="extended title">
         <input type="text" formControlName="author"         class="mandatory"    placeholder="author">
         <input type="text" formControlName="publisher"      class="mandatory"    placeholder="publisher">
-        <input type="text" formControlName="started"        class="optional"     placeholder="started">
-        <input type="text" formControlName="finished"       class="optional"     placeholder="finished">
-        <input type="text" formControlName="quicknote"      class="optional"     placeholder="quicknote">
+        <input type="date" formControlName="started"        class="optional"     placeholder="started">
+        <input type="date" formControlName="finished"       class="optional"     placeholder="finished">
+        <select formControlName="quicknote">
+            @for (g of grades | keyvalue; track g) {
+                <option value="{{g.value.short}}">
+                    {{g.value.long}}
+                </option>
+            }
+        </select>
         <input type="text" formControlName="thoughts"       class="optional"     placeholder="thoughts">
 
         <button type="submit" [disabled]="!newBookForm.valid">Create Me</button>

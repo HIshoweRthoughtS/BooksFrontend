@@ -62,6 +62,14 @@ export class MemoryDbService implements DbManager {
     this.inMemDb.other.push(book);
     this.DbBooksSubject.next(this.inMemDb.other);
   }
+  addTodo(book: TodoBook): void {
+    this.inMemDb.todos.push(book);
+    this.DbBooksSubject.next(this.inMemDb.todos);
+  }
+  addReviewed(book: ReviewedBook): void {
+    this.inMemDb.reviewed.push(book);
+    this.DbBooksSubject.next(this.inMemDb.reviewed);
+  }
   addReadToBook(read: Read, book:ReviewedBook): void {
     book.reads.push(read);
   }
