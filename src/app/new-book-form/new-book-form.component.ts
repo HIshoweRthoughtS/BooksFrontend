@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
-import { Book } from '../shared/interfaces';
+import { Book, BookReadStates } from '../shared/interfaces';
 import { BookManagementService } from '../shared/services/book-management.service';
 
 @Component({
@@ -44,6 +44,8 @@ export class NewBookFormComponent implements OnInit {
   }
 
   newBookSubmit(/*?*/) {
+    //todo:
+    //if not enough info: https://isbndb.com/apidocs/v2
     let tmpForm = this.newBookForm.value;
     let tmpBook:Book = {
       isbn: tmpForm.isbn,
@@ -55,10 +57,11 @@ export class NewBookFormComponent implements OnInit {
       extended_title: tmpForm.extended_title,
       thoughts: tmpForm.thoughts,
 
-      more_pages: null,
-      extra_info: null,
+      more_pages: undefined,
+      extra_info: undefined,
+      read_state: BookReadStates.exists
     };
-    this.bookService.addBook(tmpBook);
+    this.bookService.addOther(tmpBook);
     console.log('test', this.newBookForm.value);
   }
 }

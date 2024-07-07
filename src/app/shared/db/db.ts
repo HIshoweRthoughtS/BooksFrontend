@@ -1,14 +1,14 @@
-import { Book, ReviewedBook, TodoBook } from "../interfaces";
+import { Book, BookReadStates, ReviewedBook, TodoBook } from "../interfaces";
 
 interface DbStruct {
-    books:Book[],
+    other:Book[],
     todos:TodoBook[],
-    read:ReviewedBook[]
+    reviewed:ReviewedBook[]
 }
 
 //in Books will only be books not already present in todo or review, that means no duplicates
 let db:DbStruct = {
-    books:[
+    other:[
         {
             "isbn":"3-920379-14-4",
             "author":"K. Gieck",
@@ -17,7 +17,8 @@ let db:DbStruct = {
             "pages":-1,
             "extended_title":"",
             "more_pages":-1,
-            "first_read": undefined,
+            "read_state":BookReadStates.exists,
+            "first_read":undefined,
             "extra_info":"Formelsammlung",
             "thoughts":""
         }
@@ -32,10 +33,10 @@ let db:DbStruct = {
 
             "extended_title":"Sherlock Holmes The Complete Novels and Stories Volume 1",
             "more_pages":1059,
+            "read_state":BookReadStates.todo,
             "first_read":undefined,
             "extra_info":"classic",
             "thoughts":"",
-            read:false,
             started:undefined,
             finished:undefined
         },
@@ -51,12 +52,12 @@ let db:DbStruct = {
             "first_read":"02.07.2024 -",
             "extra_info":"deutsch - aus dem englischen von Bettina Lemke",
             "thoughts":"",
-            read:false,
+            "read_state":BookReadStates.todo,
             started:undefined,
             finished:undefined
         }
     ],
-    read:[
+    reviewed:[
         {
             "isbn":"978-0-141-43947-1",
             "author":"Marry Shelly",
@@ -66,10 +67,10 @@ let db:DbStruct = {
 
             "extended_title":"Frankenstein or THE MODERN PROMETHEUS//Edited with an Introduction and Notes by MAURICE HINDLE//REVISED EDITION",
             "more_pages":273,
+            "read_state":BookReadStates.reviewed,
             "first_read":"12/2023 - 03/2024",
             "extra_info":"classic",
             "thoughts":"*in Borat voice* very nice",
-            readCoutn:1,
             reads:[
                     {
                         "id":"978-0-141-43947-1--1",
