@@ -15,6 +15,7 @@ export interface Book {
     extended_title:string | null,
     more_pages:number | null,
     
+    first_read:string | null, //von :Date zu :Date
     extra_info:string | null, //such as, where to buy, awards, etc
     thoughts:string | null,
 }
