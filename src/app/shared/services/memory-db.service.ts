@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { db, DbStruct } from '../db/db'
 import { Book, Read, ReviewedBook, TodoBook } from '../interfaces';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { DbManager } from '../abstracts/db-manager';
 
 //future backendside all around books service -> just for dev and test in frontend, only provides debug and test essential features
@@ -19,9 +19,9 @@ export class MemoryDbService implements DbManager {
   constructor() {
     this.inMemDb = db;
     this.DbSubject = new BehaviorSubject<DbStruct>(this.inMemDb);
-    this.DbBooksSubject = new BehaviorSubject<Book[]>(this.inMemDb.books);
+    this.DbBooksSubject = new BehaviorSubject<Book[]>(this.inMemDb.other);
     this.DbTodosSubject = new BehaviorSubject<TodoBook[]>(this.inMemDb.todos);
-    this.DbReadsSubject = new BehaviorSubject<ReviewedBook[]>(this.inMemDb.read);
+    this.DbReadsSubject = new BehaviorSubject<ReviewedBook[]>(this.inMemDb.reviewed);
   }
 
   //Getters
@@ -41,34 +41,54 @@ export class MemoryDbService implements DbManager {
     return this.DbReadsSubject.asObservable();
   }
 
+  getOtherBook(isbn: string): Book | undefined {
+    return this.inMemDb.other.find((b:Book) => b.isbn === isbn);
+  }
+
+  getTodoBook(isbn: string): TodoBook | undefined {
+    return this.inMemDb.todos.find((b:TodoBook) => b.isbn === isbn);
+  }
+
+  getReviewedBook(isbn: string): ReviewedBook | undefined {
+    return this.inMemDb.reviewed.find((b:ReviewedBook) => b.isbn === isbn);
+  }
+
   //setters/adders
   set Books(newBooks:DbStruct) {
     console.log(this.inMemDb);
     this.inMemDb = newBooks;
   }
-  addBook(book:Book) {
-    this.inMemDb.books.push(book);
-    this.DbBooksSubject.next(this.inMemDb.books);
+  addOther(book:Book) {
+    this.inMemDb.other.push(book);
+    this.DbBooksSubject.next(this.inMemDb.other);
   }
   addReadToBook(read: Read, book:ReviewedBook): void {
     book.reads.push(read);
   }
 
   //finders
-  findBook(isbn: string): Book | undefined {
-    const retBook:Book | undefined = this.inMemDb.books.find((b:Book) => b.isbn === isbn);
+  findBook(isbn:string): Book | undefined {
+    console.log("{q}[memdb] can i cast a reviewbook in book?");
+    //review book sollte zurueck gegeben werden, wenn es eins gibt. dann todo, dann other
+    let ret:Book | undefined = this.findReviewedBook(isbn);
+    ret = ret ? ret : this.findTodoBook(isbn);
+    ret = ret ? ret: this.findOther(isbn);
+    return ret;
+  }
+  findOther(isbn: string): Book | undefined {
+    const retBook:Book | undefined = this.inMemDb.other.find((b:Book) => b.isbn === isbn);
     return retBook;
   }
-  containsBook(book:Book): boolean {
+  containsOther(book:Book): boolean {
     let ret: boolean = false;
-    if (!this.findBook(book.isbn)) {
+    if (!this.findOther(book.isbn)) {
       ret = true;
     }
     return ret;
   }
 
   findReviewedBook(isbn:string): ReviewedBook | undefined {
-    return this.inMemDb.read.find((b:ReviewedBook) => b.isbn === isbn);
+    return this.inMemDb.reviewed.find((b:ReviewedBook) => b.isbn === isbn);
   }
   containsReviewedBook(book:ReviewedBook): boolean {
     let ret: boolean = false;
@@ -113,4 +133,73 @@ export class MemoryDbService implements DbManager {
   // findReviewedBook(readId: string): ReviewedBook | undefined {
   //   throw new Error('Method not implemented.');
   // }
+
+
+  changeTodoToReview(todo: TodoBook, review: ReviewedBook): boolean {
+    //this.changeAnyToReview(todo.isbn, review, this.inMemDb.todos);
+    let success = false;
+    
+    //assume todo exists
+    if (todo.isbn !== review.isbn) { throwError(() => "changeTodo: books must be same!"); }
+    
+    //add review first. Duplicates are better than none after error
+    this.inMemDb.reviewed.push(review);
+
+    const idxTodo = this.inMemDb.todos.findIndex((b:TodoBook) => b.isbn === todo.isbn);
+    if (idxTodo >= 0) {
+      this.inMemDb.todos.splice(idxTodo, 1);
+      success = true;
+      console.log("{verbose}[memdb] removed todo from db");
+    }
+    else {
+      console.log("{verbose}[memdb] no todo found");
+    }
+
+    return success;
+  }
+
+  changeOtherToReview(book: Book, review: ReviewedBook): boolean {
+    //this.changeAnyToReview(todo.isbn, review, this.inMemDb.other);
+    let success = false;
+    
+    //assume todo exists
+    if (book.isbn !== review.isbn) { throwError(() => "changeOther: books must be same!"); }
+    
+    //add review first. Duplicates are better than none after error
+    this.inMemDb.reviewed.push(review);
+
+    const idxTodo = this.inMemDb.other.findIndex((b:Book) => b.isbn === book.isbn);
+    if (idxTodo >= 0) {
+      this.inMemDb.other.splice(idxTodo, 1);
+      success = true;
+      console.log("{verbose}[memdb] removed todo from db");
+    }
+    else {
+      console.log("{verbose}[memdb] no todo found");
+    }
+
+    return success;
+  }
+
+  private changeAnyToReview(isbn:string, review:ReviewedBook, list:Book[]): boolean {
+    let success = false;
+    
+    //assume todo exists
+    if (isbn !== review.isbn) { throwError(() => "changeOther: books must be same!"); }
+    
+    //add review first. Duplicates are better than none after error
+    this.inMemDb.reviewed.push(review);
+
+    const idxTodo = list.findIndex((b:Book) => b.isbn === isbn);
+    if (idxTodo >= 0) {
+      list.splice(idxTodo, 1);
+      success = true;
+      console.log(`{verbose}[memdb] removed Book (${list[0]?.read_state}) from db`);
+    }
+    else {
+      console.error("{verbose}[memdb] Book not found in list\n", list);
+    }
+
+    return success;
+  }
 }
