@@ -12,24 +12,24 @@ export interface Book {
     pages:number,
 
     //extra_authors:Author[]
-    extended_title:string | null,
-    more_pages:number | null,
+    extended_title?:string,
+    more_pages?:number,
     
-    first_read:string | null, //von :Date zu :Date
-    extra_info:string | null, //such as, where to buy, awards, etc
-    thoughts:string | null,
+    first_read?:string, //von :Date zu :Date
+    extra_info?:string, //such as, where to buy, awards, etc
+    thoughts?:string,
 }
 
 export interface TodoBook extends Book {
     read:boolean,
-    started:Date | null,
-    finished:Date | null,
+    started?:Date,
+    finished?:Date,
 }
 
 export interface ReviewedBook extends Book {
     readCoutn:number,
     reads: Read[],
-    rank:number | null //rank is not per read, cause that would be too much. With version control becomes uneccessary
+    rank:number //rank is not per read, cause that would be too much. With version control becomes uneccessary
 }
 
 //todo: es soll zwei interfaces geben. eins mit allen infos fuer die 'gelesen' Liste

@@ -17,7 +17,7 @@ let db:DbStruct = {
             "pages":-1,
             "extended_title":"",
             "more_pages":-1,
-            "first_read": null,
+            "first_read": undefined,
             "extra_info":"Formelsammlung",
             "thoughts":""
         }
@@ -32,12 +32,12 @@ let db:DbStruct = {
 
             "extended_title":"Sherlock Holmes The Complete Novels and Stories Volume 1",
             "more_pages":1059,
-            "first_read":null,
+            "first_read":undefined,
             "extra_info":"classic",
             "thoughts":"",
             read:false,
-            started:null,
-            finished:null
+            started:undefined,
+            finished:undefined
         },
         {
             "isbn":"978-3-423-28984-9",
@@ -52,8 +52,8 @@ let db:DbStruct = {
             "extra_info":"deutsch - aus dem englischen von Bettina Lemke",
             "thoughts":"",
             read:false,
-            started:null,
-            finished:null
+            started:undefined,
+            finished:undefined
         }
     ],
     read:[
