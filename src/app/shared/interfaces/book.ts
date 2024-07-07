@@ -2,7 +2,6 @@ import { Read } from "./read";
 import { Author } from "./author";
 
 
-
 //todo: remove double fields. leaving for now, so nothing breaks.
 //when changed, change appropriate places in other components
 export interface Book {

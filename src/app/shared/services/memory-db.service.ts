@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { db, DbStruct } from '../db/db'
-import { Book, Read, Review, ReviewedBook, TodoBook } from '../interfaces';
+import { Book, Read, ReviewedBook, TodoBook } from '../interfaces';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DbManager } from '../abstracts/db-manager';
 

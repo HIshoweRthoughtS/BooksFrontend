@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MemoryDbService } from '../shared/services/memory-db.service';
 import { Observable } from 'rxjs';
-import { DbStruct, db } from '../shared/db/db';
+import { DbStruct } from '../shared/db/db';
 import { CommonModule } from '@angular/common';
 
 @Component({
