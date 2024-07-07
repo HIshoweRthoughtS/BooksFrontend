@@ -25,26 +25,26 @@
         </tr>
     </thead>
     <tbody>
-        @for (r of reads$ | async; track r.book.isbn) {
+        @for (r of reads$ | async; track r.isbn) {
             <tr>
                 <td>
                     {{r.rank}}
                 </td>
                 <td>
-                    {{r.book.title}}
+                    {{r.title}}
                 </td>
                 <td>
-                    {{r.book.author}}
+                    {{r.author}}
                 </td>
                 <td><!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
                     {{r.reads.length}} mal
                     
                 </td>
                 <td>
-                    {{r.book.thoughts}}
+                    {{r.thoughts}}
                 </td>
                 <td>
-                    {{r.book.isbn}}
+                    {{r.isbn}}
                 </td>
             </tr>
         }

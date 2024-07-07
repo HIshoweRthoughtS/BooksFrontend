@@ -18,27 +18,39 @@
     </thead>
     <!--implement drag and drop for each loob-->
     <tbody>
-        @for (r of reads$ | async; track r.book.isbn) {
+        @for (r of reads$ | async; track r.isbn) {
             <tr>
-                <td>{{r.book.author}}</td>
-                <td>{{r.book.title}}</td>
-                <td>{{r.book.publisher}}</td>
+                <td>{{r.author}}</td>
+                <td>{{r.title}}</td>
+                <td>{{r.publisher}}</td>
                 <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
                 (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
                 <td>{{r.reads.length | bool:true}}</td>
-                <td><a routerLink="/newreview" [queryParams]="{isbn: r.book.isbn}">Add Review</a></td>
+                <td><a routerLink="/newreview" [queryParams]="{isbn: r.isbn}">Add Review</a></td>
             </tr>
         }
         <hr />
-        @for (t of todos$ | async; track t.book.isbn) {
+        @for (t of todos$ | async; track t.isbn) {
             <tr>
-                <td>{{t.book.author}}</td>
-                <td>{{t.book.title}}</td>
-                <td>{{t.book.publisher}}</td>
+                <td>{{t.author}}</td>
+                <td>{{t.title}}</td>
+                <td>{{t.publisher}}</td>
                 <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
                 (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
                 <td>nein</td>
-                <td><a routerLink="/newreview" [queryParams]="{isbn: t.book.isbn}">Add Review</a></td>
+                <td><a routerLink="/newreview" [queryParams]="{isbn: t.isbn}">Add Review</a></td>
+            </tr>
+        }
+        <hr />
+        @for (b of leftoverbooks; track b.isbn) {
+            <tr>
+                <td>{{b.author}}</td>
+                <td>{{b.title}}</td>
+                <td>{{b.publisher}}</td>
+                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
+                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
+                <td>nein</td>
+                <td>not allowed</td>
             </tr>
         }
     </tbody>

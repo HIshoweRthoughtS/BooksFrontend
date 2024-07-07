@@ -21,14 +21,12 @@ export interface Book {
 }
 
 export interface TodoBook extends Book {
-    book:Book,
     read:boolean,
     started:Date | null,
     finished:Date | null,
 }
 
 export interface ReviewedBook extends Book {
-    book:Book,
     readCoutn:number,
     reads: Read[],
     rank:number | null //rank is not per read, cause that would be too much. With version control becomes uneccessary

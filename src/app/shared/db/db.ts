@@ -43,18 +43,6 @@ let db:DbStruct = {
             "more_pages":1059,
             "extra_info":"classic",
             "thoughts":"",
-            book:{
-                "isbn":"978-0-553-21241-9",
-                "author":"Sir Arthur Conan Doyle",
-                "title":"Sherlock Holmes",
-                "publisher":"Bantam Classic",
-                "pages":1059,
-
-                "extended_title":"Sherlock Holmes The Complete Novels and Stories Volume 1",
-                "more_pages":1059,
-                "extra_info":"classic",
-                "thoughts":""
-            },
             read:false,
             started:null,
             finished:null
@@ -72,18 +60,6 @@ let db:DbStruct = {
             "more_pages":273,
             "extra_info":"classic",
             "thoughts":"*in Borat voice* very nice",
-            book:{
-                "isbn":"978-0-141-43947-1",
-                "author":"Marry Shelly",
-                "title":"Frankenstein",
-                "publisher":"PENGUIN CLASSICS",
-                "pages":225,
-
-                "extended_title":"Frankenstein or THE MODERN PROMETHEUS//Edited with an Introduction and Notes by MAURICE HINDLE//REVISED EDITION",
-                "more_pages":273,
-                "extra_info":"classic",
-                "thoughts":"*in Borat voice* very nice"
-            },
             readCoutn:1,
             reads:[
                     {

@@ -68,11 +68,11 @@ export class MemoryDbService implements DbManager {
   }
 
   findReviewedBook(isbn:string): ReviewedBook | undefined {
-    return this.inMemDb.read.find((b:ReviewedBook) => b.book.isbn === isbn);
+    return this.inMemDb.read.find((b:ReviewedBook) => b.isbn === isbn);
   }
   containsReviewedBook(book:ReviewedBook): boolean {
     let ret: boolean = false;
-    if (!this.findReviewedBook(book.book.isbn)) {
+    if (!this.findReviewedBook(book.isbn)) {
       ret = true;
     }
     return ret;
@@ -86,11 +86,11 @@ export class MemoryDbService implements DbManager {
   }
 
   findTodoBook(isbn:string): TodoBook | undefined {
-    return this.inMemDb.todos.find((b:TodoBook) => b.book.isbn === isbn);
+    return this.inMemDb.todos.find((b:TodoBook) => b.isbn === isbn);
   }
   containsTodoBook(book:TodoBook): boolean {
     let ret: boolean = false;
-    if (!this.findTodoBook(book.book.isbn)) {
+    if (!this.findTodoBook(book.isbn)) {
       ret = true;
     }
     return ret;
