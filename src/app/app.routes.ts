@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ReviewTableComponent } from './review-table/review-table.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { NewReadFormComponent } from './new-read-form/new-read-form.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/booklist', pathMatch: 'full' }
@@ -47,6 +48,11 @@ export const routes: Routes = [
     ,{ path: 'aboutme', redirectTo: '/about', pathMatch: 'full' }
     ,{ path: 'ueber', redirectTo: '/about', pathMatch: 'full' }
     ,{ path: 'uebermich', redirectTo: '/about', pathMatch: 'full' }
+    ,{
+        path: 'account',
+        component: CreateAccountComponent,
+        title: 'Create Account'
+    }
     ,{
         path: '**', //pagenotfound 404
         component: PageNotFoundComponent,

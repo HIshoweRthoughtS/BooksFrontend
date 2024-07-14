@@ -1,0 +1,7 @@
+<form [formGroup]="accountForm">
+    <input type="text" formControlName="login_name" />
+    <input type="password" formControlName="password" />
+    <input type="password" formControlName="password_confirm" />
+    <input type="email" formControlName="email" />
+    <button type="submit" (click)="createAccount()">Erstellen</button>
+</form>
