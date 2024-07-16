@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-const BACKEND_BASE_URL:string = 'localhost:3000';
+const BACKEND_BASE_URL:string = 'http://localhost:3000';
 const ACCOUNT_PATH:string = BACKEND_BASE_URL + '/account';
 
 @Injectable({

@@ -37,6 +37,7 @@ export class CreateAccountComponent implements OnInit {
         console.error('[CreateAccount] BE answered: ', res.detail);
       } else /*res.info === 'success'*/ {
         //messages = .."done happy we did it alright welcome"
+        console.log(res);
       }
     });
   }
