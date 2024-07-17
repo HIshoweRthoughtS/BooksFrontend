@@ -6,9 +6,15 @@ import { ReviewTableComponent } from './review-table/review-table.component';
 import { AboutMeComponent } from './about-me/about-me.component';
 import { NewReadFormComponent } from './new-read-form/new-read-form.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/booklist', pathMatch: 'full' }
+   {
+        path: 'home',
+        component: HomePageComponent,
+        title: 'Home sweet Home'
+   }  
+    ,{ path: '', redirectTo: '/booklist', pathMatch: 'full' }
     ,{
         path: 'booklist',
         component: BookListComponent,

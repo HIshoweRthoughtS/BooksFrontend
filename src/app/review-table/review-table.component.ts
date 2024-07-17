@@ -4,6 +4,7 @@ import { ReviewedBook } from '../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { BookManagementService } from '../shared/services/book-management.service';
+import { HermesService } from '../shared/services/backend/hermes.service';
 
 @Component({
   selector: 'app-book-list',
@@ -27,12 +28,12 @@ export class ReviewTableComponent implements OnInit {
   //todo: backend has endpoints for every read and the SmallBook info list.
   //frontend pieces together all info. loading every review/read when needed.
   //e.g. select a read from booklist -> show this read and review
-  constructor(private bookService:BookManagementService) {
+  constructor(private readonly hermes:HermesService,private readonly bookService:BookManagementService) {
     this.reads$ = bookService.Reviews;
   }
 
   ngOnInit(): void {
-
+    this.hermes.getReviewedBooks().subscribe(res => console.log(res));
   }
   //i will work in reads. that means, everytime i read a book i can start a new read
   //-> the book will be marked as in progress (currently reading)
