@@ -8,6 +8,7 @@ const ACCOUNT_LOGIN_PATH:string = ACCOUNT_PATH + '/login';
 
 const BOOOKS_PATH: string = BACKEND_BASE_URL + '/books';
 const REVIEWED_BOOKS_PATH:string = BOOOKS_PATH + '/reviewed';
+const TODO_BOOKS_PATH:string = BOOOKS_PATH + '/todo';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,8 @@ export class HermesService {
   }
   public getReviewedBooks():Observable<any> {
     return this.http.get<any>(REVIEWED_BOOKS_PATH);
+  }
+  public getTodoBooks():Observable<any> {
+    return this.http.get<any>(TODO_BOOKS_PATH);
   }
 }

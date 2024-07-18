@@ -33,7 +33,9 @@ export class ReviewTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.hermes.getReviewedBooks().subscribe(res => console.log(res));
+    console.log('[ReviewTable] This is the page you are looking for');
+    this.hermes.getReviewedBooks().subscribe(console.log);
+    this.hermes.getTodoBooks().subscribe(console.log)
   }
   //i will work in reads. that means, everytime i read a book i can start a new read
   //-> the book will be marked as in progress (currently reading)
