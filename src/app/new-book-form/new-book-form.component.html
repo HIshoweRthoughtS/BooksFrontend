@@ -3,23 +3,15 @@
     <form [formGroup]="newBookForm" (ngSubmit)="newBookSubmit()">
         <!-- todo: is it possible, to link the mandatory|optional css class to the form validator.
          When the validator changes, the css class also does-->
-        <input type="text" formControlName="isbn"           class="mandatory"    placeholder="ISBN">
-        <input type="text" formControlName="title"          class="halfoptional" placeholder="title">
-        <input type="text" formControlName="extendedTitle"  class="optional"     placeholder="extended title">
-        <input type="text" formControlName="author"         class="mandatory"    placeholder="author">
-        <input type="text" formControlName="publisher"      class="mandatory"    placeholder="publisher">
-        <input type="date" formControlName="started"        class="optional"     placeholder="started">
-        <input type="date" formControlName="finished"       class="optional"     placeholder="finished">
-        <select formControlName="quicknote">
-            @for (g of grades | keyvalue; track g) {
-                <option value="{{g.value.short}}">
-                    {{g.value.long}}
-                </option>
-            }
-        </select>
-        <input type="text" formControlName="thoughts"       class="optional"     placeholder="thoughts">
+        <input type="text" formControlName="isbn"           class="mandatory"    placeholder="ISBN" />
+        <input type="text" formControlName="title"          class="mandatory" placeholder="title" />
+        <h2>Autor</h2>
+        <input type="text" formControlName="firstName" class="mandatory" placeholder="first Name" />
+        <input type="text" formControlName="lastName" class="mandatory" placeholder="last Name" />
+        <h2>Publisher</h2>
+        <input type="text" formControlName="name" class="mandatory" placeholder="Publisher" />
 
-        <button type="submit" [disabled]="!newBookForm.valid">Create Me</button>
+        <button type="submit" [disabled]="newBookForm.invalid">Create Me</button>
     </form>
 
     <!-- {{newBookForm.value | json}} -->
