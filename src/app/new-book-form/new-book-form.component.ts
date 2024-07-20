@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
 import { Book, BookReadStates, Grades, TodoBook } from '../shared/interfaces';
 import { BookManagementService } from '../shared/services/book-management.service';
 import { CastingCouchService } from '../shared/services/casting-couch.service';
+import { BooksService } from '../shared/services/manager/books.service';
 
 @Component({
   selector: 'app-new-book-form',
@@ -23,24 +24,24 @@ export class NewBookFormComponent implements OnInit {
   //the title input will become mandatory
   //class halfoptional -> becomes neccessary under cerain conditions
 
-  newBookForm:any;
+  bookForm:FormGroup<any>;
 
   grades:{[key:number]:{short:string, long:string}};
 
-  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private formBuilder:FormBuilder) {
+  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private readonly booksMnger:BooksService,private formBuilder:FormBuilder) {
     this.grades = Grades;
 
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
-    this.newBookForm = this.formBuilder.group({
+    this.bookForm = this.formBuilder.group({
       isbn : ['', Validators.required],
+      title : ['', Validators.required],
       author : this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required]
       }),
       publisher : formBuilder.group({
-        name: ['', Validators.required]
+        name: ['', Validators.required],
       }),
-      title : ['', Validators.required],
     });
   }
 
@@ -48,47 +49,6 @@ export class NewBookFormComponent implements OnInit {
   }
 
   newBookSubmit(/*?*/) {
-    //todo:
-    //if not enough info: https://isbndb.com/apidocs/v2
-    let tmpForm = this.newBookForm.value;
-    let tmpBook:Book = {
-      isbn: tmpForm.isbn,
-      author: tmpForm.author,
-      title: tmpForm.title,
-      publisher: tmpForm.publisher,
-      //todo[important] get pages with api or form field
-      pages: 404,
-
-      extended_title: tmpForm.extended_title,
-      thoughts: tmpForm.thoughts,
-
-      more_pages: undefined,
-      extra_info: undefined,
-      read_state: BookReadStates.exists
-    };
-    //todo: check if following flow better
-    //create a book and add to db
-    //check if todo or review criteria is met
-    //transform book to todo or review if neccessary
-    if (tmpForm.started !== null) {
-      //reviewed book
-      if (tmpForm.finished !== null && tmpForm.quicknote !== '') {
-        const newRevBook = this.caster.getNewReviewedBook(tmpBook, {id:'tbd', startDate:tmpForm.started, finishDate:tmpForm.finished,quicknote:tmpForm.quicknote});
-        this.bookService.addReviewed(newRevBook);
-      }
-      //todo book
-      else {
-        const newToBook:TodoBook = {
-          ...tmpBook,
-          read_state: BookReadStates.todo,
-          started: tmpForm.started
-        }
-        this.bookService.addTodo(newToBook);
-      }
-    }
-    //other book
-    else {
-      this.bookService.addOther(tmpBook);
-    }
+    this.booksMnger.sendCreateNewBook(this.bookForm.value);
   }
 }

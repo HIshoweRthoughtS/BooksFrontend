@@ -1,18 +1,28 @@
 
 <div>
-    <form [formGroup]="newBookForm" (ngSubmit)="newBookSubmit()">
+    <form [formGroup]="bookForm" (ngSubmit)="newBookSubmit()">
         <!-- todo: is it possible, to link the mandatory|optional css class to the form validator.
          When the validator changes, the css class also does-->
-        <input type="text" formControlName="isbn"           class="mandatory"    placeholder="ISBN" />
-        <input type="text" formControlName="title"          class="mandatory" placeholder="title" />
+        <h2>Buch</h2>
+        <label for="book.isbn">ISBN</label>
+        <input type="text" formControlName="isbn" id="book.isbn" placeholder="ISBN" />
+        <label for="book.isbn">Titel</label>
+        <input type="text" formControlName="title" placeholder="title" />
         <h2>Autor</h2>
-        <input type="text" formControlName="firstName" class="mandatory" placeholder="first Name" />
-        <input type="text" formControlName="lastName" class="mandatory" placeholder="last Name" />
+        <div formGroupName="author">
+            <label for="author.first">first name</label>
+            <input type="text" formControlName="firstName" id="author.first" placeholder="first Name" />
+            <label for="author.last">last name</label>
+            <input type="text" formControlName="lastName" id="author.last" placeholder="last Name" />
+        </div>
         <h2>Publisher</h2>
-        <input type="text" formControlName="name" class="mandatory" placeholder="Publisher" />
+        <div formGroupName="publisher">
+            <label for="publisher.name">Verlag</label>
+            <input type="text" formControlName="name" id="publisher.name" placeholder="Publisher" />
+        </div>
 
-        <button type="submit" [disabled]="newBookForm.invalid">Create Me</button>
+        <button type="submit" [disabled]="bookForm.invalid">Create Me</button>
     </form>
 
-    <!-- {{newBookForm.value | json}} -->
+    {{bookForm.value | json}}
 </div>
