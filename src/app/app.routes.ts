@@ -1,12 +1,12 @@
 import { Routes } from '@angular/router';
-import { BookListComponent } from './book-list/book-list.component';
-import { NewBookFormComponent } from './new-book-form/new-book-form.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ReviewTableComponent } from './review-table/review-table.component';
-import { AboutMeComponent } from './about-me/about-me.component';
-import { NewReadFormComponent } from './new-read-form/new-read-form.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { NewBookFormComponent } from '../components/books/new-book-form/new-book-form.component';
+import { PageNotFoundComponent } from '../components/general/page-not-found/page-not-found.component';
+import { ReviewTableComponent } from '../components/books/review-table/review-table.component';
+import { AboutMeComponent } from '../container/about-me/about-me.component';
+import { HomePageComponent } from '../container/home-page/home-page.component';
+import { BookListComponent } from '../components/books/book-list/book-list.component';
+import { NewReadFormComponent } from '../components/books/new-read-form/new-read-form.component';
+import { CreateAccountComponent } from '../components/general/user/create-account/create-account.component';
 
 export const routes: Routes = [
    {
