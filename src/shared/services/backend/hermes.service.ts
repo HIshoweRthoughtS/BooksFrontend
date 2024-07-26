@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
+import { Book } from '../../interfaces';
 
 const BACKEND_BASE_URL:string = 'http://localhost:3000';
 const ACCOUNT_PATH:string = BACKEND_BASE_URL + '/account';
@@ -28,6 +29,9 @@ export class HermesService {
   }
   //books/
   //books/
+  public getAllBooks(sorting:string): Observable<Book[]> {
+    return this.http.get<Book[]>(BOOOKS_PATH + `?srt=${sorting}`);
+  }
   public postNewBook(body:any): Observable<any> {
     return this.http.post<any>(BOOOKS_PATH, body);
   }

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { NewBookFormComponent } from '../components/books/new-book-form/new-book-form.component';
 import { PageNotFoundComponent } from '../components/general/page-not-found/page-not-found.component';
 import { ReviewTableComponent } from '../components/books/review-table/review-table.component';
 import { AboutMeComponent } from '../container/about-me/about-me.component';
@@ -9,6 +8,8 @@ import { NewReadFormComponent } from '../components/books/new-read-form/new-read
 import { CreateAccountComponent } from '../components/general/user/create-account/create-account.component';
 import { ProfileMainComponent } from '../container/user/profile/profile-main/profile-main.component';
 import { ProfileScaffoldComponent } from '../container/user/profile/_profile/profile-scaffold.component';
+import { CreateBookComponent } from '../container/books/create-book/create-book.component';
+import { AllBooksComponent } from '../container/books/all-books/all-books.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -59,12 +60,20 @@ export const routes: Routes = [
         ]
     },
     {
-        path: 'newbook',
-        component: NewBookFormComponent,
+        path: 'books',
+        component: AllBooksComponent,
+        title: 'All Books'
+    },
+    { path: 'book', redirectTo: '/books', pathMatch: 'full' },
+    {
+        path: 'createbook',
+        component: CreateBookComponent,
         title: 'New Book'
     },
     { path: 'new', redirectTo: '/newbook', pathMatch: 'full' },
     { path: 'neu', redirectTo: '/newbook', pathMatch: 'full' },
+    { path: 'createRead', redirectTo: '/:loginname/newreview', pathMatch: 'full' },
+    { path: 'createTodo', redirectTo: '/:loginname/newtodo', pathMatch: 'full' },
     {
         path: 'about',
         component: AboutMeComponent,

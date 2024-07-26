@@ -2,10 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
-import { Book, BookReadStates, Grades, TodoBook } from '../../../shared/interfaces';
+import { Book, Grades } from '../../../shared/interfaces';
 import { BookManagementService } from '../../../shared/services/book-management.service';
 import { CastingCouchService } from '../../../shared/services/casting-couch.service';
-import { BooksService } from '../../../shared/services/manager/books.service';
+
+import { Output, EventEmitter } from '@angular/core';
+
 
 @Component({
   selector: 'app-new-book-form',
@@ -24,11 +26,13 @@ export class NewBookFormComponent implements OnInit {
   //the title input will become mandatory
   //class halfoptional -> becomes neccessary under cerain conditions
 
+  @Output() newBookEvent = new EventEmitter<Book>();
+
   bookForm:FormGroup<any>;
 
   grades:{[key:number]:{short:string, long:string}};
 
-  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private readonly booksMnger:BooksService,private formBuilder:FormBuilder) {
+  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private formBuilder:FormBuilder) {
     this.grades = Grades;
 
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
@@ -49,6 +53,7 @@ export class NewBookFormComponent implements OnInit {
   }
 
   newBookSubmit(/*?*/) {
-    this.booksMnger.sendCreateNewBook(this.bookForm.value);
+    this.bookForm.disable();
+    this.newBookEvent.emit(this.bookForm.getRawValue());
   }
 }
