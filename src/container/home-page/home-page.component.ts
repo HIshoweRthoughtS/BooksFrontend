@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HermesService } from '../../components/shared/services/backend/hermes.service';
+import { HermesService } from '../../shared/services/backend/hermes.service';
 
 @Component({
   selector: 'app-home-page',

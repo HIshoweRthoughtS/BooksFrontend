@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
-import { Book, BookReadStates, Grades, TodoBook } from '../../shared/interfaces';
-import { BookManagementService } from '../../shared/services/book-management.service';
-import { CastingCouchService } from '../../shared/services/casting-couch.service';
-import { BooksService } from '../../shared/services/manager/books.service';
+import { Book, BookReadStates, Grades, TodoBook } from '../../../shared/interfaces';
+import { BookManagementService } from '../../../shared/services/book-management.service';
+import { CastingCouchService } from '../../../shared/services/casting-couch.service';
+import { BooksService } from '../../../shared/services/manager/books.service';
 
 @Component({
   selector: 'app-new-book-form',

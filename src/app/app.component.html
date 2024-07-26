@@ -1,15 +1,9 @@
 
-<main class="main">
-    <div class="content">
-    <!-- header oder nav -->
-        <a [routerLink]="['/booklist']">Buecher die ich (ge)lese(n habe)</a>
-        <a [routerLink]="['/readlist']">Buecher Bewertung</a>
-        <a [routerLink]="['/newbook']">Neues Buch anlegen</a>
-        <a [routerLink]="['/newreview']">Neue Review anlegen</a>
-
-        <a [routerLink]="['/account']">Account</a>
-    </div>
-</main>
+<nav>
+    <a [routerLink]="['/account']" routerLinkActive="active">Account</a>
+    
+    <a [routerLink]="['/home']" routerLinkActive="active">Home</a>
+</nav>
 
 <router-outlet />
 

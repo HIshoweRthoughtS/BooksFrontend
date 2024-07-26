@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ReviewedBook } from '../../shared/interfaces';
+import { ReviewedBook } from '../../../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BookManagementService } from '../../shared/services/book-management.service';
-import { HermesService } from '../../shared/services/backend/hermes.service';
+import { BookManagementService } from '../../../shared/services/book-management.service';
+import { HermesService } from '../../../shared/services/backend/hermes.service';
 
 @Component({
   selector: 'app-book-list',

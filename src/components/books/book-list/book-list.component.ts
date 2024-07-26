@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Book, ReviewedBook, TodoBook } from '../../shared/interfaces';
+import { Book, ReviewedBook, TodoBook } from '../../../shared/interfaces';
 import { CommonModule } from '@angular/common';
-import { BoolPipe } from '../../shared/bool.pipe';
+import { BoolPipe } from '../../../shared/bool.pipe';
 import { RouterLink } from '@angular/router';
-import { BookManagementService } from '../../shared/services/book-management.service';
+import { BookManagementService } from '../../../shared/services/book-management.service';
 
 @Component({
   selector: 'app-review-table',
