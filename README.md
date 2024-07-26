@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+
+The reason for splitting up the forms and their containers, because clear in create new read and comment etc.
+In this example the book is neccessary for a new read. so just pop in the formcomponent, that handles 'interface-matching'
+and just outputs your entity

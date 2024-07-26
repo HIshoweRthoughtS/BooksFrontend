@@ -1,9 +1,10 @@
 
 <nav>
-    <a [routerLink]="['/account']" routerLinkActive="active">Account</a>
+    <a [routerLink]="['/', (loginname$ | async)]" routerLinkActive="active">Account</a>
     <a [routerLink]="['/createbook']" routerLinkActive="active">Neues Buch anlegen</a>
     
-    <a [routerLink]="['/home']" routerLinkActive="active">Home</a>
+    <a [routerLink]="['/account']" routerLinkActive="active">sign up</a>
+    <a [routerLink]="['/']" routerLinkActive="active">Home</a>
 </nav>
 
 <router-outlet />

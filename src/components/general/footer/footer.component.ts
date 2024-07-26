@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
-import { DbStruct } from '../../../shared/db/db';
 import { CommonModule } from '@angular/common';
-import { MemoryDbService } from '../../../shared/services/memory-db.service';
+import { HermesService } from '../../../shared/services/backend/hermes.service';
+import { AccountsService } from '../../../shared/services/manager/accounts.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,10 +13,14 @@ import { MemoryDbService } from '../../../shared/services/memory-db.service';
 })
 export class FooterComponent {
 
-  db$:Observable<DbStruct>;
+  public test$ = this.accd.loginname$;
+  constructor(private readonly hermes:HermesService,private readonly accd:AccountsService) { }
 
-  constructor(private dbService:MemoryDbService) {
-    this.db$ = dbService.All;
+  deleteDb() {
+    this.hermes.deltedB();
   }
 
+  logout() {
+    this.accd.clockOut();
+  }
 }

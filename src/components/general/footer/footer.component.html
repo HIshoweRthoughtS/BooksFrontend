@@ -1,6 +1,7 @@
 
 <hr />
 <footer>
+    {{test$ |async}}
     <span>
         first created: 01.07.2024<br>
         last updated: 20.07.2024<br>
@@ -11,6 +12,6 @@
     <span>
         <a [routerLink]="['/legalnotice']">Impressum</a>
     </span>
-    <br>
-    <!-- {{db$ | async | json}} -->
+    <button (click)="deleteDb()">delete db</button>
+    <button (click)="logout()">clock out</button>
 </footer>

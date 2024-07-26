@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BookListComponent } from '../components/books/book-list/book-list.component';
 import { FooterComponent } from '../components/general/footer/footer.component';
+import { AccountsService } from '../shared/services/manager/accounts.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink,RouterOutlet,BookListComponent,FooterComponent],
+  imports: [CommonModule,RouterLink,RouterOutlet,BookListComponent,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -58,5 +60,15 @@ import { FooterComponent } from '../components/general/footer/footer.component';
 
 export class AppComponent {
   title = 'BookListFrontEnd';
+
+  public loginname$ = this.accd.loginname$;
+
+  constructor(private readonly router:Router, private readonly accd:AccountsService) {
+    accd.logedIn$.subscribe((logedIn:boolean) => {
+      if (!logedIn) {
+        router.navigate(['/'])
+      }
+    });
+  }
 }
 

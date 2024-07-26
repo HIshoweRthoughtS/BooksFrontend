@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HermesService } from '../../shared/services/backend/hermes.service';
+import { AccountsService } from '../../shared/services/manager/accounts.service';
 
 @Component({
   selector: 'app-home-page',
@@ -9,12 +9,12 @@ import { HermesService } from '../../shared/services/backend/hermes.service';
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss'
 })
-export class HomePageComponent implements OnInit{
+export class HomePageComponent implements OnInit {
   public loginForm:FormGroup<any>; 
 
-  constructor(private readonly hermes:HermesService,private readonly formBuilder:FormBuilder){
+  constructor(private readonly accd:AccountsService,private readonly formBuilder:FormBuilder) {
     this.loginForm = formBuilder.group({
-      loginName : ['', Validators.required],
+      loginname : ['', Validators.required],
       password : ['', Validators.required],
     })
   }
@@ -22,11 +22,8 @@ export class HomePageComponent implements OnInit{
     
   }
   public login():void {
-    const tmpBody = {
-      name: this.loginForm.value.loginName,
-      password: this.loginForm.value.password,
-    };
-    console.log('[HomeLogin]body: ',tmpBody);
-    this.hermes.postloginAccount(tmpBody).subscribe(res => console.log('[Login] res: ',res))
+    this.loginForm.disable();
+    console.log('[HomeLogin]body: ',this.loginForm.getRawValue());
+    this.accd.clockIn(this.loginForm.getRawValue());
   }
 }
