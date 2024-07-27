@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
 import { Book, Grades } from '../../../shared/interfaces';
-import { BookManagementService } from '../../../shared/services/book-management.service';
-import { CastingCouchService } from '../../../shared/services/casting-couch.service';
 
 import { Output, EventEmitter } from '@angular/core';
 
@@ -32,7 +30,7 @@ export class NewBookFormComponent implements OnInit {
 
   grades:{[key:number]:{short:string, long:string}};
 
-  constructor(private caster:CastingCouchService,private bookService:BookManagementService,private formBuilder:FormBuilder) {
+  constructor(private formBuilder:FormBuilder) {
     this.grades = Grades;
 
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity

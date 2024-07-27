@@ -19,7 +19,7 @@
     <!--implement drag and drop for each loob-->
     <tbody>
         <h4>Reviews</h4>
-        @for (r of reads$ | async; track r.isbn) {
+        @for (r of [{isbn:'', author:'', title:'', publisher:'', reads: []}] ; track r.isbn) {
             <tr>
                 <td>{{r.author}}</td>
                 <td>{{r.title}}</td>
@@ -32,7 +32,7 @@
         }
         <hr />
         <h4>Todos</h4>
-        @for (t of todos$ | async; track t.isbn) {
+        @for (t of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track t.isbn) {
             <tr>
                 <td>{{t.author}}</td>
                 <td>{{t.title}}</td>
@@ -45,7 +45,7 @@
         }
         <hr />
         <h4>Other</h4>
-        @for (b of books$ | async; track b.isbn) {
+        @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
             <tr>
                 <td>{{b.author}}</td>
                 <td>{{b.title}}</td>

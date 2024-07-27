@@ -20,32 +20,48 @@ export class AccountsService {
     this.loginname$ = this.loginNameSubject.asObservable();
   }
 
-  public clockIn(creds:Credentials) {
-    this.sendLogMeIn(creds);
+  public askLoginState() {
+    this.sendStateReq().subscribe((res:any) => {
+      if (res.info === ResponseCodes.success) {
+        this.notifyLogin(res.detail.login_name);
+      }
+      else {
+        this.notifyLogout();
+      }
+    });
+  }
+  private sendStateReq() {
+    return this.hermes.getAccountLoginState();
   }
 
   public clockOut() {
-    this.hermes.getLogout().subscribe((res:any) => {
-      this.sendLogout();
+    this.sendLogout().subscribe((res:any) => {
+      this.notifyLogout();
       console.log('[Logout] res: ',res);
     });
   }
+  private sendLogout() {
+    return this.hermes.getLogout();
+  }
 
-  private sendLogMeIn(creds:Credentials) {
-    this.hermes.postLoginAccount(creds).subscribe((res:any) => {
+  public clockIn(creds:Credentials) {
+    this.sendLogMeIn(creds).subscribe((res:any) => {
       console.log('[Login] res: ', res)
       if (res.info === ResponseCodes.success) {
-        this.sendLogin(res.detail.loginname);
+        this.notifyLogin(res.detail.loginname);
         console.log('[Login] loged in!');
       }
     });
   }
+  private sendLogMeIn(creds:Credentials) {
+    return this.hermes.postLoginAccount(creds)
+  }
 
-  private sendLogout() {
+  private notifyLogout() {
     this.loginStatusSubject.next(false);
     this.loginNameSubject.next('');
   }
-  private sendLogin(name:string) {
+  private notifyLogin(name:string) {
     this.loginStatusSubject.next(true);
     this.loginNameSubject.next(name);
   }

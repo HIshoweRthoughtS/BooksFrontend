@@ -58,11 +58,11 @@ export const routes: Routes = [
     //has to be penultimate, because otherwise every thing will be parsed as loginname
     {
         path: ':loginname',
-        component: ProfileMainComponent,
+        component: ProfileScaffoldComponent,
         children: [
             //settings, edit, etc
             //maybe review preview todo preview
-            { path:'', component: ProfileScaffoldComponent},
+            { path:'', component: ProfileMainComponent},
             {
                 path: 'booklist',
                 component: BookListComponent,

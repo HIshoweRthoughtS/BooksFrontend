@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-profile-scaffold',
   standalone: true,
-  imports: [CommonModule,RouterLink, RouterOutlet],
+  imports: [CommonModule,RouterLink,RouterOutlet],
   templateUrl: './profile-scaffold.component.html',
   styleUrl: './profile-scaffold.component.scss'
 })

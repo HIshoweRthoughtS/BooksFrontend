@@ -2,12 +2,12 @@
 <div>
     <form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
         <select formControlName="isbn">
-            @for (b of reviewed$ | async; track b.isbn) {
+            @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
                 <option value="{{b.isbn}}">
                     {{b.title}}
                 </option>
             }
-            @for (b of todo$ | async; track b.isbn) {
+            @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
                 <option value="{{b.isbn}}">
                     {{b.title}}
                 </option>

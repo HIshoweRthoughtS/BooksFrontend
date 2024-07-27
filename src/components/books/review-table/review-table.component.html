@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        @for (r of reads$ | async; track r.isbn) {
+        @for (r of [{isbn:'', author:'', title:'', publisher:'', reads: [], rank:0, thoughts:''}]; track r.isbn) {
             <tr>
                 <td>
                     {{r.rank}}

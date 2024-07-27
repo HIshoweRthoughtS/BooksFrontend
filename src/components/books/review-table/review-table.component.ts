@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ReviewedBook } from '../../../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BookManagementService } from '../../../shared/services/book-management.service';
 import { HermesService } from '../../../shared/services/backend/hermes.service';
 
 @Component({
@@ -14,8 +11,6 @@ import { HermesService } from '../../../shared/services/backend/hermes.service';
   styleUrl: './review-table.component.scss'
 })
 export class ReviewTableComponent implements OnInit {
-
-  reads$:Observable<ReviewedBook[]>;
 
   //I need a booklist service or ngrx/store
   //Links to Short Essay, maybe with a comment section
@@ -28,8 +23,7 @@ export class ReviewTableComponent implements OnInit {
   //todo: backend has endpoints for every read and the SmallBook info list.
   //frontend pieces together all info. loading every review/read when needed.
   //e.g. select a read from booklist -> show this read and review
-  constructor(private readonly hermes:HermesService,private readonly bookService:BookManagementService) {
-    this.reads$ = bookService.Reviews;
+  constructor(private readonly hermes:HermesService) {
   }
 
   ngOnInit(): void {

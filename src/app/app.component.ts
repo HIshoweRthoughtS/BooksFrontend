@@ -64,9 +64,10 @@ export class AppComponent {
   public loginname$ = this.accd.loginname$;
 
   constructor(private readonly router:Router, private readonly accd:AccountsService) {
+    accd.askLoginState();
     accd.logedIn$.subscribe((logedIn:boolean) => {
       if (!logedIn) {
-        router.navigate(['/'])
+        router.navigate(['/']);
       }
     });
   }

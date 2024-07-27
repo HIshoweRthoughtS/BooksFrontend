@@ -15,7 +15,7 @@ const TODO_BOOKS_PATH:string = BOOOKS_PATH + '/todo';
 
 interface ServerError {
   summary: string,
-  detail: string,
+  message: string,
   //more soon
 }
 
@@ -38,6 +38,9 @@ export class HermesService {
 
   //account
   //account/
+  public getAccountLoginState() {
+    return this.http.get<ServerRes<{login_name:string}>>(ACCOUNT_PATH);
+  }
   public postNewAccount(body:Account):Observable<any> {
     return this.http.post<any>(ACCOUNT_PATH, body);
   }

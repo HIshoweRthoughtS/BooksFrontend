@@ -4,7 +4,6 @@ import { Book, Grades, Read } from '../../../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { BookManagementService } from '../../../shared/services/book-management.service';
 
 
 @Component({
@@ -17,14 +16,9 @@ import { BookManagementService } from '../../../shared/services/book-management.
 export class NewReadFormComponent implements OnInit {
   newReadForm!:FormGroup<any>;
 
-  reviewed$:Observable<Book[]>;
-  todo$:Observable<Book[]>;
-
   grades:{[key:number]:{short:string, long:string}};
 
-  constructor(private aRoute:ActivatedRoute,private bookService:BookManagementService,private formBuilder:FormBuilder) {
-    this.reviewed$ = bookService.Reviews;
-    this.todo$ = bookService.Todos;
+  constructor(private aRoute:ActivatedRoute,private formBuilder:FormBuilder) {
 
     this.grades = Grades;
   }
@@ -61,6 +55,5 @@ export class NewReadFormComponent implements OnInit {
       review: formValues.review,
       short_essay: formValues.essay
     }
-    this.bookService.addReadFindBook(newRead, formValues.isbn);
   }
 }
