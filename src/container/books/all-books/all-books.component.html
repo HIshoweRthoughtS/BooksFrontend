@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        @for (b of books$ | async; track b.id_ref) {
+        @for (b of books$ | async; track b.isbn) {
             <tr>
                 <td>{{b.isbn}}</td>
                 <td>{{b.title}}</td>
@@ -21,3 +21,6 @@
         }
     </tbody>
 </table>
+<span>
+    <a [routerLink]="['/createbook']" routerLinkActive="active">Neues Buch anlegen</a>
+</span>

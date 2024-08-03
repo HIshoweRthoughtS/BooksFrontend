@@ -1,4 +1,23 @@
+nav {
+    position: fixed;
+    width: 200px;
+    // left: -200px;
+    top: 100%;
+    bottom: 0;
+}
+ul {
+    list-style: none;
+    padding-inline-start: 0;
+    height: 100vh;
+    display: inline-table;
+}
 
 a {
     margin: 5px;
+    text-decoration: none;
+}
+
+//https://www.codepalm.de/post/sidebar-menue-mit-css-erstellen/
+div {
+    margin-left: 200px;
 }
