@@ -35,8 +35,8 @@ export class NewBookFormComponent implements OnInit {
   constructor(private formBuilder:FormBuilder) {
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
     this.bookForm = this.formBuilder.group({
-      isbn : ['', Validators.required],
-      title : ['', Validators.required],
+      isbn : ['test', Validators.required],
+      title : ['test', Validators.required],
     });
   }
 

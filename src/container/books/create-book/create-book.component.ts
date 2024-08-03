@@ -4,6 +4,7 @@ import { BooksService } from '../../../shared/services/manager/books.service';
 import { NewAuthorFormComponent } from '../../../components/books/form/new-author-form/new-author-form.component';
 import { NewPublisherFormComponent } from '../../../components/books/form/new-publisher-form/new-publisher-form.component';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBook } from '../../../shared/interfaces';
 
 @Component({
   selector: 'create-book',
@@ -25,8 +26,16 @@ export class CreateBookComponent implements OnInit {
 
   createBook() {
     this.fullBookForm.disable();
-    this.bookd.sendCreateNewBook(this.fullBookForm.getRawValue()).subscribe(console.log);
-    this.fullBookForm.get('cover')?.enable();
-  } 
+    const book:FormBook = this.assembleNewBookBody(this.fullBookForm.getRawValue());
+    console.log('[CreateBook] form: ', book);
+    this.bookd.sendCreateNewBook(book).subscribe((res:any) => {
+      console.log(res);
+      this.fullBookForm.get('cover')?.reset();
+      this.fullBookForm.enable();
+    });
+  }
+  private assembleNewBookBody(formValues:any): FormBook {
+    return { ...formValues, ...formValues.cover }
+  }
 
 }

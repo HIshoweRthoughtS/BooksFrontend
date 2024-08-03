@@ -62,6 +62,7 @@ export class AppComponent {
   title = 'BookListFrontEnd';
 
   public loginname$ = this.accd.loginname$;
+  public logedIn$ = this.accd.logedIn$;
 
   constructor(private readonly router:Router, private readonly accd:AccountsService) {
     accd.askLoginState();

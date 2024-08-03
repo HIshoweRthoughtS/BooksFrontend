@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Account } from '../../../shared/interfaces';
+import { FormAccount } from '../../../shared/interfaces';
 
 @Component({
   selector: 'new-account-form',
@@ -11,7 +11,7 @@ import { Account } from '../../../shared/interfaces';
 })
 export class NewAccountFormComponent {
 
-  @Output() newAccountEvent = new EventEmitter<Account>();
+  @Output() newAccountEvent = new EventEmitter<FormAccount>();
 
   public accountForm:FormGroup<any>;
 

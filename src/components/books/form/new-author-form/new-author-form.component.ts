@@ -18,8 +18,8 @@ export class NewAuthorFormComponent implements OnInit {
   public authorForm:FormGroup<any>;
   constructor(private readonly formBuilder:FormBuilder) {
     this.authorForm = formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['test', Validators.required],
+      lastName: ['test', Validators.required],
     });
   }
 

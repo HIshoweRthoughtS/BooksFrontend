@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HermesService } from '../backend/hermes.service';
-import { Account, Credentials } from '../../interfaces';
+import { Credentials } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 
 @Injectable({

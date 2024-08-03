@@ -18,7 +18,7 @@ export class NewPublisherFormComponent implements OnInit {
   public publisherForm:FormGroup<any>;
   constructor(private readonly formBuilder:FormBuilder) {
     this.publisherForm = formBuilder.group({
-      title: ['', Validators.required],
+      title: ['test', Validators.required],
       country_of_origin: [''],
       hq_location: [''],
     });
