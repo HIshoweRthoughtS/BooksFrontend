@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HermesService } from '../../shared/services/backend/hermes.service';
 import { FormAccount } from '../../shared/interfaces';
-import { NewAccountFormComponent } from '../../components/general/user/new-account-form/new-account-form.component';
+import { NewAccountFormComponent } from '../../components/user/new-account-form/new-account-form.component';
 
 @Component({
   selector: 'create-account',
