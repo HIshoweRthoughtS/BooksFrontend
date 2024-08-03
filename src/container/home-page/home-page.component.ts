@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { AccountsService } from '../../shared/services/manager/accounts.service';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'home-page',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './home-page.component.html',
@@ -23,7 +23,6 @@ export class HomePageComponent implements OnInit {
   }
   public login():void {
     this.loginForm.disable();
-    console.log('[HomeLogin]body: ',this.loginForm.getRawValue());
     this.accd.clockIn(this.loginForm.getRawValue());
   }
 }

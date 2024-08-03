@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { RouterLink } from '@angular/router';
-import { Book, Grades } from '../../../shared/interfaces';
 
 import { Output, EventEmitter } from '@angular/core';
+import { NewAuthorFormComponent } from "../new-author-form/new-author-form.component";
+import { NewPublisherFormComponent } from '../new-publisher-form/new-publisher-form.component';
 
 
 @Component({
-  selector: 'app-new-book-form',
+  selector: 'new-book-form',
   standalone: true,
-  imports: [CommonModule,RouterLink,ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, NewAuthorFormComponent, NewPublisherFormComponent],
   templateUrl: './new-book-form.component.html',
   styleUrl: './new-book-form.component.scss'
 })
+//todo: rename this 'book' to coverinfo or smth. not whole book, just title and isbn etc
 export class NewBookFormComponent implements OnInit {
   //this componetn should be displayed in a popout window.
   //this way the form wont take away any space and you can
@@ -24,34 +26,30 @@ export class NewBookFormComponent implements OnInit {
   //the title input will become mandatory
   //class halfoptional -> becomes neccessary under cerain conditions
 
-  @Output() newBookEvent = new EventEmitter<Book>();
+  @Input() parentForm: {name: string, controls: FormGroup<any>} | undefined;
+
+  @Output() newBookEvent = new EventEmitter<any>();
 
   bookForm:FormGroup<any>;
 
-  grades:{[key:number]:{short:string, long:string}};
-
   constructor(private formBuilder:FormBuilder) {
-    this.grades = Grades;
-
     //noteworthy methods: patchValue, setValidators, updateValueAndValidity
     this.bookForm = this.formBuilder.group({
       isbn : ['', Validators.required],
       title : ['', Validators.required],
-      author : this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required]
-      }),
-      publisher : formBuilder.group({
-        name: ['', Validators.required],
-      }),
     });
   }
 
   ngOnInit(): void {
+    if (this.parentForm) {
+      this.parentForm.controls.addControl(this.parentForm.name, this.bookForm);
+      this.bookForm.setParent(this.parentForm.controls);
+    }
   }
 
-  newBookSubmit(/*?*/) {
+  submitNewBook(/*?*/) {
     this.bookForm.disable();
     this.newBookEvent.emit(this.bookForm.getRawValue());
+    this.bookForm.enable();
   }
 }

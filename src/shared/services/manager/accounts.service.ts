@@ -23,7 +23,7 @@ export class AccountsService {
   public askLoginState() {
     this.sendStateReq().subscribe((res:any) => {
       if (res.info === ResponseCodes.success) {
-        this.notifyLogin(res.detail.login_name);
+        this.notifyLogin(res.detail.loginname);
       }
       else {
         this.notifyLogout();

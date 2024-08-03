@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Account } from '../../../../shared/interfaces';
+import { Account } from '../../../shared/interfaces';
 
 @Component({
-  selector: 'app-new-account-form',
+  selector: 'new-account-form',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './new-account-form.component.html',

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-profile-scaffold',
+  selector: 'profile-scaffold',
   standalone: true,
   imports: [CommonModule,RouterLink,RouterOutlet],
   templateUrl: './profile-scaffold.component.html',

@@ -1,3 +1,9 @@
 
 <!--https://docs.angular.lat/guide/inputs-outputs#input-and-output-together-->
-<app-new-book-form (newBookEvent)="createBook($event)"></app-new-book-form>
+<form [formGroup]="fullBookForm"(ngSubmit)="createBook()">
+    <new-book-form [parentForm]="{name: 'cover', controls: fullBookForm}"></new-book-form>
+    <new-author-form [parentForm]="{name: 'author', controls: fullBookForm}"></new-author-form>
+    <new-publisher-form [parentForm]="{name: 'publisher', controls: fullBookForm}"></new-publisher-form>
+
+    <button type="submit" [disabled]="fullBookForm.invalid">Create Me</button>
+</form>

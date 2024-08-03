@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 import { HermesService } from '../../../shared/services/backend/hermes.service';
 
 @Component({
-  selector: 'app-book-list',
+  selector: 'book-list',
   standalone: true,
   imports: [CommonModule,RouterLink],
   templateUrl: './review-table.component.html',

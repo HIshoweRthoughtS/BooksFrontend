@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HermesService } from '../backend/hermes.service';
+import { Observable, take, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,16 +9,17 @@ export class BooksService {
 
   constructor(private readonly hermes:HermesService) { }
 
-  public sendGetAll(sort:string):void {
-    this.hermes.getAllBooks(sort).subscribe(console.log);
+  public sendGetAll(sort:string) {
+    //todo: cache
+    return this.hermes.getAllBooks(sort);
   }
 
-  public sendCreateNewBook(formValues:any):void {
+  public sendCreateNewBook(formValues:any): Observable<any> {
     //todo:
     //if not enough info: https://isbndb.com/apidocs/v2
     let body = {
       ...formValues
     };
-    this.hermes.postNewBook(body).subscribe(console.log);
+    return this.hermes.postNewBook(body).pipe(tap((_:any) => console.log(_)), take(1));
   }
 }

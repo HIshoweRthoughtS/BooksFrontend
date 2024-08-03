@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-legal-notice',
+  selector: 'legal-notice',
   standalone: true,
   imports: [],
   templateUrl: './legal-notice.component.html',

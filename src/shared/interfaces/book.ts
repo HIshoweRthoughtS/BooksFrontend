@@ -1,6 +1,5 @@
-import { Read } from "./read";
-import { Author } from "./author";
-
+import { FormAuthor } from "./author";
+import { FormPublisher } from "./publisher";
 
 export const enum BookReadStates {
     exisnt = 'book does not exist in db',
@@ -19,36 +18,28 @@ export const enum BookReadStates {
     reviewed = 'read and reviewed at least once'
 }
 
-
-//todo: remove double fields. leaving for now, so nothing breaks.
-//when changed, change appropriate places in other components
-export interface Book {
+export interface FormBook {
     isbn:string,
-    author:string,
     title:string,
-    publisher:string,
-    pages:number,
-
-    //extra_authors:Author[]
     extended_title?:string,
-    more_pages?:number,
+    author:FormAuthor,
+    seconds?:FormAuthor[],
+    publisher:FormPublisher,
 
-    read_state:BookReadStates,  //unlisted,todo,progress,awaiting,reviewd
+    chapter?:number,
+    pages?:number,
+}
+
+export interface BackendBook {
+    id_ref:number,
+    isbn:string,
+    /*author*/
+    first_name:string,
+    last_name:string,
+    /*publisher*/
+    pub_title:string,
     
-    first_read?:string, //von :Date zu :Date
-    extra_info?:string, //such as, where to buy, awards, etc
-    thoughts?:string,
+    title:string,
+    extended_title?:string,
+    extra_info?:string,
 }
-
-export interface TodoBook extends Book {
-    started?:Date,
-    finished?:Date,
-}
-//TodoBooks, that have been read and dont have a review will be penting for review
-export interface ReviewedBook extends Book {
-    reads: Read[],
-    rank:number //rank is not per read, cause that would be too much. With version control becomes uneccessary
-}
-
-//todo: es soll zwei interfaces geben. eins mit allen infos fuer die 'gelesen' Liste
-//und eins mit nur buch infos, fuer eine 'alle buecher'- bzw. 'todo' liste

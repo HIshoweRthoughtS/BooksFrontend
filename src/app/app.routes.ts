@@ -4,7 +4,7 @@ import { ReviewTableComponent } from '../components/books/review-table/review-ta
 import { AboutMeComponent } from '../container/about-me/about-me.component';
 import { HomePageComponent } from '../container/home-page/home-page.component';
 import { BookListComponent } from '../components/books/book-list/book-list.component';
-import { NewReadFormComponent } from '../components/books/new-read-form/new-read-form.component';
+import { NewReadFormComponent } from '../components/books/form/new-read-form/new-read-form.component';
 import { CreateAccountComponent } from '../container/create-account/create-account.component';
 import { ProfileMainComponent } from '../container/user/profile/profile-main/profile-main.component';
 import { ProfileScaffoldComponent } from '../container/user/profile/_profile/profile-scaffold.component';

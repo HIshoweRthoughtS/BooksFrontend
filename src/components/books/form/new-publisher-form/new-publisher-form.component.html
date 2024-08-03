@@ -1,0 +1,12 @@
+
+<form [formGroup]="publisherForm" (ngSubmit)="submitNewPublisher()">
+    <label for="publisher.name">Name</label>
+    <input type="text" formControlName="title" id="publisher.name" placeholder="name" />
+    <label for="publisher.coo">Country of origin</label>
+    <input type="text" formControlName="country_of_origin" id="publisher.coo" placeholder="coo" />
+    <label for="publisher.hql">HQ location</label>
+    <input type="text" formControlName="hq_location" id="publisher.hql" placeholder="hql" />
+    @if (!parentForm) {
+        <button type="submit" [disabled]="publisherForm.invalid">create</button>
+    }
+</form>

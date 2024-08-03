@@ -1,6 +1,7 @@
 
 <nav>
     <a [routerLink]="['/', (loginname$ | async)]" routerLinkActive="active">Account</a>
+    <a [routerLink]="['/books']" routerLinkActive="active">Alle Bücher</a>
     <a [routerLink]="['/createbook']" routerLinkActive="active">Neues Buch anlegen</a>
     
     <a [routerLink]="['/account']" routerLinkActive="active">sign up</a>

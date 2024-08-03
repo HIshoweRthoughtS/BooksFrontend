@@ -1,0 +1,10 @@
+
+<form [formGroup]="authorForm" (ngSubmit)="submitNewAuthor()">
+    <label for="author.first">first name</label>
+    <input type="text" formControlName="firstName" id="author.first" placeholder="first Name" />
+    <label for="author.last">last name</label>
+    <input type="text" formControlName="lastName" id="author.last" placeholder="last Name" />
+    @if (!parentForm) {
+        <button type="submit" [disabled]="authorForm.invalid">create</button>
+    }
+</form>

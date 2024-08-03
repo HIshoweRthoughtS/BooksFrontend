@@ -1,2 +1,23 @@
 
 <h2>Alle Bücher</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>isbn</th>
+            <th>titel</th>
+            <th>autor</th>
+            <th>verlag</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (b of books$ | async; track b.id_ref) {
+            <tr>
+                <td>{{b.isbn}}</td>
+                <td>{{b.title}}</td>
+                <td>{{b.last_name}}, {{b.first_name}}</td>
+                <td>{{b.pub_title}}</td>
+            </tr>
+        }
+    </tbody>
+</table>

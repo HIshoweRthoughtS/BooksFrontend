@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { Account, Book } from '../../interfaces';
+import { FormAccount } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 
 const BACKEND_BASE_URL:string = 'http://localhost:3000';
@@ -13,15 +13,15 @@ const BOOOKS_PATH: string = BACKEND_BASE_URL + '/books';
 const REVIEWED_BOOKS_PATH:string = BOOOKS_PATH + '/reviewed';
 const TODO_BOOKS_PATH:string = BOOOKS_PATH + '/todo';
 
+interface ServerRes<T> {
+  info: ResponseCodes,
+  detail: T | ServerError
+}
+
 interface ServerError {
   summary: string,
   message: string,
   //more soon
-}
-
-interface ServerRes<T> {
-  info: ResponseCodes,
-  detail: T | ServerError
 }
 
 @Injectable({
@@ -39,9 +39,9 @@ export class HermesService {
   //account
   //account/
   public getAccountLoginState() {
-    return this.http.get<ServerRes<{login_name:string}>>(ACCOUNT_PATH);
+    return this.http.get<ServerRes<{loginname:string}>>(ACCOUNT_PATH);
   }
-  public postNewAccount(body:Account):Observable<any> {
+  public postNewAccount(body:FormAccount):Observable<any> {
     return this.http.post<any>(ACCOUNT_PATH, body);
   }
   //account/logout
@@ -49,16 +49,16 @@ export class HermesService {
     return this.http.get<ServerRes<string>>(ACCOUNT_LOGOUT_PATH);
   }
   //account/login
-  public postLoginAccount(body:any):Observable<ServerRes<Account>> {
-    return this.http.post<ServerRes<Account>>(ACCOUNT_LOGIN_PATH, body);
+  public postLoginAccount(body:any):Observable<ServerRes<FormAccount>> {
+    return this.http.post<ServerRes<FormAccount>>(ACCOUNT_LOGIN_PATH, body);
   }
   //books/
   //books/
-  public getAllBooks(sorting:string): Observable<Book[]> {
-    return this.http.get<Book[]>(BOOOKS_PATH + `?srt=${sorting}`);
+  public getAllBooks(sorting:string): Observable<any[]> {
+    return this.http.get<any[]>(BOOOKS_PATH/* + `/?srt=${sorting}`*/);
   }
-  public postNewBook(body:any): Observable<any> {
-    return this.http.post<any>(BOOOKS_PATH, body);
+  public postNewBook(body:any): Observable<ServerRes<string>> {
+    return this.http.post<ServerRes<string>>(BOOOKS_PATH, body);
   }
   //books/reviewed
   public getReviewedBooks():Observable<any> {

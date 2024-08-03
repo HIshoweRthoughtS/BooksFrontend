@@ -1,0 +1,17 @@
+
+<div>
+    <form [formGroup]="bookForm" (ngSubmit)="submitNewBook()">
+        <!-- todo: is it possible, to link the mandatory|optional css class to the form validator.
+         When the validator changes, the css class also does-->
+        <h2>Buch</h2>
+        <label for="book.isbn">ISBN</label>
+        <input type="text" formControlName="isbn" id="book.isbn" placeholder="ISBN" />
+        <label for="book.isbn">Titel</label>
+        <input type="text" formControlName="title" placeholder="title" />
+        @if (!parentForm) {
+            <button type="submit" [disabled]="bookForm.invalid">Create Me</button>
+        }
+    </form>
+
+    {{bookForm.value | json}}
+</div>

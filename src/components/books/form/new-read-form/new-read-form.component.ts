@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Book, Grades, Read } from '../../../shared/interfaces';
+import { Grades, Read } from '../../../../shared/interfaces';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
-  selector: 'app-new-read-form',
+  selector: 'new-read-form',
   standalone: true,
   imports: [CommonModule,ReactiveFormsModule],
   templateUrl: './new-read-form.component.html',
