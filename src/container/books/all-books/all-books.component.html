@@ -8,6 +8,7 @@
             <th>titel</th>
             <th>autor</th>
             <th>verlag</th>
+            <th></th><!--hidden for button. button only visible on hover-->
         </tr>
     </thead>
     <tbody>
@@ -15,8 +16,9 @@
             <tr>
                 <td>{{b.isbn}}</td>
                 <td>{{b.title}}</td>
-                <td>{{b.last_name}}, {{b.first_name}}</td>
-                <td>{{b.pub_title}}</td>
+                <td>{{b.a_last}}, {{b.a_first}}</td>
+                <td>{{b.p_title}}</td>
+                <td><button (click)="startRead(b)">Open Book</button></td>
             </tr>
         }
     </tbody>

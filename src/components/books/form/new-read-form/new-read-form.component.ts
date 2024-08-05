@@ -45,14 +45,5 @@ export class NewReadFormComponent implements OnInit {
   //reads have to be created on an existing book.
   //todo[later,luxus]: create new book from new read via redirect or popout
   createNewRead() {
-    const formValues = this.newReadForm.value;
-    const newRead:Read = {
-      id: "tbd",
-      startDate: formValues.startDate,
-      finishDate: formValues.finishDate,
-      quicknote: formValues.quicknote,
-      review: formValues.review,
-      short_essay: formValues.essay
-    }
   }
 }

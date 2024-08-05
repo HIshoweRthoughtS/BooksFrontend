@@ -1,7 +1,8 @@
-import { FormAuthor } from "./author";
-import { FormPublisher } from "./publisher";
+import { BackendAuthor, FormAuthor } from "./author";
+import { BackendPublisher, FormPublisher } from "./publisher";
+import { Read } from "./read";
 
-export const enum BookReadStates {
+const enum BookReadStates {
     exisnt = 'book does not exist in db',
     //should never be in db or view but can be used for stuff
     lost = 'information lost through cast',
@@ -30,16 +31,47 @@ export interface FormBook {
     pages?:number,
 }
 
+export interface BE_Book_A_Name_P_Title {
+    id_ref:number,
+    isbn:string,
+    title:string,
+    /*author*/
+    a_first:string,
+    a_last:string,
+    /*publisher*/
+    p_title:string,
+    
+    extended_title?:string,
+    extra_info?:string,
+}
+
 export interface BackendBook {
     id_ref:number,
     isbn:string,
-    /*author*/
-    first_name:string,
-    last_name:string,
-    /*publisher*/
-    pub_title:string,
+    author: BackendAuthor,
+    publisher: BackendPublisher,
     
     title:string,
     extended_title?:string,
     extra_info?:string,
+}
+
+interface TodoReminder {
+    title:string,
+    content:string,
+}
+
+interface TodoBook extends BackendBook {
+    order_rank: number,
+    started_todo_date: string, //Date
+    finished_todo_date?: string, //Date
+    reminder?: TodoReminder[],
+}
+
+interface ReviewedBook extends BackendBook {
+    created_at:string, //Date
+    first_impression:string,
+    last_updated: string, //Date
+    reads: Read[],
+    order_rank?: number,
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
-import { FormAccount } from '../../interfaces';
+import { BE_Book_A_Name_P_Title, FormAccount } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 
 const BACKEND_BASE_URL:string = 'http://localhost:3000';
@@ -54,8 +54,8 @@ export class HermesService {
   }
   //books/
   //books/
-  public getAllBooks(sorting:string): Observable<any[]> {
-    return this.http.get<any[]>(BOOOKS_PATH/* + `/?srt=${sorting}`*/);
+  public getAllBooks(sorting:string): Observable<BE_Book_A_Name_P_Title[]> {
+    return this.http.get<BE_Book_A_Name_P_Title[]>(BOOOKS_PATH/* + `/?srt=${sorting}`*/);
   }
   public postNewBook(body:any): Observable<ServerRes<string>> {
     return this.http.post<ServerRes<string>>(BOOOKS_PATH, body);
