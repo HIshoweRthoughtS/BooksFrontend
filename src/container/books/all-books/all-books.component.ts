@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../../../shared/services/manager/books.service';
 import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { BE_Book_A_Name_P_Title } from '../../../shared/interfaces';
 
 @Component({
   selector: 'all-books',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './all-books.component.html',
   styleUrl: './all-books.component.scss'
 })
