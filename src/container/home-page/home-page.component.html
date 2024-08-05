@@ -4,3 +4,7 @@
     <input formControlName="password" type="password" />
     <input type="button" (click)="login()" value="login" />
 </form>
+
+@if (!(logedIn$ | async)) {
+    You are not logged in!
+}
