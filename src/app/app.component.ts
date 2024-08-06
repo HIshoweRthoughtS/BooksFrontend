@@ -65,6 +65,7 @@ export class AppComponent {
   public logedIn$ = this.accd.logedIn$;
 
   constructor(private readonly router:Router, private readonly accd:AccountsService) {
+    console.log('Constructing app');
     accd.askLoginState();
     accd.logedIn$.subscribe((logedIn:boolean) => {
       if (!logedIn) {

@@ -9,8 +9,11 @@ import { ResponseCodes } from '../../enums/response-codes.enumeration';
 })
 export class AccountsService {
 
-  private readonly loginStatusSubject = new BehaviorSubject<boolean>(false);
-  private readonly loginNameSubject = new BehaviorSubject<string>('');
+  private loginState:boolean = false;
+  private loginname:string = '';
+
+  private readonly loginStatusSubject = new BehaviorSubject<boolean>(this.loginState);
+  private readonly loginNameSubject = new BehaviorSubject<string>(this.loginname);
 
   public readonly logedIn$:Observable<boolean>;
   public readonly loginname$:Observable<string>
@@ -18,6 +21,14 @@ export class AccountsService {
   constructor(private readonly hermes:HermesService) {
     this.logedIn$ = this.loginStatusSubject.asObservable();
     this.loginname$ = this.loginNameSubject.asObservable();
+  }
+  
+  get LoggedIn(): boolean {
+    return this.loginState;
+  }
+
+  get Loginname(): string {
+    return this.loginname;
   }
 
   public askLoginState() {
@@ -57,12 +68,16 @@ export class AccountsService {
     return this.hermes.postLoginAccount(creds)
   }
 
-  private notifyLogout() {
-    this.loginStatusSubject.next(false);
-    this.loginNameSubject.next('');
+  public notifyLogout() {
+    this.loginState = false;
+    this.loginStatusSubject.next(this.loginState);
+    this.loginname = '';
+    this.loginNameSubject.next(this.loginname);
   }
   private notifyLogin(name:string) {
+    this.loginState = true;
     this.loginStatusSubject.next(true);
+    this.loginname = name;
     this.loginNameSubject.next(name);
   }
 }
