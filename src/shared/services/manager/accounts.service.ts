@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HermesService } from '../backend/hermes.service';
 import { Credentials } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
+import { BroadcastService } from '../broadcast/broadcast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,12 @@ export class AccountsService {
   private loginState:boolean = false;
   private loginname:string = '';
 
-  private readonly loginStatusSubject = new BehaviorSubject<boolean>(this.loginState);
-  private readonly loginNameSubject = new BehaviorSubject<string>(this.loginname);
-
-  public readonly logedIn$:Observable<boolean>;
-  public readonly loginname$:Observable<string>
-
-  constructor(private readonly hermes:HermesService) {
-    this.logedIn$ = this.loginStatusSubject.asObservable();
-    this.loginname$ = this.loginNameSubject.asObservable();
+  constructor(private readonly hermes:HermesService, private readonly bbc:BroadcastService) {
+    bbc.logedIn$.subscribe((lolIn:boolean) => {
+      if (!lolIn && this.loginState) {
+        this.doLogout();
+      }
+    })
   }
   
   get LoggedIn(): boolean {
@@ -34,10 +32,10 @@ export class AccountsService {
   public askLoginState() {
     this.sendStateReq().subscribe((res:any) => {
       if (res.info === ResponseCodes.success) {
-        this.notifyLogin(res.detail.loginname);
+        this.doLogin(res.detail.loginname);
       }
       else {
-        this.notifyLogout();
+        this.doLogout();
       }
     });
   }
@@ -47,7 +45,7 @@ export class AccountsService {
 
   public clockOut() {
     this.sendLogout().subscribe((res:any) => {
-      this.notifyLogout();
+      this.doLogout();
       console.log('[Logout] res: ',res);
     });
   }
@@ -59,7 +57,7 @@ export class AccountsService {
     this.sendLogMeIn(creds).subscribe((res:any) => {
       console.log('[Login] res: ', res)
       if (res.info === ResponseCodes.success) {
-        this.notifyLogin(res.detail.loginname);
+        this.doLogin(res.detail.loginname);
         console.log('[Login] loged in!');
       }
     });
@@ -68,16 +66,14 @@ export class AccountsService {
     return this.hermes.postLoginAccount(creds)
   }
 
-  public notifyLogout() {
+  public doLogout() {
     this.loginState = false;
-    this.loginStatusSubject.next(this.loginState);
     this.loginname = '';
-    this.loginNameSubject.next(this.loginname);
+    this.bbc.notifyLogout();
   }
-  private notifyLogin(name:string) {
+  private doLogin(name:string) {
     this.loginState = true;
-    this.loginStatusSubject.next(true);
     this.loginname = name;
-    this.loginNameSubject.next(name);
+    this.bbc.notifyLogin(name);
   }
 }

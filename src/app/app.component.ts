@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BookListComponent } from '../components/books/book-list/book-list.component';
 import { FooterComponent } from '../components/general/footer/footer.component';
 import { AccountsService } from '../shared/services/manager/accounts.service';
 import { CommonModule } from '@angular/common';
+import { BroadcastService } from '../shared/services/broadcast/broadcast.service';
 
 @Component({
   selector: 'app-root',
@@ -58,20 +59,22 @@ import { CommonModule } from '@angular/common';
 
 
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'BookListFrontEnd';
 
-  public loginname$ = this.accd.loginname$;
-  public logedIn$ = this.accd.logedIn$;
+  public loginname$ = this.bbc.loginname$;
+  public logedIn$ = this.bbc.logedIn$;
 
-  constructor(private readonly router:Router, private readonly accd:AccountsService) {
-    console.log('Constructing app');
+  constructor(private readonly router:Router, private readonly accd:AccountsService, private readonly bbc:BroadcastService) {
     accd.askLoginState();
-    accd.logedIn$.subscribe((logedIn:boolean) => {
-      if (!logedIn) {
-        router.navigate(['/']);
-      }
-    });
+  }
+
+  ngOnInit(): void {
+    // this.bbc.logedIn$.subscribe((logedIn:boolean) => {
+    //   if (!logedIn) {
+    //     this.router.navigate(['/']);
+    //   }
+    // });
   }
 }
 

@@ -3,9 +3,11 @@ import { tap } from 'rxjs';
 import { ResponseCodes } from '../enums/response-codes.enumeration';
 import { inject } from '@angular/core';
 import { AccountsService } from '../services/manager/accounts.service';
+import { BroadcastService } from '../services/broadcast/broadcast.service';
 
 export const logoutSyncInterceptor: HttpInterceptorFn = (req, next) => {
   const accd = inject(AccountsService);
+  const bbc = inject(BroadcastService);
   return next(req).pipe(tap(event => {
     if (event.type === HttpEventType.Response) {
       const tmp = (event.body as any);
@@ -13,7 +15,7 @@ export const logoutSyncInterceptor: HttpInterceptorFn = (req, next) => {
             && tmp.detail && tmp.detail.summary === '???'
 
               && accd.LoggedIn) {
-        accd.notifyLogout();
+        bbc.notifyLogout();
       }
     }
   }));

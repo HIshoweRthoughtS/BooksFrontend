@@ -1,0 +1,22 @@
+
+<button (click)="justOneMore()">Add Review</button>
+@for (group of newReviews.controls; track $index) {
+    <form [formGroupName]="$index" (ngSubmit)="createNewReview()">
+        <!--if standalone hit db for all my reads and select the one with selection-->
+        <label for="title">title</label>
+        <input type="text" id="title" formControlName="title">
+        <label for="essay">essay</label>
+        <input type="text" id="essay" formControlName="essay">
+        <label for="tldr">tldr</label>
+        <input type="text" id="tldr" formControlName="tldr">
+    
+        <label for="rating">rating</label>
+        <input type="text" id="rating" formControlName="rating">
+        
+        <label for="is_public">is_public</label>
+        <input type="text" id="is_public" formControlName="is_public">
+        <!-- @if (!parentForm) {
+            <button type="submit" [disabled]="newReviewForm.invalid">create</button>
+        } -->
+    </form>
+}

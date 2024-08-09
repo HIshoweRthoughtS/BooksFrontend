@@ -1,6 +1,46 @@
 import { BackendAuthor, FormAuthor } from "./author";
 import { BackendPublisher, FormPublisher } from "./publisher";
-import { Read } from "./read";
+import { FormRead } from "./read";
+
+//Everything in Use right now -> all exported and internals for usage
+export interface FormBook {
+    isbn:string,
+    title:string,
+    extended_title?:string,
+    author:FormAuthor,
+    seconds?:FormAuthor[],
+    publisher:FormPublisher,
+
+    chapter?:number,
+    pages?:number,
+}
+export interface SimpleBook {
+    id_ref:number,
+    isbn:string,
+    title:string,
+    /*author*/
+    a_first:string,
+    a_last:string,
+    /*publisher*/
+    p_title:string,
+    
+    extended_title:string | null,
+    extra_info:string | null,
+}
+export interface TwoBee_Todo_Book {
+    book: SimpleBook,
+    start_date: number | null,
+}
+export interface SimpleTodo extends SimpleBook {
+    order_rank: number,
+    started_todo_date: number | null, //Date.now
+    finished_todo_date: number | null,
+    // "join_acc": 1,
+    // "join_book": 1,
+    // "join_author": 1,
+    // "join_publisher": 1,
+}
+//Everything I want or how I imagine changes
 
 const enum BookReadStates {
     exisnt = 'book does not exist in db',
@@ -18,34 +58,7 @@ const enum BookReadStates {
     //Book is in reviewed
     reviewed = 'read and reviewed at least once'
 }
-
-export interface FormBook {
-    isbn:string,
-    title:string,
-    extended_title?:string,
-    author:FormAuthor,
-    seconds?:FormAuthor[],
-    publisher:FormPublisher,
-
-    chapter?:number,
-    pages?:number,
-}
-
-export interface BE_Book_A_Name_P_Title {
-    id_ref:number,
-    isbn:string,
-    title:string,
-    /*author*/
-    a_first:string,
-    a_last:string,
-    /*publisher*/
-    p_title:string,
-    
-    extended_title?:string,
-    extra_info?:string,
-}
-
-export interface BackendBook {
+interface BackendBook {
     id_ref:number,
     isbn:string,
     author: BackendAuthor,
@@ -55,23 +68,20 @@ export interface BackendBook {
     extended_title?:string,
     extra_info?:string,
 }
-
-interface TodoReminder {
-    title:string,
-    content:string,
-}
-
 interface TodoBook extends BackendBook {
     order_rank: number,
     started_todo_date: string, //Date
     finished_todo_date?: string, //Date
     reminder?: TodoReminder[],
 }
-
+interface TodoReminder {
+    title:string,
+    content:string,
+}
 interface ReviewedBook extends BackendBook {
     created_at:string, //Date
     first_impression:string,
     last_updated: string, //Date
-    reads: Read[],
+    reads: FormRead[],
     order_rank?: number,
 }

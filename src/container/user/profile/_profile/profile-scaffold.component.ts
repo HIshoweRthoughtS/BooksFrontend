@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { AccountsService } from '../../../../shared/services/manager/accounts.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { BroadcastService } from '../../../../shared/services/broadcast/broadcast.service';
 
 @Component({
   selector: 'profile-scaffold',
@@ -14,8 +14,8 @@ import { CommonModule } from '@angular/common';
 export class ProfileScaffoldComponent {
 
   public loginname$:Observable<string | null>;
-  constructor(private readonly accd:AccountsService) {
-    this.loginname$ = accd.loginname$;
+  constructor(private readonly bbc:BroadcastService) {
+    this.loginname$ = bbc.loginname$;
   }
 
 }

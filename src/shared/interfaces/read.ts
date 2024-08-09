@@ -1,15 +1,27 @@
-
-//A Read must contain at least a quicknote and can contain an essay and review.
-
 import { Review } from "./review";
 
+export const Grades:{[key:string]:string} = {
+    "vb": "Very Best",
+    "ra": "Read Again",
+    "gr": "Good Read",
+    "nm": "Nice Message",
+    "e": "Enjoyed",
+    "pg": "Partially Good",
+    "nr": "Not Recommended",
+    "dnf": "Did Not Finish",
+}
+
 //dates are mandatory, but do not have to be accurate
-export interface Read {
+export interface FormRead {
     // id:string, //isbn + start/finish-date/count
+    book_id_ref:string,
+    started_read_date: number, //Date
+    finished_read_date: number, //Date
     reviews: Review[],
-    started_read_date: string, //Date
-    finished_read_date: string, //Date
-    thoughts: string,
+    quicknote: string,
+    thoughts?: string,
+
+    remove_todo_id?: number,
 }
 
 //todo:create frontend and backend interfaces

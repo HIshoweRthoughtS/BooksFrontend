@@ -1,60 +1,38 @@
 
 <!--shows todos and other marked books. maybe alredy read books / link to detailed review-->
-<h2>Eine Liste von Buechern, die ich gelesen habe, oder noch lesen werde</h2>
-<!-- Buecher sortiert in folgender form
- 1. gelesene Buecher
-    sortiert nach datum des ersten Mal lesens 
- 2. noch nicht gelesene Buecher
-    sortiert nach tbd-->
-<hr />
 <table>
     <thead>
         <tr>
-            <th>Autor</th>
+            <th>Rang</th>
             <th>Titel</th>
+            <th>isbn:dev</th>
+            <th>Autor</th>
             <th>Verlag</th>
-            <th>Gelesen</th>
-            <th>todo:better txt</th>
+            <th>startdate</th>
         </tr>
     </thead>
     <!--implement drag and drop for each loob-->
+    <!--neuste zuerst, also alle gelesenen bücher ganz unten, neue todos ganz oben-->
     <tbody>
-        <h4>Reviews</h4>
-        @for (r of [{isbn:'', author:'', title:'', publisher:'', reads: []}] ; track r.isbn) {
+        @for (todo of todos$ | async; track todo.isbn) {
             <tr>
-                <td>{{r.author}}</td>
-                <td>{{r.title}}</td>
-                <td>{{r.publisher}}</td>
-                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
-                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
-                <td>{{r.reads.length | bool:true}}</td>
-                <td><a routerLink="/newreview" [queryParams]="{isbn: r.isbn}">Add Review</a></td>
+                <td>{{todo.order_rank}}</td>
+                <td>{{todo.isbn}}</td>
+                <td>{{todo.title}}</td>
+                <td>{{todo.a_last}}, {{todo.a_first}}</td>
+                <td>{{todo.p_title}}</td>
+                <td>{{todo.started_todo_date | date}}</td>
+                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.id_ref, startdate: todo.started_todo_date, removetodo:todo.id_ref}">Add Review</a></td>
             </tr>
         }
-        <hr />
-        <h4>Todos</h4>
         @for (t of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track t.isbn) {
             <tr>
                 <td>{{t.author}}</td>
                 <td>{{t.title}}</td>
                 <td>{{t.publisher}}</td>
-                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
+                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der || check _bool pipe
                 (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
-                <td>nein</td>
-                <td><a routerLink="/newreview" [queryParams]="{isbn: t.isbn}">Add Review</a></td>
-            </tr>
-        }
-        <hr />
-        <h4>Other</h4>
-        @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
-            <tr>
-                <td>{{b.author}}</td>
-                <td>{{b.title}}</td>
-                <td>{{b.publisher}}</td>
-                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der
-                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
-                <td>nein</td>
-                <td>not allowed</td>
+                <td></td>
             </tr>
         }
     </tbody>

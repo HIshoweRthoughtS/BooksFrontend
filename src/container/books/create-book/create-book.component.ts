@@ -18,6 +18,7 @@ export class CreateBookComponent implements OnInit {
   public readonly fullBookForm: FormGroup<any>;
   constructor(private readonly bookd:BooksService, private readonly formBuilder:FormBuilder) {
     this.fullBookForm = formBuilder.group({});
+    //todo:[test] try: no form in this comp. use book form. nest auth and pub in book <bookform><authfomr></authfomr><pubfomr></pubform></bookfomr>
   }
 
   ngOnInit(): void {

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HermesService } from '../../../shared/services/backend/hermes.service';
 import { AccountsService } from '../../../shared/services/manager/accounts.service';
+import { BroadcastService } from '../../../shared/services/broadcast/broadcast.service';
 
 @Component({
   selector: 'app-footer',
@@ -13,8 +14,12 @@ import { AccountsService } from '../../../shared/services/manager/accounts.servi
 })
 export class FooterComponent {
 
-  public test$ = this.accd.loginname$;
-  constructor(private readonly hermes:HermesService,private readonly accd:AccountsService) { }
+  public test$ = this.bbc.loginname$;
+  constructor(
+    private readonly hermes:HermesService,
+    private readonly accd:AccountsService,
+    private readonly bbc:BroadcastService,
+  ) { }
 
   deleteDb() {
     this.hermes.deltedB();

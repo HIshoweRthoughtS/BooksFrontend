@@ -1,33 +1,25 @@
 
-<div>
-    <form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
-        <select formControlName="isbn">
-            @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
-                <option value="{{b.isbn}}">
-                    {{b.title}}
-                </option>
-            }
-            @for (b of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track b.isbn) {
-                <option value="{{b.isbn}}">
-                    {{b.title}}
-                </option>
-            }
-            <!--other books will not be shown, to keep the dropdown compact. It is still possible to add a Read to any book-->
-        </select>
-        <input type="date" formControlName="startDate"  class="mandatory"   placeholder="Startdate" />
-        <input type="date" formControlName="finishDate" class="mandatory"   placeholder="Finishdate" />
-        <select formControlName="quicknote">
-            @for (g of grades | keyvalue; track g) {
-                <option value="{{g.value.short}}">
-                    {{g.value.long}}
-                </option>
-            }
-        </select>
-        <input type="text" formControlName="review"     class="optional"    placeholder="review" />
-        <input type="text" formControlName="essay"      class="optional"    placeholder="short essay" />
+<form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
+    <label for="isbn">BookID</label>
+    <input type="text" id="isbn" formControlName="book_id_ref">
 
-        <button type="submit" [disabled]="!newReadForm.valid">Create Me</button>
-    </form>
+    <label for="startdate">start</label>
+    <input type="date" id="startdate" formControlName="started_read_date">
+    <label for="finishdate">finish</label>
+    <input type="date" id="finishdate" formControlName="finished_read_date">
 
-    <!-- {{newReadForm.value | json}} -->
-</div>
+    <label for="thoughts">My thoughts</label>
+    <input type="text" id="thoughts" formControlName="thoughts">
+    <label for="qn">Quicknote</label>
+    <select formControlName="quicknote" id="qn">
+        <option value="" disabled selected hidden>Select Quicknote</option>
+        @for (qn of quicknotes; track $index) {
+            <option value="{{qn}}">
+                {{allQN[qn]}}
+            </option>
+        }
+    </select>
+
+    <new-review [parentForm]="{name: 'reviews', controls: newReadForm}"></new-review>
+    <button type="submit" [disabled]="newReadForm.invalid">Create Me</button>
+</form>
