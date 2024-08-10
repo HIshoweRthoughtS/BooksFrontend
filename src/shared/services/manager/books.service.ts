@@ -36,6 +36,10 @@ export class BooksService {
     }))
   }
 
+  public sendSetTodoPages(body:{todo_id:number,last_page?:number,current_page?:number}): Observable<any> {
+    return this.hermes.putTodoPages(body)
+  }
+
   public sendCreateNewTodo(book:SimpleBook): Observable<any> {
     return this.hermes.postTodoBooks({book, start_date: new Date().toISOString()});
   }

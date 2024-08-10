@@ -35,6 +35,8 @@ export interface SimpleTodo extends SimpleBook {
     order_rank: number,
     started_todo_date: string | null,
     finished_todo_date: string | null,
+    last_page: number | null,
+    current_page: number | null,
     // "join_acc": 1,
     // "join_book": 1,
     // "join_author": 1,

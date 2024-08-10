@@ -28,7 +28,7 @@ export class AllBooksComponent implements OnInit {
 
   startRead(b:SimpleBook) {
     this.bookd.sendCreateNewTodo(b).subscribe((res:any) => {if (res.info ==='success') {
-      this.router.navigate([/*'/'*/'..', this.accd.Loginname, 'booklist']);
+      this.router.navigate([/*'/'*/'..', this.accd.Loginname, 'todo']);
     }});
   }
 }

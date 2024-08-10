@@ -1,17 +1,22 @@
 
 <!--shows todos and other marked books. maybe alredy read books / link to detailed review-->
+<form [formGroup]="setPagesForm">
+    <input type="number" formControlName="current_page" placeholder="Lesezeichen">
+    <input type="number" formControlName="last_page" placeholder="Seitenzahl">
+</form>
 <table>
     <thead>
         <tr>
             <th>Rang</th>
+            <th>progress</th>
             <th>Titel</th>
             <th>isbn:dev</th>
             <th>Autor</th>
             <th>Verlag</th>
             <th>startdate</th>
+            <th>set pages</th>
             <th>finishdate</th>
             <th>State</th>
-            <th>progress</th>
         </tr>
     </thead>
     <!--implement drag and drop for each loob-->
@@ -22,15 +27,18 @@
         @for (todo of todos$ | async; track todo.isbn) {
             <tr>
                 <td>{{todo.order_rank}}</td>
+                <td>{{(null !== todo.current_page ? todo.current_page : '??') + '/' + (todo.last_page || '??')}}</td>
                 <td>{{todo.isbn}}</td>
                 <td>{{todo.title}}</td>
                 <td>{{todo.a_last}}, {{todo.a_first}}</td>
                 <td>{{todo.p_title}}</td>
                 <td>{{todo.started_todo_date | date}}</td>
+                <td>
+                    <button type="submit" [disabled]="setPagesForm.invalid" (click)="setPages(todo.id_ref)">set</button>
+                </td>
                 <td>...</td>
                 <td>in Progress</td>
-                <td>pages/pages</td>
-                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.id_ref, startdate: todo.started_todo_date, removetodo:todo.id_ref}">Add Review</a></td>
+                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.id_ref, startdate: todo.started_todo_date, removetodo:todo.id_ref}">Review</a></td>
             </tr>
         }
     </tbody>

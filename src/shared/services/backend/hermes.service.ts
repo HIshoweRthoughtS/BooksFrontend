@@ -4,17 +4,6 @@ import { Observable, tap } from 'rxjs';
 import { SimpleBook, FormAccount, TwoBee_Todo_Book, FormRead } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 
-const BACKEND_BASE_URL:string = 'http://localhost:3000';
-const ACCOUNT_PATH:string = BACKEND_BASE_URL + '/account';
-const ACCOUNT_LOGOUT_PATH:string = ACCOUNT_PATH + '/logout';
-const ACCOUNT_LOGIN_PATH:string = BACKEND_BASE_URL + '/login';
-const NEW_LOGIN_PATH:string = ACCOUNT_LOGIN_PATH + '/new';
-
-const BOOOKS_PATH: string = BACKEND_BASE_URL + '/books';
-const TODO_BOOKS_PATH:string = BOOOKS_PATH + '/todo';
-const REVIEWED_BOOKS_PATH:string = BOOOKS_PATH + '/reviewed';
-const READS_PATH:string = BOOOKS_PATH + '/read';
-
 interface ServerRes<T> {
   info: ResponseCodes,
   detail: T | ServerError
@@ -35,50 +24,53 @@ export class HermesService {
 
   //devonly
   public deltedB() {
-    this.get(BACKEND_BASE_URL + '/dev/deletedb').subscribe(console.log);
+    this.get(this.BACKEND_BASE_URL + '/dev/deletedb').subscribe(console.log);
   }
 
   //account
   //account/
   public getAccountLoginState() {
-    return this.get<{loginname:string}>(ACCOUNT_PATH);
+    return this.get<{loginname:string}>(this.ACCOUNT_PATH);
   }
   //account/logout
   public getLogout(): Observable<ServerRes<string>> {
-    return this.get<string>(ACCOUNT_LOGOUT_PATH);
+    return this.get<string>(this.ACCOUNT_LOGOUT_PATH);
   }
   //login
   //login/
   public postLoginAccount(body:any):Observable<ServerRes<FormAccount>> {
-    return this.post<FormAccount>(ACCOUNT_LOGIN_PATH, body);
+    return this.post<FormAccount>(this.ACCOUNT_LOGIN_PATH, body);
   }
   //login/new
   public postNewAccount(body:FormAccount):Observable<any> {
-    return this.post<any>(NEW_LOGIN_PATH, body);
+    return this.post<any>(this.NEW_LOGIN_PATH, body);
   }
 
   //books/
   //books/
   public getAllBooks(sorting:string): Observable<SimpleBook[]> {
-    return this.get<SimpleBook[]>(BOOOKS_PATH)/* + `/?srt=${sorting}`*/;
+    return this.get<SimpleBook[]>(this.BOOOKS_PATH)/* + `/?srt=${sorting}`*/;
   }
   public postNewBook(body:any): Observable<ServerRes<string>> {
-    return this.post<string>(BOOOKS_PATH, body);
+    return this.post<string>(this.BOOOKS_PATH, body);
   }
   //books/todo
   public getTodoBooks():Observable<any> {
-    return this.get<any>(TODO_BOOKS_PATH);
+    return this.get<any>(this.TODO_BOOKS_PATH);
   }
-  public postTodoBooks(body:TwoBee_Todo_Book) {
-    return this.post<string>(TODO_BOOKS_PATH, body);
+  public postTodoBooks(body:TwoBee_Todo_Book):Observable<any> {
+    return this.post<string>(this.TODO_BOOKS_PATH, body);
+  }
+  public putTodoPages(body:{todo_id:number,last_page?:number,current_page?:number}):Observable<any> {
+    return this.put<string>(this.TODO_BOOKS_PATH, body);
   }
   //books/reviewed
   public getReviewedBooks():Observable<any> {
-    return this.get<any>(REVIEWED_BOOKS_PATH);
+    return this.get<any>(this.REVIEWED_BOOKS_PATH);
   }
   //books/read
   public postRead(body:FormRead) {
-    return this.post<string>(READS_PATH, body);
+    return this.post<string>(this.READS_PATH, body);
   }
 
   private get<T>(uri:string, options?:any): Observable<any> {
@@ -86,6 +78,9 @@ export class HermesService {
   }
   private post<T>(uri:string, body:any | null, options?:any): Observable<any> {
     return this.http.post<ServerRes<T>>(uri, body, options).pipe(tap((res:any) => this.loggerFirstDraft(uri,res,body,options)));//.pipe(catchError(this.errorHandler).bind(this))
+  }
+  private put<T>(uri:string, body:any | null, options?:any): Observable<any> {
+    return this.http.put<ServerRes<T>>(uri, body, options).pipe(tap((res:any) => this.loggerFirstDraft(uri,res,body,options)));//.pipe(catchError(this.errorHandler).bind(this))
   }
 
 
@@ -96,4 +91,17 @@ export class HermesService {
     with options: ${options}`;
     console.log(msg);
   }
+
+
+  //links, but part of the class
+  private readonly BACKEND_BASE_URL:string = 'http://localhost:3000';
+  private readonly ACCOUNT_PATH:string = this.BACKEND_BASE_URL + '/account';
+  private readonly ACCOUNT_LOGOUT_PATH:string = this.ACCOUNT_PATH + '/logout';
+  private readonly ACCOUNT_LOGIN_PATH:string = this.BACKEND_BASE_URL + '/login';
+  private readonly NEW_LOGIN_PATH:string = this.ACCOUNT_LOGIN_PATH + '/new';
+
+  private readonly BOOOKS_PATH: string = this.BACKEND_BASE_URL + '/books';
+  private readonly TODO_BOOKS_PATH:string = this.BOOOKS_PATH + '/todo';
+  private readonly REVIEWED_BOOKS_PATH:string = this.BOOOKS_PATH + '/reviewed';
+  private readonly READS_PATH:string = this.BOOOKS_PATH + '/read';
 }
