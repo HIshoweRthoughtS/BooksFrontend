@@ -15,8 +15,8 @@ export const Grades:{[key:string]:string} = {
 export interface FormRead {
     // id:string, //isbn + start/finish-date/count
     book_id_ref:string,
-    started_read_date: number, //Date
-    finished_read_date: number, //Date
+    started_read_date: string, //iso date
+    finished_read_date: string, //iso date
     reviews: Review[],
     quicknote: string,
     thoughts?: string,

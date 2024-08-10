@@ -1,25 +1,31 @@
+ <!-- (ngSubmit)="createNewRead()" -->
+<form [formGroup]="newReadForm">
+    <label>BookID
+        <input type="text" id="isbn" formControlName="book_id_ref">
+    </label>
 
-<form [formGroup]="newReadForm" (ngSubmit)="createNewRead()">
-    <label for="isbn">BookID</label>
-    <input type="text" id="isbn" formControlName="book_id_ref">
+    <label>start
+        <input type="datetime-local" id="startdate" formControlName="started_read_date">
+    </label>
+    <label>finish
+        <input type="datetime-local" id="finishdate" formControlName="finished_read_date">
+    </label>
 
-    <label for="startdate">start</label>
-    <input type="date" id="startdate" formControlName="started_read_date">
-    <label for="finishdate">finish</label>
-    <input type="date" id="finishdate" formControlName="finished_read_date">
+    <label>My thoughts
+        <input type="text" id="thoughts" formControlName="thoughts">
+    </label>
+    <label>Quicknote
+        <select formControlName="quicknote" id="qn">
+            <option value="" disabled selected hidden>Select Quicknote</option>
+            @for (qn of quicknotes; track $index) {
+                <option value="{{qn}}">
+                    {{allQN[qn]}}
+                </option>
+            }
+        </select>
+    </label>
 
-    <label for="thoughts">My thoughts</label>
-    <input type="text" id="thoughts" formControlName="thoughts">
-    <label for="qn">Quicknote</label>
-    <select formControlName="quicknote" id="qn">
-        <option value="" disabled selected hidden>Select Quicknote</option>
-        @for (qn of quicknotes; track $index) {
-            <option value="{{qn}}">
-                {{allQN[qn]}}
-            </option>
-        }
-    </select>
-
-    <new-review [parentForm]="{name: 'reviews', controls: newReadForm}"></new-review>
-    <button type="submit" [disabled]="newReadForm.invalid">Create Me</button>
+    <new-review [parentForm]="{name: 'reviews', group: newReadForm}"></new-review>
+    <new-quote [parentForm]="{name: 'quotes', group: newReadForm}"></new-quote>
+    <button type="submit" [disabled]="newReadForm.invalid" (click)="createNewRead()">Create Me</button>
 </form>

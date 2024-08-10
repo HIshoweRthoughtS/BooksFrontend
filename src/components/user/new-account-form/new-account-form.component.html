@@ -1,7 +1,12 @@
 
-<form [formGroup]="accountForm">
-    <input type="text" formControlName="loginname" />
-    <input type="password" formControlName="password" />
-    <input type="password" formControlName="password_confirm" />
-    <button type="submit" (click)="newAccountSubmit()">Erstellen</button>
+<form [formGroup]="accountForm" (ngSubmit)="newAccountSubmit()">
+    <input type="text" formControlName="loginname" id="loginname" />
+    <input type="password" formControlName="password" id="password" />
+    <input type="password" formControlName="password_confirm" id="password_confirm" />
+
+    <br />
+    <label for="extrainfo">Additional creation field</label>
+    <input type="password" formControlName="extrainfo" id="extrainfo" />
+
+    <button type="submit" [disabled]="accountForm.invalid">Erstellen</button>
 </form>

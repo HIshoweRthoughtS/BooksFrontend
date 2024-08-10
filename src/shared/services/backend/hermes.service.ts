@@ -8,6 +8,7 @@ const BACKEND_BASE_URL:string = 'http://localhost:3000';
 const ACCOUNT_PATH:string = BACKEND_BASE_URL + '/account';
 const ACCOUNT_LOGOUT_PATH:string = ACCOUNT_PATH + '/logout';
 const ACCOUNT_LOGIN_PATH:string = BACKEND_BASE_URL + '/login';
+const NEW_LOGIN_PATH:string = ACCOUNT_LOGIN_PATH + '/new';
 
 const BOOOKS_PATH: string = BACKEND_BASE_URL + '/books';
 const TODO_BOOKS_PATH:string = BOOOKS_PATH + '/todo';
@@ -42,17 +43,20 @@ export class HermesService {
   public getAccountLoginState() {
     return this.get<{loginname:string}>(ACCOUNT_PATH);
   }
-  public postNewAccount(body:FormAccount):Observable<any> {
-    return this.post<any>(ACCOUNT_PATH, body);
-  }
   //account/logout
   public getLogout(): Observable<ServerRes<string>> {
     return this.get<string>(ACCOUNT_LOGOUT_PATH);
   }
-  //account/login
+  //login
+  //login/
   public postLoginAccount(body:any):Observable<ServerRes<FormAccount>> {
     return this.post<FormAccount>(ACCOUNT_LOGIN_PATH, body);
   }
+  //login/new
+  public postNewAccount(body:FormAccount):Observable<any> {
+    return this.post<any>(NEW_LOGIN_PATH, body);
+  }
+
   //books/
   //books/
   public getAllBooks(sorting:string): Observable<SimpleBook[]> {

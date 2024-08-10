@@ -37,14 +37,14 @@ export class BooksService {
   }
 
   public sendCreateNewTodo(book:SimpleBook): Observable<any> {
-    return this.hermes.postTodoBooks({book, start_date: new Date().getTime()});
+    return this.hermes.postTodoBooks({book, start_date: new Date().toISOString()});
   }
 
   public sendCreateNewRead(read:FormRead) {
     return this.hermes.postRead({
       ...read,
-      started_read_date: new Date(read.started_read_date).getTime(),
-      finished_read_date: new Date(read.finished_read_date).getTime()
+      started_read_date: new Date(read.started_read_date).toISOString(),
+      finished_read_date: new Date(read.finished_read_date).toISOString()
     });
   }
 }

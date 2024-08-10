@@ -1,0 +1,35 @@
+
+<button (click)="justOneMore()">Add Quote</button>
+<form [formGroup]="quotesForm">
+    <div formArrayName="_quotes">
+        @for (group of newQuotes.controls; track $index) {
+            <button (click)="lessOneJust($index)">x</button>
+            <div [formGroupName]="$index">
+                <label>content
+                    <input type="text" name="content" formControlName="content" />
+                </label>
+                <label>note
+                    <input type="text" name="note" formControlName="note" />
+                </label>
+                <label>chapter
+                    <input type="text" name="chapter" formControlName="chapter" />
+                </label>
+                <label>page_from
+                    <input type="text" name="page_from" formControlName="page_from" />
+                </label>
+                <label>page_to
+                    <input type="text" name="page_to" formControlName="page_to" />
+                </label>
+                <label>line_from
+                    <input type="text" name="line_from" formControlName="line_from" />
+                </label>
+                <label>line_to
+                    <input type="text" name="line_to" formControlName="line_to" />
+                </label>
+                <label>is_public
+                    <input type="checkbox" name="is_public" formControlName="is_public" />
+                </label>
+            </div>
+        }
+    </div>
+</form>
