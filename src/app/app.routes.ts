@@ -1,15 +1,16 @@
 import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from '../components/general/page-not-found/page-not-found.component';
-import { ReviewTableComponent } from '../components/books/review-table/review-table.component';
 import { AboutMeComponent } from '../container/about-me/about-me.component';
 import { HomePageComponent } from '../container/home-page/home-page.component';
-import { BookListComponent } from '../components/books/book-list/book-list.component';
 import { NewReadFormComponent } from '../components/books/form/new-read-form/new-read-form.component';
 import { CreateAccountComponent } from '../container/create-account/create-account.component';
-import { ProfileMainComponent } from '../container/user/profile/profile-main/profile-main.component';
-import { ProfileScaffoldComponent } from '../container/user/profile/_profile/profile-scaffold.component';
 import { CreateBookComponent } from '../container/books/create-book/create-book.component';
 import { AllBooksComponent } from '../container/books/all-books/all-books.component';
+import { ProfileScaffoldComponent } from '../container/user/profile-scaffold.component';
+import { BooksTodoViewComponent } from '../container/user/books-todo-view/books-todo-view.component';
+import { BooksReviewedViewComponent } from '../container/user/books-reviewed-view/books-reviewed-view.component';
+import { rausMitDieViecherGuard } from '../shared/guards/raus-mit-die-viecher.guard';
+import { authGuard } from '../shared/guards/auth.guard';
 
 export const routes: Routes = [
     /**
@@ -28,7 +29,8 @@ export const routes: Routes = [
     {
         path: 'books',
         component: AllBooksComponent,
-        title: 'All Books'
+        title: 'All Books',
+        canActivate: [rausMitDieViecherGuard]
     },
     { path: 'book', redirectTo: '/books', pathMatch: 'full' },
     { path: 'allbook', redirectTo: '/books', pathMatch: 'full' },
@@ -36,7 +38,8 @@ export const routes: Routes = [
     {
         path: 'createbook',
         component: CreateBookComponent,
-        title: 'New Book'
+        title: 'New Book',
+        canActivate: [rausMitDieViecherGuard]
     },
     { path: 'new', redirectTo: '/newbook', pathMatch: 'full' },
     { path: 'neu', redirectTo: '/newbook', pathMatch: 'full' },
@@ -59,26 +62,27 @@ export const routes: Routes = [
     {
         path: ':loginname',
         component: ProfileScaffoldComponent,
+        canActivate: [rausMitDieViecherGuard],
+        canActivateChild: [authGuard],
         children: [
             //settings, edit, etc
             //maybe review preview todo preview
-            { path:'', component: ProfileMainComponent},
             {
-                path: 'booklist',
-                component: BookListComponent,
+                path: 'todo',
+                component: BooksTodoViewComponent,
                 title: 'My Book Todos'
             },
-            { path: 'todo', redirectTo: '/booklist', pathMatch: 'full' },
-            { path: 'todos', redirectTo: '/booklist', pathMatch: 'full' },
-            { path: 'buchliste', redirectTo: '/booklist', pathMatch: 'full' },
-            { path: 'buecherliste', redirectTo: '/booklist', pathMatch: 'full' },
+            { path:'', redirectTo: 'todo', pathMatch: 'full' },
+            { path: 'todos', redirectTo: '/todo', pathMatch: 'full' },
+            { path: 'buchliste', redirectTo: '/todo', pathMatch: 'full' },
+            { path: 'buecherliste', redirectTo: '/todo', pathMatch: 'full' },
             {
-                path: 'readlist',
-                component: ReviewTableComponent,
+                path: 'reviewed',
+                component: BooksReviewedViewComponent,
                 title: 'Bewertung'
             },
-            { path: 'bewertung', redirectTo: '/readlist', pathMatch: 'full' },
-            { path: 'bewertungen', redirectTo: '/readlist', pathMatch: 'full' },
+            { path: 'bewertung', redirectTo: '/reviewed', pathMatch: 'full' },
+            { path: 'bewertungen', redirectTo: '/reviewed', pathMatch: 'full' },
             { path: 'neuesbuch', redirectTo: '/newbook', pathMatch: 'full' },
             {
                 path: 'newreview',

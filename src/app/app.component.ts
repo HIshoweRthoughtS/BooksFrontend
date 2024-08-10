@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { BookListComponent } from '../components/books/book-list/book-list.component';
 import { FooterComponent } from '../components/general/footer/footer.component';
 import { AccountsService } from '../shared/services/manager/accounts.service';
 import { CommonModule } from '@angular/common';
@@ -9,7 +8,7 @@ import { BroadcastService } from '../shared/services/broadcast/broadcast.service
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterOutlet,BookListComponent,FooterComponent],
+  imports: [CommonModule,RouterLink,RouterOutlet,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

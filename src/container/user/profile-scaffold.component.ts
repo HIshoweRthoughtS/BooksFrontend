@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BroadcastService } from '../../../../shared/services/broadcast/broadcast.service';
+import { BroadcastService } from '../../shared/services/broadcast/broadcast.service';
 
 @Component({
   selector: 'profile-scaffold',

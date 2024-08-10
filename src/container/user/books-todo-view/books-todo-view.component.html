@@ -9,10 +9,15 @@
             <th>Autor</th>
             <th>Verlag</th>
             <th>startdate</th>
+            <th>finishdate</th>
+            <th>State</th>
+            <th>progress</th>
         </tr>
     </thead>
     <!--implement drag and drop for each loob-->
     <!--neuste zuerst, also alle gelesenen bücher ganz unten, neue todos ganz oben-->
+                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der || check _bool pipe
+                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
     <tbody>
         @for (todo of todos$ | async; track todo.isbn) {
             <tr>
@@ -22,17 +27,10 @@
                 <td>{{todo.a_last}}, {{todo.a_first}}</td>
                 <td>{{todo.p_title}}</td>
                 <td>{{todo.started_todo_date | date}}</td>
+                <td>...</td>
+                <td>in Progress</td>
+                <td>pages/pages</td>
                 <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.id_ref, startdate: todo.started_todo_date, removetodo:todo.id_ref}">Add Review</a></td>
-            </tr>
-        }
-        @for (t of [{isbn:'', author:'', title:'', publisher:'', reads: []}]; track t.isbn) {
-            <tr>
-                <td>{{t.author}}</td>
-                <td>{{t.title}}</td>
-                <td>{{t.publisher}}</td>
-                <!-- todo: hier eine pipe, die checkt, ob es reads gibt, wenn schon wird der || check _bool pipe
-                (letzte oder aelteste oder gesamt oder alles in einem dropdown) angezeigt-->
-                <td></td>
             </tr>
         }
     </tbody>
