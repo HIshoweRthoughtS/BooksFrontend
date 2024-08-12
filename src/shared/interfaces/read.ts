@@ -14,7 +14,7 @@ export const Grades:{[key:string]:string} = {
 //dates are mandatory, but do not have to be accurate
 export interface FormRead {
     // id:string, //isbn + start/finish-date/count
-    book_id_ref:string,
+    b_id_ref:string,
     started_read_date: string, //iso date
     finished_read_date: string, //iso date
     reviews: Review[],

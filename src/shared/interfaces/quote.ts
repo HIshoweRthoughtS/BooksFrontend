@@ -1,4 +1,16 @@
 
+//not in use
+const enum ColorCodes {
+    yellow = 1,
+    green,
+    orange,
+    blue,
+    purple,
+    pink
+}
+
+export const Colors:string[] = ['yellow','green','orange','blue','purple','pink'];
+
 export interface Quote {
     content: string,
     note: string,

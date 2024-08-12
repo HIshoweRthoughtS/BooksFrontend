@@ -15,7 +15,7 @@ export interface FormBook {
     pages?:number,
 }
 export interface SimpleBook {
-    id_ref:number,
+    b_id_ref:number,
     isbn:string,
     title:string,
     /*author*/
@@ -61,7 +61,7 @@ const enum BookReadStates {
     reviewed = 'read and reviewed at least once'
 }
 interface BackendBook {
-    id_ref:number,
+    b_id_ref:number,
     isbn:string,
     author: BackendAuthor,
     publisher: BackendPublisher,

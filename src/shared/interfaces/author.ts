@@ -7,7 +7,7 @@ export interface FormAuthor {
 }
 
 export interface BackendAuthor {
-    id_ref:number,
+    au_id_ref:number,
     first_name:string,
     last_name:string,
     more_legal_names?:string,

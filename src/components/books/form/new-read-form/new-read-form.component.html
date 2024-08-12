@@ -1,7 +1,7 @@
  <!-- (ngSubmit)="createNewRead()" -->
 <form [formGroup]="newReadForm">
     <label>BookID
-        <input type="text" id="isbn" formControlName="book_id_ref">
+        <input type="text" id="isbn" formControlName="b_id_ref">
     </label>
 
     <label>start
@@ -29,3 +29,5 @@
     <new-quote [parentForm]="{name: 'quotes', group: newReadForm}"></new-quote>
     <button type="submit" [disabled]="newReadForm.invalid" (click)="createNewRead()">Create Me</button>
 </form>
+
+{{newReadForm.value | json}}

@@ -27,14 +27,14 @@ export class NewReadFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.newReadForm = this.formBuilder.group({
-      book_id_ref: ['', Validators.required],
+      b_id_ref: ['', Validators.required],
       started_read_date: [null, Validators.required],
       finished_read_date: [formatDate(new Date(),'yyyy-MM-dd hh:mm', 'en'), Validators.required],
       thoughts: [''],
       quicknote: ['', Validators.required],
       remove_todo_id: [null]
     });
-    this.newReadForm.get('book_id_ref')?.disable();
+    this.newReadForm.get('b_id_ref')?.disable();
     this.handleUrlParams();
   }
 
@@ -46,7 +46,7 @@ export class NewReadFormComponent implements OnInit {
     //if found -> display in dropdown
     //if not found -> redirect to new book form with redirect back on succes if popout not working yet or on phone
     if (urlBookId) {
-      this.newReadForm.patchValue({book_id_ref:urlBookId});
+      this.newReadForm.patchValue({b_id_ref:urlBookId});
     }
     if (urlStartDate) {
       this.newReadForm.patchValue({started_read_date:formatDate(new Date(urlStartDate),'yyyy-MM-dd hh:mm', 'en')});

@@ -8,6 +8,15 @@
                 <label>content
                     <input type="text" name="content" formControlName="content" />
                 </label>
+                <label>color
+                    <select>
+                        @for (c of colorWrap; track c) {
+                            <option>
+                                <button (click)="addColorToQuote(c, $index)">{{c}}</button>
+                            </option>
+                        }
+                    </select>
+                </label>
                 <label>note
                     <input type="text" name="note" formControlName="note" />
                 </label>

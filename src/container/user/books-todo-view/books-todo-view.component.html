@@ -34,11 +34,11 @@
                 <td>{{todo.p_title}}</td>
                 <td>{{todo.started_todo_date | date}}</td>
                 <td>
-                    <button type="submit" [disabled]="setPagesForm.invalid" (click)="setPages(todo.id_ref)">set</button>
+                    <button type="submit" [disabled]="setPagesForm.invalid" (click)="setPages(todo.t_id_ref)">set</button>
                 </td>
                 <td>...</td>
                 <td>in Progress</td>
-                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.id_ref, startdate: todo.started_todo_date, removetodo:todo.id_ref}">Review</a></td>
+                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.t_id_ref, startdate: todo.started_todo_date, removetodo:todo.t_id_ref}">Review</a></td>
             </tr>
         }
     </tbody>

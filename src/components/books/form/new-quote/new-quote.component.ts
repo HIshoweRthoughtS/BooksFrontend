@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Colors } from '../../../../shared/interfaces/quote';
 
 @Component({
   selector: 'new-quote',
@@ -10,11 +11,11 @@ import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } fr
   styleUrl: './new-quote.component.scss'
 })
 export class NewQuoteComponent implements OnInit {
-  
   @Input() parentForm:{name: string, group: FormGroup<any>} | undefined;
 
   public quotesForm:FormGroup<any>;
   public newQuotes:FormArray<any>;
+  public readonly colorWrap = Colors;
   constructor(private readonly formBuilder:FormBuilder) {
     this.newQuotes = formBuilder.array([]);
     this.quotesForm = formBuilder.group({
@@ -32,6 +33,7 @@ export class NewQuoteComponent implements OnInit {
   justOneMore() {
     this.newQuotes.push(this.formBuilder.group({
       content: ['', Validators.required],
+      colors: this.formBuilder.array([]),
       note: [''],
       chapter: [null],
       page_from: [null, Validators.required],
@@ -41,8 +43,11 @@ export class NewQuoteComponent implements OnInit {
       is_public: [false]
     }));
   }
-
   lessOneJust(idx:number) {
     this.newQuotes.removeAt(idx);
+  }
+
+  addColorToQuote(color:string, arrayIndex:number) {
+    (this.newQuotes.get(arrayIndex.toString())?.get('colors') as FormArray).push(color);
   }
 }
