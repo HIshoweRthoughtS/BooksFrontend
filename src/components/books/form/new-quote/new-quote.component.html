@@ -6,7 +6,7 @@
             <button (click)="lessOneJust($index)">x</button>
             <div [formGroupName]="$index">
                 <label>content
-                    <input type="text" name="content" formControlName="content" />
+                    <textarea type="text" name="content" formControlName="content" rows="4" cols="50"></textarea>
                 </label>
                 <label>color
                     <select>
@@ -18,7 +18,7 @@
                     </select>
                 </label>
                 <label>note
-                    <input type="text" name="note" formControlName="note" />
+                    <textarea type="text" name="note" formControlName="note"></textarea>
                 </label>
                 <label>chapter
                     <input type="text" name="chapter" formControlName="chapter" />

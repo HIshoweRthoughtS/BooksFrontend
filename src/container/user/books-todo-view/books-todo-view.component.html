@@ -2,7 +2,6 @@
 <!--shows todos and other marked books. maybe alredy read books / link to detailed review-->
 <form [formGroup]="setPagesForm">
     <input type="number" formControlName="current_page" placeholder="Lesezeichen">
-    <input type="number" formControlName="last_page" placeholder="Seitenzahl">
 </form>
 <table>
     <thead>
@@ -40,6 +39,9 @@
                 <td>in Progress</td>
                 <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.t_id_ref, startdate: todo.started_todo_date, removetodo:todo.t_id_ref}">Review</a></td>
             </tr>
+        }
+        @empty {
+            No Todos
         }
     </tbody>
 </table>

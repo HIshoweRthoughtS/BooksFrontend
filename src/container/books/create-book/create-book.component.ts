@@ -28,9 +28,7 @@ export class CreateBookComponent implements OnInit {
   createBook() {
     this.fullBookForm.disable();
     const book:FormBook = this.assembleNewBookBody(this.fullBookForm.getRawValue());
-    console.log('[CreateBook] form: ', book);
     this.bookd.sendCreateNewBook(book).subscribe((res:any) => {
-      console.log(res);
       this.fullBookForm.get('cover')?.reset();
       this.fullBookForm.enable();
     });

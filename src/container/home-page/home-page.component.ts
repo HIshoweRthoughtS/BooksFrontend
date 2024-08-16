@@ -13,7 +13,7 @@ import { BroadcastService } from '../../shared/services/broadcast/broadcast.serv
 })
 export class HomePageComponent implements OnInit {
   public loginForm:FormGroup<any>; 
-  public logedIn$ = this.bbc.logedIn$;
+  public logedIn$ = this.bbc.tapLoginState();
 
   constructor(
     private readonly accd:AccountsService,

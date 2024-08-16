@@ -15,7 +15,7 @@ export class ProfileScaffoldComponent {
 
   public loginname$:Observable<string | null>;
   constructor(private readonly bbc:BroadcastService) {
-    this.loginname$ = bbc.loginname$;
+    this.loginname$ = bbc.tapLoginname();
   }
 
 }

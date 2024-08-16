@@ -1,6 +1,9 @@
 
 <h2>Alle Bücher</h2>
-
+<form [formGroup]="finishDetailForm">
+    <input type="number" formControlName="last_page" placeholder="Seitenzahl">
+    <input type="number" formControlName="last_chapter" placeholder="Lesezeichen">
+</form>
 <table>
     <thead>
         <tr>

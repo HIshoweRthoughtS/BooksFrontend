@@ -14,7 +14,7 @@ import { BroadcastService } from '../../../shared/services/broadcast/broadcast.s
 })
 export class FooterComponent {
 
-  public test$ = this.bbc.loginname$;
+  public test$ = this.bbc.tapLoginname();
   constructor(
     private readonly hermes:HermesService,
     private readonly accd:AccountsService,

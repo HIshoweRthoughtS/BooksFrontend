@@ -19,14 +19,7 @@ export class CreateAccountComponent implements OnInit {
   }
 
   createAccount(acc:FormAccount) {
-    this.hermes.postNewAccount(acc).subscribe((res:any) => {
-      if (res.info === 'fail') {
-        console.error('[CreateAccount] BE answered: ', res.detail);
-      } else /*res.info === 'success'*/ {
-        //messages = .."done happy we did it alright welcome"
-        console.log(res);
-      }
-    });
+    this.hermes.postNewAccount(acc);
   }
 
 }

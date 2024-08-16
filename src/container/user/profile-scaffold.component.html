@@ -13,5 +13,7 @@
     </ul>
 </nav>
 <div>
-    <router-outlet></router-outlet>
+@defer(when loginname$ | async) {
+    <router-outlet />
+}
 </div>

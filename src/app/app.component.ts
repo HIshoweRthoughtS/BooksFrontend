@@ -59,21 +59,22 @@ import { BroadcastService } from '../shared/services/broadcast/broadcast.service
 
 
 export class AppComponent implements OnInit {
-  title = 'BookListFrontEnd';
+    title = 'BookListFrontEnd';
 
-  public loginname$ = this.bbc.loginname$;
-  public logedIn$ = this.bbc.logedIn$;
+    public logedIn$ = this.bbc.tapLoginState();
+    public loginname$ = this.bbc.tapLoginname();
 
-  constructor(private readonly router:Router, private readonly accd:AccountsService, private readonly bbc:BroadcastService) {
-    accd.askLoginState();
-  }
+    constructor(private readonly router:Router, private readonly accd:AccountsService, private readonly bbc:BroadcastService) {
+        //like dispatch
+        accd.askLoginState();
+    }
 
-  ngOnInit(): void {
-    // this.bbc.logedIn$.subscribe((logedIn:boolean) => {
-    //   if (!logedIn) {
-    //     this.router.navigate(['/']);
-    //   }
-    // });
-  }
+    ngOnInit(): void {
+        // this.bbc.logedIn$.subscribe((logedIn:boolean) => {
+        //   if (!logedIn) {
+        //     this.router.navigate(['/']);
+        //   }
+        // });
+    }
 }
 
