@@ -9,6 +9,7 @@ import { BroadcastService } from '../broadcast/broadcast.service';
 export class AccountsService {
 
     private loginState:boolean = false;
+    private accountId:number = -1;
     private loginname:string = '';
 
     constructor(private readonly hermes:HermesService, private readonly bbc:BroadcastService) {
@@ -23,14 +24,18 @@ export class AccountsService {
         return this.loginState;
     }
 
+    get AccountId(): number {
+        return this.accountId;
+    }
+
     get Loginname(): string {
         return this.loginname;
     }
 
     public askLoginState() {
         this.sendStateReq().subscribe((res:any) => {
-            if (res) {
-                this.doLogin(res.loginname);
+            if (!!res) {
+                this.doLogin(res.a_id_ref, res.loginname);
             }
             else {
                 this.doLogout();
@@ -53,7 +58,7 @@ export class AccountsService {
     public clockIn(creds:Credentials) {
         this.sendLogMeIn(creds).subscribe((res:any) => {
             if (!!res) {
-                this.doLogin(res.loginname);
+                this.doLogin(res.a_id_ref, res.loginname);
             }
         });
     }
@@ -63,11 +68,13 @@ export class AccountsService {
 
     public doLogout() {
         this.loginState = false;
+        this.accountId = -1;
         this.loginname = '';
         this.bbc.notifyLogout();
     }
-    private doLogin(name:string) {
+    private doLogin(id:number, name:string) {
         this.loginState = true;
+        this.accountId = id;
         this.loginname = name;
         this.bbc.notifyLogin(name);
     }

@@ -46,8 +46,8 @@ export class BooksTodoViewComponent implements OnInit {
 
     setPages(todoId:number) {
         this.setPagesForm.disable();
-        this.bookd.sendSetTodoPages({todo_id: todoId, ...this.setPagesForm.getRawValue()}).subscribe((res:any) => {
-            if (res.info === ResponseCodes.success) {
+        this.bookd.sendSetTodoPages(String(todoId), {...this.setPagesForm.getRawValue()}).subscribe((res:any) => {
+            if (!!res) {
                 this.todos$ = this.bookd.sendGetAllTodos();
                 this.setPagesForm.reset();
                 this.setPagesForm.enable();

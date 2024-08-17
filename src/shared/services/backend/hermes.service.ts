@@ -52,11 +52,15 @@ export class HermesService {
 
     //general
     //general/books/
-    public getAllBooks(sorting:string): Observable<SimpleBook[]> {
+    public getAllBooks(sorting?:string): Observable<SimpleBook[]> {
         return this.get<SimpleBook[]>(this.ALL_BOOOKS_PATH)/* + `/?srt=${sorting}`*/;
     }
     public postNewBook(body:any): Observable<string> {
         return this.post<string>(this.ALL_BOOOKS_PATH, body);
+    }
+    //general/books/:bookId
+    public patchBookLength(bookId:string, detail:{last_page:number, last_chapter?:number},) {
+        return this.patch<any>(this.replaplaceBookId(this.BOOK_RESSOURCE_PATH, bookId), detail);
     }
 
     //:userId
@@ -67,8 +71,8 @@ export class HermesService {
     public postTodoBooks(accId:string, body:TwoBee_Todo_Book): Observable<any> {
         return this.post<string>(this.replaceUserId(this.USER_TODOS_PATH, accId), body);
     }
-    public putTodoPages(accId:string,body:{todo_id:number,last_page?:number,current_page?:number}): Observable<any> {
-        return this.patch<string>(this.replaceUserId(this.USER_TODOS_PATH, accId), body);
+    public patchTodoPages(accId:string, todoId:string, body:{current_page:number}): Observable<any> {
+        return this.patch<string>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);
     }
     //:userId/books/reads
     public getReviewedBooks(accId:string): Observable<any> {
@@ -79,7 +83,16 @@ export class HermesService {
     }
 
     private replaceUserId(url:string, accId:string) {
-        return url.replace(':userid', accId);
+        return this.replaceParams(url, ':userid', accId);
+    }
+    private replaplaceBookId(url:string, bookId:string) {
+        return this.replaceParams(url, ':bookid', bookId);
+    }
+    private replaceTodoId(url: string, todoId:string) {
+        return this.replaceParams(url, ':todoId', todoId);
+    }
+    private replaceParams(url:string, wildcard:string, replacement:string): string {
+        return url.replace(wildcard, replacement);
     }
     //==========generic http methods======================
     private get<T>(uri:string, options?:any): Observable<T> {
@@ -98,7 +111,7 @@ export class HermesService {
             })
         );
     }
-    private post<T>(uri:string, body:any | null, options?:any): Observable<T> {
+    private post<T>(uri:string, body?:any, options?:any): Observable<T> {
         return this.http.post<ServerRes<T>>(uri, body, options).pipe(
             tap((res:any) => this.loggerFirstDraft(uri,res)),
             map((res:ServerRes<T>) => {
@@ -113,7 +126,7 @@ export class HermesService {
             })
         );//.pipe(catchError(this.errorHandler).bind(this))
     }
-    private patch<T>(uri:string, body:any | null, options?:any): Observable<T> {
+    private patch<T>(uri:string, body?:any, options?:any): Observable<T> {
         return this.http.patch<ServerRes<T>>(uri, body, options).pipe(
             tap((res:any) => this.loggerFirstDraft(uri,res)),
             map((res:ServerRes<T>) => {
@@ -180,8 +193,10 @@ export class HermesService {
 
     private readonly GENERAL_ROUTE:string = this.BACKEND_BASE_URL + '/general';
     private readonly ALL_BOOOKS_PATH: string = this.GENERAL_ROUTE + '/books';
+    private readonly BOOK_RESSOURCE_PATH: string = this.ALL_BOOOKS_PATH + '/:bookid';
     
     private readonly USER_ASSOCIATED_ROUTE:string = this.BACKEND_BASE_URL + '/:userid';
     private readonly USER_TODOS_PATH: string = this.USER_ASSOCIATED_ROUTE + '/books/todos';
+    private readonly TODOS_RESSOURCE_PATH: string = this.USER_TODOS_PATH + '/:todoId';
     private readonly USER_READS_PATH: string = this.USER_ASSOCIATED_ROUTE + '/books/reads';
 }

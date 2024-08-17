@@ -16,27 +16,38 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class AllBooksComponent implements OnInit {
 
-  public finishDetailForm:FormGroup<any>;
-  public books$: Observable<SimpleBook[]>;
+    public finishDetailForm:FormGroup<any>;
+    public books$: Observable<SimpleBook[]>;
 
-  constructor(
-    private readonly bookd:BooksService,
-    private readonly accd:AccountsService,
-    private readonly router:Router,
-    private readonly fb:FormBuilder)
-  {
-    this.finishDetailForm = fb.group({
-      last_page: [null, Validators.required],
-      last_chapter: [null]
-    });
-    this.books$ = this.bookd.sendGetAll('test');
-  }
+    constructor(
+        private readonly bookd:BooksService,
+        private readonly accd:AccountsService,
+        private readonly router:Router,
+        private readonly fb:FormBuilder)
+    {
+        this.finishDetailForm = fb.group({
+            last_page: [null, Validators.required],
+            last_chapter: [null]
+        });
+        this.books$ = this.bookd.sendGetAll('test');
+    }
 
-  ngOnInit(): void { }
+    ngOnInit(): void { }
 
-  startRead(b:SimpleBook) {
-    this.bookd.sendCreateNewTodo(b).subscribe((res:any) => {if (res.info ==='success') {
-      this.router.navigate([/*'/'*/'..', this.accd.Loginname, 'todo']);
-    }});
-  }
+    startRead(b:SimpleBook) {
+        this.bookd.sendCreateNewTodo(b).subscribe((res:any) => {
+            if (!!res) {
+                this.router.navigate([/*'/'*/'..', this.accd.Loginname, 'todo']);
+            }
+        });
+    }
+
+    setPages(b:SimpleBook) {
+        this.bookd.sendSetBookLength(b, this.finishDetailForm.getRawValue()).subscribe((res:any) => {
+            if (!!res) {
+                this.books$ = this.bookd.sendGetAll();
+            }
+        });
+    }
+
 }

@@ -23,12 +23,15 @@ export interface SimpleBook {
     a_last:string,
     /*publisher*/
     p_title:string,
+
+    pages:number | null,
+    chapter:number | null,
     
     extended_title:string | null,
     extra_info:string | null,
 }
 export interface TwoBee_Todo_Book {
-    book: SimpleBook,
+    bookId: string,
     start_date: string | null, //ISO DATE
 }
 export interface SimpleTodo extends SimpleBook {

@@ -1,8 +1,8 @@
 
 <h2>Alle Bücher</h2>
 <form [formGroup]="finishDetailForm">
-    <input type="number" formControlName="last_page" placeholder="Seitenzahl">
-    <input type="number" formControlName="last_chapter" placeholder="Lesezeichen">
+    <input type="number" formControlName="last_page" placeholder="Seitenanzahl">
+    <input type="number" formControlName="last_chapter" placeholder="Kapitelanzahl">
 </form>
 <table>
     <thead>
@@ -11,6 +11,8 @@
             <th>titel</th>
             <th>autor</th>
             <th>verlag</th>
+            <th>Seiten</th>
+            <th>Kapitel</th>
             <th></th><!--hidden for button. button only visible on hover-->
         </tr>
     </thead>
@@ -21,7 +23,10 @@
                 <td>{{b.title}}</td>
                 <td>{{b.a_last}}, {{b.a_first}}</td>
                 <td>{{b.p_title}}</td>
+                <td>{{b.pages}}</td>
+                <td>{{b.chapter}}</td>
                 <td><button (click)="startRead(b)">Open Book</button></td>
+                <td><button (click)="setPages(b)">set</button></td>
             </tr>
         }
     </tbody>

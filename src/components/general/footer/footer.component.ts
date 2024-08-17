@@ -15,11 +15,15 @@ import { BroadcastService } from '../../../shared/services/broadcast/broadcast.s
 export class FooterComponent {
 
   public test$ = this.bbc.tapLoginname();
+  public id = this.accd.AccountId;
   constructor(
     private readonly hermes:HermesService,
     private readonly accd:AccountsService,
     private readonly bbc:BroadcastService,
-  ) { }
+  )
+  {
+    this.test$.subscribe(() => this.id = accd.AccountId);
+  }
 
   deleteDb() {
     this.hermes.deltedB();
