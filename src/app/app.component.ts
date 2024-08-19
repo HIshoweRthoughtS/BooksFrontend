@@ -4,11 +4,12 @@ import { FooterComponent } from '../components/general/footer/footer.component';
 import { AccountsService } from '../shared/services/manager/accounts.service';
 import { CommonModule } from '@angular/common';
 import { BroadcastService } from '../shared/services/broadcast/broadcast.service';
+import { BroadcastDisplayComponent } from '../components/general/broadcast-display/broadcast-display.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterOutlet,FooterComponent],
+  imports: [CommonModule,RouterLink,RouterOutlet,FooterComponent,BroadcastDisplayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

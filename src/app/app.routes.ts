@@ -11,6 +11,7 @@ import { BooksTodoViewComponent } from '../container/user/books-todo-view/books-
 import { BooksReviewedViewComponent } from '../container/user/books-reviewed-view/books-reviewed-view.component';
 import { rausMitDieViecherGuard } from '../shared/guards/raus-mit-die-viecher.guard';
 import { authGuard } from '../shared/guards/auth.guard';
+import { TodoDetailedComponent } from '../container/user/todo-detailed/todo-detailed.component';
 
 export const routes: Routes = [
     /**
@@ -25,6 +26,11 @@ export const routes: Routes = [
         path: '',
         component: HomePageComponent,
         title: 'Home sweet Home'
+    },
+    {
+        path: 'notfound', //pagenotfound 404
+        component: PageNotFoundComponent,
+        title: 'Page Not Found'
     },
     {
         path: 'books',
@@ -77,6 +83,11 @@ export const routes: Routes = [
             { path: 'buchliste', redirectTo: '/todo', pathMatch: 'full' },
             { path: 'buecherliste', redirectTo: '/todo', pathMatch: 'full' },
             {
+                path: 'todo/:id',
+                component: TodoDetailedComponent,
+                title: 'Todo'
+            },
+            {
                 path: 'reviewed',
                 component: BooksReviewedViewComponent,
                 title: 'Bewertung'
@@ -93,9 +104,5 @@ export const routes: Routes = [
             { path: 'neuebewertung', redirectTo: '/newreview', pathMatch: 'full' }
         ]
     },
-    {
-        path: '**', //pagenotfound 404
-        component: PageNotFoundComponent,
-        title: 'Page Not Found'
-    }
+    { path: '**', redirectTo: '/notfound', pathMatch: 'full' }
 ];

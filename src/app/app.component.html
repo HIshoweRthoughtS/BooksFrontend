@@ -10,6 +10,10 @@
     <a [routerLink]="['/']" routerLinkActive="active">Home</a>
 </nav>
 
-<router-outlet />
+<broadcast-display class="global-broadcast"/>
+
+<div class="content">
+    <router-outlet />
+</div>
 
 <app-footer></app-footer>

@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { SimpleBook, FormAccount, TwoBee_Todo_Book, FormRead } from '../../interfaces';
+import { SimpleBook, FormAccount, TwoBee_Todo_Book, FormRead, Review, FullBERead } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 import { environment } from '../../../environments/environment.development';
 import { BroadcastService } from '../broadcast/broadcast.service';
+import { Quote } from '../../interfaces/quote';
 
 interface ServerRes<T> {
     info: ResponseCodes,
@@ -70,6 +71,13 @@ export class HermesService {
     }
     public postTodoBooks(accId:string, body:TwoBee_Todo_Book): Observable<any> {
         return this.post<string>(this.replaceUserId(this.USER_TODOS_PATH, accId), body);
+    }
+    //:userId/books/todo/:todoId
+    public getOneTodo(accId:string, todoId: string): Observable<FullBERead> {
+        return this.get<FullBERead>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId));
+    }
+    public postTodoAddInfo(accId:string, todoId:string, body:{quotes:Quote[],reviews:Review[]}): Observable<string> {
+        return this.post(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);
     }
     public patchTodoPages(accId:string, todoId:string, body:{current_page:number}): Observable<any> {
         return this.patch<string>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);

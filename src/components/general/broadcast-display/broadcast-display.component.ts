@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-broadcast-display',
+  selector: 'broadcast-display',
   standalone: true,
   imports: [],
   templateUrl: './broadcast-display.component.html',

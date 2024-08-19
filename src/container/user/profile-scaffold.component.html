@@ -1,19 +1,11 @@
 
-<nav>
-    <ul>
-        <li>
-            <a [routerLink]="['todo']" routerLinkActive="active">todo</a>
-        </li>
-        <li>
-            <a [routerLink]="['reviewed']" routerLinkActive="active">reviewed</a>
-        </li>
-        <li>
-            <a [routerLink]="['newreview']" routerLinkActive="active">Neue Review anlegen</a>
-        </li>
-    </ul>
-</nav>
-<div>
 @defer(when loginname$ | async) {
-    <router-outlet />
+    <div class="content">
+        <router-outlet />
+    </div>
 }
-</div>
+<nav class="sidebar">
+    <a [routerLink]="['todo']" routerLinkActive="active">todo</a>
+    <a [routerLink]="['reviewed']" routerLinkActive="active">reviewed</a>
+    <a [routerLink]="['newreview']" routerLinkActive="active">Neue Review anlegen</a>
+</nav>

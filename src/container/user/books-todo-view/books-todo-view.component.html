@@ -37,7 +37,8 @@
                 </td>
                 <td>...</td>
                 <td>in Progress</td>
-                <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.t_id_ref, startdate: todo.started_todo_date, removetodo:todo.t_id_ref}">Review</a></td>
+                <td><a [routerLink]="[todo.re_id_ref]">Detail</a></td>
+                <!-- <td><a [routerLink]="['..', 'newreview']" [queryParams]="{bookref: todo.t_id_ref, startdate: todo.started_todo_date, removetodo:todo.t_id_ref}">Review</a></td> -->
             </tr>
         }
         @empty {

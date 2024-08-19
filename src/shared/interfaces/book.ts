@@ -35,6 +35,7 @@ export interface TwoBee_Todo_Book {
     start_date: string | null, //ISO DATE
 }
 export interface SimpleTodo extends SimpleBook {
+    re_id_ref: string,
     order_rank: number,
     started_todo_date: string | null,
     finished_todo_date: string | null,

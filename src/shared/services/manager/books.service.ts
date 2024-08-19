@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HermesService } from '../backend/hermes.service';
 import { Observable } from 'rxjs';
-import { FormRead, SimpleBook } from '../../interfaces';
+import { FormRead, FullBERead, SimpleBook } from '../../interfaces';
 import { AccountsService } from './accounts.service';
 
 @Injectable({
@@ -33,6 +33,10 @@ export class BooksService {
         return this.hermes.getTodoBooks(String(this.accd.AccountId));
     }
 
+    public sendGetOneTodo(todoId:string): Observable<FullBERead> {
+        return this.hermes.getOneTodo(String(this.accd.AccountId), todoId);
+    }
+
     public sendSetTodoPages(todoId:string, body:{current_page:number}): Observable<any> {
         return this.hermes.patchTodoPages(todoId, String(this.accd.AccountId), body)
     }
@@ -47,6 +51,10 @@ export class BooksService {
             started_read_date: new Date(read.started_read_date).toISOString(),
             finished_read_date: new Date(read.finished_read_date).toISOString()
         });
+    }
+
+    public sendTodoAddInfo(todoId:string, body:any) {
+        return this.hermes.postTodoAddInfo(String(this.accd.AccountId), todoId, body);
     }
 
     //todo: maybe create private function to always add accId when needed. lots of dubs right now

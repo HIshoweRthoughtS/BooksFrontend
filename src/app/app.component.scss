@@ -1,12 +1,40 @@
-a {
-    margin: 5px;
+:host {
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    grid-template-areas: 
+        "nav"
+        "children"
+        "footer";
+    grid-template-rows: 3rem 1fr auto;
+}
+
+nav {
+    grid-area: nav;
+    display: block;
+    background-color: gray;
+}
+
+.content {
+    grid-area: children;
+    display: block;
 }
 
 app-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    min-height: '250px';
+    grid-area: footer;
+    display: block;
+    background-color: lightblue;
+}
+
+.global-broadcast {
+    // display: block;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+a {
+    margin: 5px;
 }

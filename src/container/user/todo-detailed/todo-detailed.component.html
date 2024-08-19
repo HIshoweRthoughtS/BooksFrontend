@@ -1,0 +1,10 @@
+@if (todo$ | async; as t) {
+    <!--todo: add quote + add review can in own component, since it is exactly the same for a read in progress, as for a finished read-->
+    <form [formGroup]="addToTodo" (ngSubmit)="expandTodo(t)">
+        <new-quote [parentForm]="{name: 'quotes', group: addToTodo}"></new-quote>
+        <new-review [parentForm]="{name: 'reviews', group: addToTodo}"></new-review>
+    </form>
+}
+@else {
+    <!-- loading -->
+}
