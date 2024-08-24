@@ -3,7 +3,7 @@ import { BooksService } from '../../../shared/services/manager/books.service';
 import { map, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { SimpleBook } from '../../../shared/interfaces';
+import { BackendBook } from '../../../shared/interfaces';
 import { AccountsService } from '../../../shared/services/manager/accounts.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
@@ -17,7 +17,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class AllBooksComponent implements OnInit {
 
     public finishDetailForm:FormGroup<any>;
-    public books$: Observable<SimpleBook[]>;
+    public books$: Observable<BackendBook[]>;
 
     constructor(
         private readonly bookd:BooksService,
@@ -34,7 +34,7 @@ export class AllBooksComponent implements OnInit {
 
     ngOnInit(): void { }
 
-    startRead(b:SimpleBook) {
+    startRead(b:BackendBook) {
         this.bookd.sendCreateNewTodo(b).subscribe((res:any) => {
             if (!!res) {
                 this.router.navigate([/*'/'*/'..', this.accd.Loginname, 'todo']);
@@ -42,7 +42,7 @@ export class AllBooksComponent implements OnInit {
         });
     }
 
-    setPages(b:SimpleBook) {
+    setPages(b:BackendBook) {
         this.bookd.sendSetBookLength(b, this.finishDetailForm.getRawValue()).subscribe((res:any) => {
             if (!!res) {
                 this.books$ = this.bookd.sendGetAll();

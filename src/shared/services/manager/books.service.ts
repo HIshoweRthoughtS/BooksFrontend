@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HermesService } from '../backend/hermes.service';
-import { Observable } from 'rxjs';
-import { FormRead, FullBERead, SimpleBook } from '../../interfaces';
+import { Observable, tap } from 'rxjs';
+import { BackendBook, FormRead, FullBERead, SimpleTodo } from '../../interfaces';
 import { AccountsService } from './accounts.service';
+import { BackendQuote } from '../../interfaces/quote';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ export class BooksService {
 
     constructor(private readonly hermes:HermesService, private readonly accd:AccountsService) { }
 
-    public sendGetAll(sort?:string):Observable<SimpleBook[]> {
+    public sendGetAll(sort?:string):Observable<BackendBook[]> {
         //todo: cache
         return this.hermes.getAllBooks(sort);
     }
@@ -25,11 +26,11 @@ export class BooksService {
         return this.hermes.postNewBook(body);
     }
 
-    public sendSetBookLength(b:SimpleBook, formContent:{last_page:number, chapter?:number}): Observable<any> {
-        return this.hermes.patchBookLength(String(b.b_id_ref), formContent);
+    public sendSetBookLength(b:BackendBook, formContent:{last_page:number, chapter?:number}): Observable<any> {
+        return this.hermes.patchBookLength(String(b.b_b_id_ref), formContent);
     }
 
-    public sendGetAllTodos(): Observable<any> {
+    public sendGetAllTodos(): Observable<SimpleTodo[]> {
         return this.hermes.getTodoBooks(String(this.accd.AccountId));
     }
 
@@ -37,12 +38,16 @@ export class BooksService {
         return this.hermes.getOneTodo(String(this.accd.AccountId), todoId);
     }
 
+    public sendGetQuotes(todoId:string): Observable<BackendQuote[]> {
+        return this.hermes.getQuotes(String(this.accd.AccountId), todoId);
+    }
+
     public sendSetTodoPages(todoId:string, body:{current_page:number}): Observable<any> {
         return this.hermes.patchTodoPages(todoId, String(this.accd.AccountId), body)
     }
 
-    public sendCreateNewTodo(book:SimpleBook): Observable<any> {
-        return this.hermes.postTodoBooks(String(this.accd.AccountId), {bookId: String(book.b_id_ref), start_date: new Date().toISOString()});
+    public sendCreateNewTodo(book:BackendBook): Observable<any> {
+        return this.hermes.postTodoBooks(String(this.accd.AccountId), {bookId: String(book.b_b_id_ref), start_date: new Date().toISOString()});
     }
 
     public sendCreateNewRead(read:FormRead) {
@@ -53,8 +58,12 @@ export class BooksService {
         });
     }
 
-    public sendTodoAddInfo(todoId:string, body:any) {
+    public sendTodoAddInfo(todoId:string, body:any): Observable<FullBERead> {
         return this.hermes.postTodoAddInfo(String(this.accd.AccountId), todoId, body);
+    }
+
+    public sendDeleteTodo(todoId:string): Observable<SimpleTodo[]> {
+        return this.hermes.deleteTodo(String(this.accd.AccountId), todoId);
     }
 
     //todo: maybe create private function to always add accId when needed. lots of dubs right now

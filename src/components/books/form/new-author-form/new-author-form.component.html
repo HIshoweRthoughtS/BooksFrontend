@@ -5,6 +5,6 @@
     <label for="author.last">last name</label>
     <input type="text" formControlName="lastName" id="author.last" placeholder="last Name" />
     @if (!parentForm) {
-        <button type="submit" [disabled]="authorForm.invalid">create</button>
+        <button type="submit" [disabled]="authorForm.invalid" name="authorsubmit">create</button>
     }
 </form>

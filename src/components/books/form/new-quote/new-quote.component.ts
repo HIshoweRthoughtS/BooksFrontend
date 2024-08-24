@@ -33,14 +33,13 @@ export class NewQuoteComponent implements OnInit {
   justOneMore() {
     this.newQuotes.push(this.formBuilder.group({
       content: ['', Validators.required],
-      colors: this.formBuilder.array([]),
+    //   colors: this.formBuilder.array([]),
       note: [''],
       chapter: [null],
-      page_from: [null, Validators.required],
-      page_to: [null, Validators.required],
-      line_from: [null],
-      line_to: [null],
-      is_public: [false]
+      page_from: [null],
+      page_to: [null],
+      line_from: [null, Validators.required],
+      line_to: [null, Validators.required]
     }));
   }
   lessOneJust(idx:number) {

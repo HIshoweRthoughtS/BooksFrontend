@@ -14,7 +14,7 @@ export interface FormBook {
     chapter?:number,
     pages?:number,
 }
-export interface SimpleBook {
+interface SimpleBook {
     b_id_ref:number,
     isbn:string,
     title:string,
@@ -30,6 +30,25 @@ export interface SimpleBook {
     extended_title:string | null,
     extra_info:string | null,
 }
+export interface BackendBook {
+    b_b_id_ref: number,
+    b_isbn: string,
+    b_title: string,
+    b_extended_title: string | null,
+    b_pages: number,
+    b_chapter: number,
+    b_extra_info: string | null,
+    au_au_id_ref: number,
+    au_first_name: string,
+    au_last_name: string,
+    au_more_legal_names: string | null,
+    au_pseudonym: string | null,
+    au_birthday: string | null,
+    pub_pub_id_ref: number,
+    pub_title: string,
+    pub_country_of_origin: string | null,
+    pub_hq_location: string | null
+}
 export interface TwoBee_Todo_Book {
     bookId: string,
     start_date: string | null, //ISO DATE
@@ -37,8 +56,8 @@ export interface TwoBee_Todo_Book {
 export interface SimpleTodo extends SimpleBook {
     re_id_ref: string,
     order_rank: number,
-    started_todo_date: string | null,
-    finished_todo_date: string | null,
+    started_read_date: string | null,
+    finished_read_date: string | null,
     last_page: number | null,
     current_page: number | null,
     // "join_acc": 1,
@@ -63,16 +82,6 @@ const enum BookReadStates {
     awaiting = 'finished reading; awaiting review',
     //Book is in reviewed
     reviewed = 'read and reviewed at least once'
-}
-interface BackendBook {
-    b_id_ref:number,
-    isbn:string,
-    author: BackendAuthor,
-    publisher: BackendPublisher,
-    
-    title:string,
-    extended_title?:string,
-    extra_info?:string,
 }
 interface TodoBook extends BackendBook {
     order_rank: number,

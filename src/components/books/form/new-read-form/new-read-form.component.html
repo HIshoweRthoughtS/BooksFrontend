@@ -27,7 +27,7 @@
 
     <new-review [parentForm]="{name: 'reviews', group: newReadForm}"></new-review>
     <new-quote [parentForm]="{name: 'quotes', group: newReadForm}"></new-quote>
-    <button type="submit" [disabled]="newReadForm.invalid" (click)="createNewRead()">Create Me</button>
+    <button type="submit" [disabled]="newReadForm.invalid" name="readsubmit" (click)="createNewRead()">Create Me</button>
 </form>
 
 {{newReadForm.value | json}}

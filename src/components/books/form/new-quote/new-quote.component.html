@@ -1,22 +1,22 @@
 
-<button (click)="justOneMore()">Add Quote</button>
+<button type="button" (click)="justOneMore()">Add Quote</button>
 <form [formGroup]="quotesForm">
     <div formArrayName="_quotes">
         @for (group of newQuotes.controls; track $index) {
-            <button (click)="lessOneJust($index)">x</button>
+            <button type="button" (click)="lessOneJust($index)">x</button>
             <div [formGroupName]="$index">
                 <label>content
                     <textarea type="text" name="content" formControlName="content" rows="4" cols="50"></textarea>
                 </label>
-                <label>color
+                <!-- <label>color
                     <select>
                         @for (c of colorWrap; track c) {
                             <option>
-                                <button (click)="addColorToQuote(c, $index)">{{c}}</button>
+                                <button type="button" (click)="addColorToQuote(c, $index)">{{c}}</button>
                             </option>
                         }
                     </select>
-                </label>
+                </label> -->
                 <label>note
                     <textarea type="text" name="note" formControlName="note"></textarea>
                 </label>
@@ -34,9 +34,6 @@
                 </label>
                 <label>line_to
                     <input type="text" name="line_to" formControlName="line_to" />
-                </label>
-                <label>is_public
-                    <input type="checkbox" name="is_public" formControlName="is_public" />
                 </label>
             </div>
         }

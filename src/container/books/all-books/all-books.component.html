@@ -17,16 +17,16 @@
         </tr>
     </thead>
     <tbody>
-        @for (b of books$ | async; track b.isbn) {
+        @for (b of books$ | async; track b.b_isbn) {
             <tr>
-                <td>{{b.isbn}}</td>
-                <td>{{b.title}}</td>
-                <td>{{b.a_last}}, {{b.a_first}}</td>
-                <td>{{b.p_title}}</td>
-                <td>{{b.pages}}</td>
-                <td>{{b.chapter}}</td>
-                <td><button (click)="startRead(b)">Open Book</button></td>
-                <td><button (click)="setPages(b)">set</button></td>
+                <td>{{b.b_isbn}}</td>
+                <td>{{b.b_title}}</td>
+                <td>{{b.au_last_name}}, {{b.au_first_name}}</td>
+                <td>{{b.pub_title}}</td>
+                <td>{{b.b_pages}}</td>
+                <td>{{b.b_chapter}}</td>
+                <td><button (click)="startRead(b)" name="startreadsubmit">Open Book</button></td>
+                <td><button (click)="setPages(b)" name="setpagessubmit">set</button></td>
             </tr>
         }
     </tbody>

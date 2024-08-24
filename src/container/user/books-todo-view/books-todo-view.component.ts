@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BoolPipe } from '../../../shared/bool.pipe';
 import { RouterLink } from '@angular/router';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BooksService } from '../../../shared/services/manager/books.service';
 import { AccountsService } from '../../../shared/services/manager/accounts.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ResponseCodes } from '../../../shared/enums/response-codes.enumeration';
+import { SimpleTodo } from '../../../shared/interfaces';
 
 @Component({
   selector: 'app-books-todo-view',
@@ -19,7 +20,7 @@ export class BooksTodoViewComponent implements OnInit {
 
     //creating new books should be possible at least here, maybe reviews as well
     //<a [routerLink]="['/newbook']"> || [queryParams]="{para: value}"
-    todos$?: Observable<any>;
+    todos$?: Observable<SimpleTodo[]>;
     //relevant for router redirect
     loginname = this.accd.Loginname;
     public setPagesForm:FormGroup<any>;
@@ -44,15 +45,19 @@ export class BooksTodoViewComponent implements OnInit {
         this.todos$ = this.bookd.sendGetAllTodos();
     }
 
-    setPages(todoId:number) {
+    setPages(t:SimpleTodo) {
         this.setPagesForm.disable();
-        this.bookd.sendSetTodoPages(String(todoId), {...this.setPagesForm.getRawValue()}).subscribe((res:any) => {
+        this.bookd.sendSetTodoPages(t.re_id_ref, {...this.setPagesForm.getRawValue()}).subscribe((res:any) => {
             if (!!res) {
                 this.todos$ = this.bookd.sendGetAllTodos();
                 this.setPagesForm.reset();
                 this.setPagesForm.enable();
             }
         });
+    }
+
+    finishTodo(t:SimpleTodo) {
+        this.todos$ = this.bookd.sendDeleteTodo(t.re_id_ref).pipe(map((res:SimpleTodo[]) => res || this.todos$));
     }
 
     // atLeastOneValue(form: any) {

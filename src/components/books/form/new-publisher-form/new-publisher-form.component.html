@@ -7,6 +7,6 @@
     <label for="publisher.hql">HQ location</label>
     <input type="text" formControlName="hq_location" id="publisher.hql" placeholder="hql" />
     @if (!parentForm) {
-        <button type="submit" [disabled]="publisherForm.invalid">create</button>
+        <button type="submit" [disabled]="publisherForm.invalid" name="publishersubmit">create</button>
     }
 </form>

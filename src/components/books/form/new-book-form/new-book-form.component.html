@@ -9,7 +9,7 @@
         <label for="book.isbn">Titel</label>
         <input type="text" formControlName="title" placeholder="title" />
         @if (!parentForm) {
-            <button type="submit" [disabled]="bookForm.invalid">Create Me</button>
+            <button type="submit" [disabled]="bookForm.invalid" name="booksubmit">Create Me</button>
         }
     </form>
 </div>

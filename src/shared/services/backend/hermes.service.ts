@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, tap } from 'rxjs';
-import { SimpleBook, FormAccount, TwoBee_Todo_Book, FormRead, Review, FullBERead } from '../../interfaces';
+import { FormAccount, TwoBee_Todo_Book, FormRead, Review, FullBERead, SimpleTodo, BackendBook } from '../../interfaces';
 import { ResponseCodes } from '../../enums/response-codes.enumeration';
 import { environment } from '../../../environments/environment.development';
 import { BroadcastService } from '../broadcast/broadcast.service';
-import { Quote } from '../../interfaces/quote';
+import { Quote, BackendQuote } from '../../interfaces/quote';
 
 interface ServerRes<T> {
     info: ResponseCodes,
@@ -53,36 +53,49 @@ export class HermesService {
 
     //general
     //general/books/
-    public getAllBooks(sorting?:string): Observable<SimpleBook[]> {
-        return this.get<SimpleBook[]>(this.ALL_BOOOKS_PATH)/* + `/?srt=${sorting}`*/;
+    //ext_full_book
+    public getAllBooks(sorting?:string): Observable<BackendBook[]> {
+        return this.get<BackendBook[]>(this.ALL_BOOOKS_PATH)/* + `/?srt=${sorting}`*/;
     }
     public postNewBook(body:any): Observable<string> {
         return this.post<string>(this.ALL_BOOOKS_PATH, body);
     }
     //general/books/:bookId
-    public patchBookLength(bookId:string, detail:{last_page:number, last_chapter?:number},) {
+    public patchBookLength(bookId:string, detail:{last_page:number, last_chapter?:number}) {
         return this.patch<any>(this.replaplaceBookId(this.BOOK_RESSOURCE_PATH, bookId), detail);
     }
 
     //:userId
     //:userId/books/todo
-    public getTodoBooks(accId:string): Observable<any> {
+    //todo_overview
+    public getTodoBooks(accId:string): Observable<SimpleTodo[]> {
         return this.get<any>(this.replaceUserId(this.USER_TODOS_PATH, accId));
     }
     public postTodoBooks(accId:string, body:TwoBee_Todo_Book): Observable<any> {
         return this.post<string>(this.replaceUserId(this.USER_TODOS_PATH, accId), body);
     }
     //:userId/books/todo/:todoId
+    //ext_full_book_read
     public getOneTodo(accId:string, todoId: string): Observable<FullBERead> {
         return this.get<FullBERead>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId));
     }
-    public postTodoAddInfo(accId:string, todoId:string, body:{quotes:Quote[],reviews:Review[]}): Observable<string> {
-        return this.post(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);
+    public postTodoAddInfo(accId:string, todoId:string, body:{bookid:string, quotes:Quote[],reviews:Review[]}): Observable<FullBERead> {
+        return this.post<FullBERead>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);
     }
     public patchTodoPages(accId:string, todoId:string, body:{current_page:number}): Observable<any> {
         return this.patch<string>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId), body);
     }
+    public deleteTodo(accId:string, todoId:string): Observable<SimpleTodo[]> {
+        return this.delete<SimpleTodo[]>(this.replaceTodoId(this.replaceUserId(this.TODOS_RESSOURCE_PATH, accId), todoId));
+    }
+    //:userId/books/todo/:todoId/quotes
+    //full_quote
+    public getQuotes(accId:string, todoId:string): Observable<BackendQuote[]> {
+        return this.get<BackendQuote[]>(this.replaceTodoId(this.replaceUserId(this.TODO_QUOTES_PATH, accId), todoId));
+    }
+
     //:userId/books/reads
+    //ext_full_reviewed_book
     public getReviewedBooks(accId:string): Observable<any> {
         return this.get<any>(this.replaceUserId(this.USER_READS_PATH, accId));
     }
@@ -108,14 +121,13 @@ export class HermesService {
         return this.http.get<ServerRes<T>>(uri, options).pipe(
             tap((res:any) => this.loggerFirstDraft(uri,res)),
             map((res:ServerRes<T>) => {
-                let ret = null;
                 if (ResponseCodes.fail === res.info) {
                     this.bbc.backEndRequestFailed(res.data as ServerError);
                 }
                 else {
-                    ret = res.data;
+                    return res.data as T;
                 }
-                return ret as T;
+                return null as T;
             })
         );
     }
@@ -136,6 +148,21 @@ export class HermesService {
     }
     private patch<T>(uri:string, body?:any, options?:any): Observable<T> {
         return this.http.patch<ServerRes<T>>(uri, body, options).pipe(
+            tap((res:any) => this.loggerFirstDraft(uri,res)),
+            map((res:ServerRes<T>) => {
+                let ret = null;
+                if (ResponseCodes.fail === res.info) {
+                    this.bbc.backEndRequestFailed(res.data as ServerError);
+                }
+                else {
+                    ret = res.data;
+                }
+                return ret as T;
+            })
+        );//.pipe(catchError(this.errorHandler).bind(this))
+    }
+    private delete<T>(uri:string, options?:any): Observable<T> {
+        return this.http.delete<ServerRes<T>>(uri, options).pipe(
             tap((res:any) => this.loggerFirstDraft(uri,res)),
             map((res:ServerRes<T>) => {
                 let ret = null;
@@ -206,5 +233,6 @@ export class HermesService {
     private readonly USER_ASSOCIATED_ROUTE:string = this.BACKEND_BASE_URL + '/:userid';
     private readonly USER_TODOS_PATH: string = this.USER_ASSOCIATED_ROUTE + '/books/todos';
     private readonly TODOS_RESSOURCE_PATH: string = this.USER_TODOS_PATH + '/:todoId';
+    private readonly TODO_QUOTES_PATH: string = this.TODOS_RESSOURCE_PATH + '/quotes';
     private readonly USER_READS_PATH: string = this.USER_ASSOCIATED_ROUTE + '/books/reads';
 }

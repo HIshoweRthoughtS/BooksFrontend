@@ -1,10 +1,45 @@
-@if (todo$ | async; as t) {
+@if (todo$ && todo$ | async; as t) {
     <!--todo: add quote + add review can in own component, since it is exactly the same for a read in progress, as for a finished read-->
     <form [formGroup]="addToTodo" (ngSubmit)="expandTodo(t)">
+        <input formControlName="bookid" type="hidden" [value]="t.b_b_id_ref" />
+
         <new-quote [parentForm]="{name: 'quotes', group: addToTodo}"></new-quote>
         <new-review [parentForm]="{name: 'reviews', group: addToTodo}"></new-review>
+        
+        <button type="submit" [disabled]="addToTodo.invalid" name="tododetailssubmit">Add</button>
     </form>
+    <!-- {{addToTodo.value | json}}
+    {{addToTodo.errors | json}} -->
+
+    <table>
+        <thead>
+            <tr>
+                <th>Start</th>
+                <th>Current page</th>
+                <th>first impress</th>
+                <th>Start</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{t.started_read_date}}</td>
+                <td>{{t.current_page}}</td>
+                <td>{{t.rv_first_impression}}</td>
+            </tr>
+        </tbody>
+    </table>
 }
 @else {
     <!-- loading -->
+    <a [routerLink]="['/']">back</a>
+}
+
+@for (quote of quotes$ | async; track quote.q_id_ref) {
+    <div class="quote_location">{{quote.line_from}} - {{quote.line_to}}</div>
+    <div class="quote_container">
+        <q class="quote">{{quote.content}}</q>
+    </div>
+}
+@empty {
+    <!-- No quotes yet -->
 }
