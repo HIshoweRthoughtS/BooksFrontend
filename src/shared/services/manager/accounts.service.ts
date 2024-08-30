@@ -66,7 +66,7 @@ export class AccountsService {
         return this.hermes.postLoginAccount(creds)
     }
 
-    public doLogout() {
+    private doLogout() {
         this.loginState = false;
         this.accountId = -1;
         this.loginname = '';

@@ -1,0 +1,16 @@
+#docker-compose up -d --build
+services:
+  book-list-front-end:
+    container_name: frontendcontainer
+    build: .
+    image: book-list-front-end:v1
+    ports:
+      - 80:80
+    expose:
+      - 80
+    networks:
+      - internalnet
+
+networks:
+  internalnet:
+    driver: bridge

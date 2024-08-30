@@ -1,0 +1,9 @@
+
+//my custom breakpoints
+$bp-portrait-phone: 450px;
+$bp-landscape-phone: 1050px;
+//landscape phone is roughly the same as tablet portrait
+//thats why i group them together and there is only one tablet breakpoint
+$bp-tablet: 1375px;
+//breakpoint over the tablet size are not neccessary yet.
+//everything bigger than tablet shows all the content (and may be restricted to a certain pixel size)

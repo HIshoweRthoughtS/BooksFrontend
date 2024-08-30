@@ -32,4 +32,7 @@ export class HomePageComponent implements OnInit {
     this.loginForm.disable();
     this.accd.clockIn(this.loginForm.getRawValue());
   }
+  public logout(): void {
+    this.accd.clockOut();
+  }
 }

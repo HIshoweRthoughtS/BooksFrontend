@@ -12,6 +12,7 @@ import { BooksReviewedViewComponent } from '../container/user/books-reviewed-vie
 import { rausMitDieViecherGuard } from '../shared/guards/raus-mit-die-viecher.guard';
 import { authGuard } from '../shared/guards/auth.guard';
 import { TodoDetailedComponent } from '../container/user/todo-detailed/todo-detailed.component';
+import { environment } from '../environments/environment.development';
 
 export const routes: Routes = [
     /**
@@ -25,7 +26,7 @@ export const routes: Routes = [
     {
         path: '',
         component: HomePageComponent,
-        title: 'Home sweet Home'
+        title: 'Home sweet Home ' + environment.testTitle
     },
     {
         path: 'notfound', //pagenotfound 404

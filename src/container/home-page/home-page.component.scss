@@ -1,0 +1,25 @@
+
+form {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: 50%;
+    left: 25%;
+    width: 65%;
+
+    div {
+        display: inline-block;
+    }
+}
+
+.form-input {
+    width: 75%;
+}
+
+.form-submit {
+    width: 25%;
+    text-align: -webkit-center;
+    button {
+        display: block;
+    }
+}

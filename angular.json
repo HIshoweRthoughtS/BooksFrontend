@@ -32,7 +32,11 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/shared_styles/01_portrait.scss",
+              "src/shared_styles/02_landscape.scss",
+              "src/shared_styles/03_tablet.scss",
+              "src/shared_styles/04_hdscreen.scss"
             ],
             "scripts": []
           },
@@ -50,7 +54,13 @@
                   "maximumError": "4kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                    "replace": "src/environments/environment.development.ts",
+                    "with": "src/environments/environment.ts"
+                } 
+              ]
             },
             "development": {
               "optimization": false,
@@ -97,7 +107,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/extrasmall.scss"
             ],
             "scripts": []
           }

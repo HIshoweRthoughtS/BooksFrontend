@@ -1,10 +1,20 @@
 
-<form [formGroup]="loginForm">
-    <input formControlName="loginname" type="text" />
-    <input formControlName="password" type="password" />
-    <input type="button" (click)="login()" value="login" />
-</form>
-
+<p>Bald wird hier mehr content sein.</p>
 @if (!(logedIn$ | async)) {
-    You are not logged in!
+    <form [formGroup]="loginForm">
+        <div class="form-input">
+            <input formControlName="loginname"  type="text"     placeholder="Nutzername" />
+            <input formControlName="password"   type="password" placeholder="Passwort"   />
+        </div>
+        
+        <div class="form-submit">
+            <button type="submit" (click)="login()">
+                ->
+            </button>
+        </div>
+    </form>
+    <p>You are not logged in!</p>
+}
+@else {
+    <button (click)="logout()">logout</button>
 }

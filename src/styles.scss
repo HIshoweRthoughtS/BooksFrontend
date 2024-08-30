@@ -5,5 +5,12 @@
     margin: 0;
 
     text-align: center;
-  }
-  
+}
+
+html,body {
+    font-size: 100%;
+}
+
+input[type='text'], input[type='password'] {
+    width: 100%;
+}

@@ -1,3 +1,5 @@
+@use '../shared_styles/variables' as v;
+
 :host {
     height: 100vh;
     width: 100vw;
@@ -12,11 +14,12 @@
 
 nav {
     grid-area: nav;
-    display: block;
+    display: flex;
+    
     background-color: gray;
 }
 
-.content {
+.main-paige {
     grid-area: children;
     display: block;
 }
@@ -25,6 +28,9 @@ app-footer {
     grid-area: footer;
     display: block;
     background-color: lightblue;
+    @media screen and (max-width: v.$bp-portrait-phone) {
+        display: none;
+    }
 }
 
 .global-broadcast {
